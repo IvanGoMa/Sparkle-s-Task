@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Sparkle's Task</string>
+    <string name="user">Usuari</string>
+    <string name="pw">Contrasenya</string>
+    <string name="enter">Inici</string>
+    <string name="reg">Registrar-me</string>
+</resources>

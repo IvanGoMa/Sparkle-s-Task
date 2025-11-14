@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "sparkle" sTask "d s
+rootProject.name = "SparklesTask"
 include(":app")
