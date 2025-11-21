@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Sparkle's Task</string>
+    <string name="user">Usuari</string>
+    <string name="pw">Contrasenya</string>
+    <string name="enter">Inici</string>
+    <string name="reg">Registrar-me</string>
+
+    <string name="email">Email</string> (67 de register.xml)
+    <string name="instrx">Instodueix les dades necesaries per poder formar part de la nostra familía!</string> (61 de register.xml)
+</resources>

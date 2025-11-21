@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SparklesTask">
         <activity
-            android:name=".MainActivity"
+            android:name=".Register"
+            android:exported="false" />
+        <activity
+            android:name=".Inici"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
