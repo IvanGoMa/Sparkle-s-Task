@@ -52,6 +52,8 @@
             android:layout_height="150dp"
             android:src="@drawable/perfil"
             android:layout_marginTop="40dp"
+            android:scaleType="centerCrop"
+            app:ShapeAppearanceOverlay="@style/AvatarShape"
             />
 
         <EditText

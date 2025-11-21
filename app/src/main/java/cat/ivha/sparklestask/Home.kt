@@ -1,13 +1,11 @@
 package cat.ivha.sparklestask
 
-import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.CalendarView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import java.time.LocalDate
 
-class HomeActivity : AppCompatActivity() {
+class Home : AppCompatActivity() {
     lateinit var cvCalendari: CalendarView
 
     override fun onCreate(savedInstanceState: Bundle?):{
