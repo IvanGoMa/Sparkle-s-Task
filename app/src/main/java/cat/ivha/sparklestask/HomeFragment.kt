@@ -1,27 +1,27 @@
 package cat.ivha.sparklestask
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.CalendarView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 
-class Home : AppCompatActivity() {
+class HomeFragment : Fragment(R.layout.home) {
     lateinit var cvCalendari: CalendarView
 
-    override fun onCreate(savedInstanceState: Bundle?):{
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.home)
-        initComponents()
+    override fun onViewCreated(view: View, savedInstanceState:Bundle?){
+        super.onViewCreated(view, savedInstanceState)
+        initComponents(view)
         initListeners()
         initUI()
     }
 
-
-
     fun initListeners(){}
-    fun initComponents(){
-        cvCalendari = findViewById<CalendarView>(R.id.cvCalendari)
+    fun initComponents(view: View){
+        cvCalendari = view.findViewById<CalendarView>(R.id.cvCalendari)
         cvCalendari.minDate = System.currentTimeMillis()
         cvCalendari.maxDate = System.currentTimeMillis() + 14*24*60*60*1000
 
