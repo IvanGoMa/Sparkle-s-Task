@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_sparkle"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/ivPerfil"
-        android:layout_width="100sp"
-        android:layout_height="100sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="30sp"
-        android:layout_marginTop="40sp"
-        android:src=""
-        />
+
     <LinearLayout
         android:id="@+id/flFrameSparks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
         android:layoutDirection="ltr"
         >
@@ -38,62 +29,111 @@
             />
 
     </LinearLayout>
-    <TextView
-        android:id="@+id/tvUsername"
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvPerfil"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/ivPerfil"
-        app:layout_constraintTop_toBottomOf="@id/flFrameSparks"
-        android:textSize="20sp"
-        android:text="Nombre de usuario"
-        android:layout_marginStart="15sp"
-        android:layout_marginTop="40sp"
-        />
-    <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ivPerfil"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="30sp"
-        android:layout_marginTop="50sp"
-        android:textSize="18sp"
-        android:text="Canvia el teu nom d'usuari"
-        />
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/etUsername"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="30sp"
-        android:layout_marginTop="30sp"
-        android:textSize="18sp"
-        android:text="Canvia el teu nom d'usuari"
-        />
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/etPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="30sp"
-        android:layout_marginTop="30sp"
-        android:textSize="18sp"
-        android:text="Canvia el teu nom d'usuari"
-        />
-    <Switch
-        android:id="@+id/swMode"
-        app:layout_constraintTop_toBottomOf="@id/etEmail"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="200sp"
-        android:layout_height="10sp"
-        android:text="Mode nit/ Mode dia"
-        android:layout_marginStart="30sp"
-        android:layout_marginTop="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="60dp"
+        app:cardCornerRadius="15dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/ivPerfil"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
 
+                android:src=""
+                />
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/ivPerfil"
+                app:layout_constraintTop_toBottomOf="@id/flFrameSparks"
+                android:textSize="20sp"
+                android:text="Nombre de usuario"
+                android:layout_marginStart="15sp"
+                android:textColor="@color/pinkOnSurface"
+                />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cvPerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@color/pinkSurface"
+        app:cardCornerRadius="15dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/cvPerfil"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="50sp"
+                android:textSize="18sp"
+                android:text="Canvia el teu nom d'usuari"
+                />
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/etUsername"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="30sp"
+                android:textSize="18sp"
+                android:text="Canvia la teva contrasenya"
+                />
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/etPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="30sp"
+                android:textSize="18sp"
+                android:text="Canvia el teu email"
+                />
+            <Switch
+                android:id="@+id/swMode"
+                app:layout_constraintTop_toBottomOf="@id/etEmail"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="200sp"
+                android:layout_height="10sp"
+                android:text="Mode nit/ Mode dia"
+                android:layout_marginTop="30sp"
 
-        />
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Guardar els canvis"
+                android:layout_marginTop="30sp"
+                android:layout_marginBottom="30sp"
+                />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
     <Button
         android:id="@+id/btnSortir"
         android:layout_width="match_parent"
@@ -101,11 +141,25 @@
         android:text="Tanca sessió"
         android:textSize="16sp"
         android:layout_marginHorizontal="100sp"
-        android:layout_marginBottom="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:backgroundTint="@color/orange"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/cvSettings"
         />
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/pinkSurface"
+        android:gravity="center"
+        >
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aquí estarà el menú"
+            android:gravity="center_horizontal"/>
+
+    </LinearLayout>
 
 
 

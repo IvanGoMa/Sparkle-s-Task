@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pinkPrimary">#C62980</color>
+    <color name="pinkOnPrimary">#FFFFFF</color>
+    <color name="pinkPrimaryVariant">#88236C</color>
+
+    <color name="pinkSecondary">#91cbed</color>
+    <color name="pinkOnSecondary">#000000</color>
+    <color name="pinkSecondaryVariant">#2b4c85</color>
+
+    <color name="pinkBackground">#91cbed</color>
+    <color name="pinkOnBackground">#000000</color>
+
+    <color name="pinkError">#E91E43</color>
+    <color name="pinkOnError">#FFFFFF</color>
+
+    <color name="pinkSurface">#F4C0DF</color>
+    <color name="pinkOnSurface">#000000</color>
+</resources>
