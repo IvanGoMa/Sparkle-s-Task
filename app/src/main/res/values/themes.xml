@@ -1,6 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.SparklesTask" parent="Theme.Material3.DayNight.NoActionBar">
+
+    </style>
+
+    <style name="Green.SparklesTask" parent="Base.Theme.SparklesTask">
         <item name="colorPrimary"></item>
         <item name="colorPrimaryVariant"></item>
         <item name="colorOnPrimary"></item>
@@ -15,7 +19,22 @@
         <item name="colorOnError"></item>
     </style>
 
-    <style name="Green.SparklesTask" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Pink.SparklesTask" parent="Base.Theme.SparklesTask">
+        <item name="colorPrimary">@color/pinkPrimary</item>
+        <item name="colorPrimaryVariant">@color/pinkPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/pinkOnPrimary</item>
+        <item name="colorSecondary">@color/pinkSecondary</item>
+        <item name="colorSecondaryVariant">@color/pinkSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/pinkOnSecondary</item>
+        <item name="colorSurface">@color/pinkSurface</item>
+        <item name="colorOnSurface">@color/pinkOnSurface</item>
+        <item name="android:colorBackground">@color/pinkBackground</item>
+        <item name="colorOnBackground">@color/pinkOnBackground</item>
+        <item name="colorError">@color/pinkError</item>
+        <item name="colorOnError">@color/pinkOnError</item>
+    </style>
+
+    <style name="Yellow.SparklesTask" parent="Base.Theme.SparklesTask">
         <item name="colorPrimary"></item>
         <item name="colorPrimaryVariant"></item>
         <item name="colorOnPrimary"></item>
@@ -30,7 +49,7 @@
         <item name="colorOnError"></item>
     </style>
 
-    <style name="Blue.SparklesTask" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Purple.SparklesTask" parent="Base.Theme.SparklesTask">
         <item name="colorPrimary"></item>
         <item name="colorPrimaryVariant"></item>
         <item name="colorOnPrimary"></item>
@@ -45,19 +64,4 @@
         <item name="colorOnError"></item>
     </style>
 
-    <style name="Yellow.SparklesTask" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary"></item>
-        <item name="colorPrimaryVariant"></item>
-        <item name="colorOnPrimary"></item>
-        <item name="colorSecondary"></item>
-        <item name="colorSecondaryVariant"></item>
-        <item name="colorOnSecondary"></item>
-        <item name="colorSurface"></item>
-        <item name="colorOnSurface"></item>
-        <item name="android:colorBackground"></item>
-        <item name="colorOnBackground"></item>
-        <item name="colorError"></item>
-        <item name="colorOnError"></item>
-    </style>
-    <style name="Theme.SparklesTask" parent="Base.Theme.SparklesTask" />
 </resources>
