@@ -2,11 +2,11 @@
 <resources>
     <color name="pinkPrimary">#C62980</color>
     <color name="pinkOnPrimary">#FFFFFF</color>
-    <color name="pinkPrimaryVariant">#88236C</color>
+    <color name="pinkPrimaryVariant">#B3C5297F</color>
 
-    <color name="pinkSecondary">#91cbed</color>
+    <color name="pinkSecondary">#337FAB</color>
     <color name="pinkOnSecondary">#000000</color>
-    <color name="pinkSecondaryVariant">#2b4c85</color>
+    <color name="pinkSecondaryVariant">#AB337EAA</color>
 
     <color name="pinkBackground">#91cbed</color>
     <color name="pinkOnBackground">#000000</color>

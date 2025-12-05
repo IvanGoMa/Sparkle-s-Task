@@ -49,12 +49,14 @@
             android:id="@+id/lluserInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@drawable/round_pink"
+            >
 
             <ImageView
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:src="@drawable/perfil"
+                android:src="@drawable/prfil_sinFondo"
                 app:ShapeAppearanceOverlay="@style/AvatarShape" />
 
             <TextView
@@ -63,7 +65,8 @@
                 android:text="@string/app_name"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="25dp"
-                android:textSize="30sp"/>
+                android:textSize="30sp"
+                android:textColor="@color/pinkOnPrimary"/>
 
         </LinearLayout>
 
@@ -74,17 +77,13 @@
             app:layout_constraintTop_toBottomOf="@+id/lluserInfo"
             android:layout_marginTop="20dp"
             android:hint="@string/search"
+            android:textColor="@color/pinkOnPrimary"
+            android:textColorHint="@color/pinkOnPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/bg_register_round"
+            android:background="@drawable/round_pink_sec"
             />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/etSearch"
-            android:layout_marginTop="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
