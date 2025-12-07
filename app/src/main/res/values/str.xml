@@ -5,10 +5,11 @@
     <string name="enter">Inici</string>
     <string name="reg">Registrar-me</string>
 
-    <string name="search">Busca</string>
+    <string name="search">🔎 Buscar item</string>
     <string name="email">Email</string> (67 de register.xml)
     <string name="instrx">Instodueix les dades necesaries per poder formar part de la nostra familía!</string> (61 de register.xml)
     <string name="var1">Collars</string>
     <string name="var2">Anells</string>
     <string name="var3">Gorros</string>
+    <string name="back">←</string>
 </resources>

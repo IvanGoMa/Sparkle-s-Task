@@ -8,21 +8,20 @@
 
 
     <LinearLayout
+        android:id="@+id/llKoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal"
+        android:paddingHorizontal="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/cosa"
-        tools:ignore="UseCompoundDrawables">
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:contentDescription="@string/sparkCoin"
-            android:src="@drawable/moneda"
-            android:layout_marginTop="10dp"/>
-
-
+            android:layout_marginTop="5dp"
+            android:src="@drawable/moneda" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,8 +29,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:text="@string/sparksTotals"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -44,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="65dp"
         app:cardCornerRadius="15dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,7 +97,7 @@
                 android:autofillHints="@string/changeUsername"
                 app:layout_constraintTop_toBottomOf="@id/cvPerfil"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="50sp"
+                android:layout_marginTop="40sp"
                 android:textSize="20sp"
                 android:hint="@string/changeUsername"
                 android:inputType="text"
@@ -149,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/saveChanges"
                 android:layout_marginTop="30sp"
-                android:layout_marginBottom="30sp"
+                android:layout_marginBottom="20sp"
                 android:backgroundTint="@color/pinkPrimary"
                 />
         </LinearLayout>
