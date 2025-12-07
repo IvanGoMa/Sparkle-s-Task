@@ -11,8 +11,7 @@
     <string name="calendari">Calendari</string>
     <string name="tasques">Tasques</string>
     <string name="addTask">Afegir tasca</string>
-    <string name=""></string>
-    <string name=""></string>
-    <string name=""></string>
-    <string name=""></string>
+    <string name="datePlaceholder">05/12/2026</string>
+    <string name="prizePlaceholder">+10 Sparkles</string>
+    <string name="task"> Recollir</string>
 </resources>

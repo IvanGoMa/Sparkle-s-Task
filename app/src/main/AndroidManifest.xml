@@ -18,6 +18,15 @@
             android:name=".Register"
             android:exported="false" />
         <activity
+            android:name=".Home"
+            android:exported="false" />
+        <activity
+            android:name=".Settings"
+            android:exported="false" />
+        <activity
+            android:name=".Menu"
+            android:exported="false" />
+        <activity
             android:name=".Inici"
             android:exported="true">
             <intent-filter>
