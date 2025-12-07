@@ -22,9 +22,9 @@
             android:textSize="20sp"
             />
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:src=""
+            android:src="@drawable/perfil_sin_fondo"
             />
 
     </LinearLayout>
@@ -53,7 +53,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:textSize="25sp"
                 android:layout_marginTop="10dp"
-                android:text="Calendari"
+                android:text="@string/calendari"
                 android:layout_marginStart="15dp"
                 />
             <CalendarView
@@ -92,9 +92,9 @@
                 app:layout_constraintTop_toBottomOf="@id/cardCalendari"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="15dp"
-                android:text="Tasques"
+                android:text="@string/tasques"
                 android:textSize="25sp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 />
 
             <ScrollView
@@ -112,230 +112,192 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     >
-                    <LinearLayout
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center_vertical"
-                        >
-                        <CheckBox
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="20dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Hola"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="+10 Sparkles"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="05/12/2025"/>
-                        />
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/design_default_color_secondary"
+                        app:cardCornerRadius="15dp"
+                        android:layout_marginBottom="5dp">
 
-                    </LinearLayout>
-                    <LinearLayout
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical"
+                            >
+                            <CheckBox
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="20dp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="@string/task"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="30dp"
+                                android:text="@string/prizePlaceholder"
+                                android:textColor="@color/black"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="25dp"
+                                android:text="@string/datePlaceholder"/>
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center_vertical"
-                        >
-                        <CheckBox
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="20dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Hola"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="+10 Sparkles"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="05/12/2025"/>
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/design_default_color_secondary"
+                        app:cardCornerRadius="15dp"
+                        android:layout_marginBottom="5dp">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical"
+                            >
+                            <CheckBox
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="20dp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="@string/task"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="30dp"
+                                android:text="@string/prizePlaceholder"
+                                android:textColor="@color/black"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="25dp"
+                                android:text="@string/datePlaceholder"/>
 
-                    </LinearLayout>
-                    <LinearLayout
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center_vertical"
-                        >
-                        <CheckBox
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="20dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Hola"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="+10 Sparkles"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="05/12/2025"/>
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/design_default_color_secondary"
+                        app:cardCornerRadius="15dp"
+                        android:layout_marginBottom="5dp">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical"
+                            >
+                            <CheckBox
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="20dp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="@string/task"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="30dp"
+                                android:text="@string/prizePlaceholder"
+                                android:textColor="@color/black"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="25dp"
+                                android:text="@string/datePlaceholder"/>
 
-                    </LinearLayout>
-                    <LinearLayout
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center_vertical"
-                        >
-                        <CheckBox
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="20dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Hola"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="+10 Sparkles"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="05/12/2025"/>
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/design_default_color_secondary"
+                        app:cardCornerRadius="15dp"
+                        android:layout_marginBottom="5dp">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical"
+                            >
+                            <CheckBox
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="20dp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="@string/task"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="30dp"
+                                android:text="@string/prizePlaceholder"
+                                android:textColor="@color/black"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="25dp"
+                                android:text="@string/datePlaceholder"/>
 
-                    </LinearLayout>
-                    <LinearLayout
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center_vertical"
-                        >
-                        <CheckBox
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="20dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Hola"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="+10 Sparkles"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="05/12/2025"/>
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/design_default_color_secondary"
+                        app:cardCornerRadius="15dp"
+                        android:layout_marginBottom="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical"
+                            >
+                            <CheckBox
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="20dp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="@string/task"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="30dp"
+                                android:text="@string/prizePlaceholder"
+                                android:textColor="@color/black"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="25dp"
+                                android:text="@string/datePlaceholder"/>
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center_vertical"
-                        >
-                        <CheckBox
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="20dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Hola"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="+10 Sparkles"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="05/12/2025"/>
 
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center_vertical"
-                        >
-                        <CheckBox
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="20dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Hola"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="+10 Sparkles"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="05/12/2025"/>
 
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center_vertical"
-                        >
-                        <CheckBox
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="20dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Hola"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="+10 Sparkles"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:text="05/12/2025"/>
 
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -347,7 +309,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Afegir tasca"
+        android:text="@string/addTask"
         app:layout_constraintTop_toBottomOf="@id/cardTasques"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="35dp"
@@ -367,7 +329,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Aquí estarà el menú"
+        android:text="@string/menuPlaceholder"
         android:gravity="center_horizontal"/>
 
     </LinearLayout>
