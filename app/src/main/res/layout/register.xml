@@ -112,6 +112,17 @@
         />
 
         <Button
+            android:id="@+id/btnBack"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etHB"
+            android:layout_marginTop="40dp"
+            android:drawableLeft="@drawable/back"
+            android:backgroundTint="@color/pinkPrimaryVariant"
+            />
+
+        <Button
             android:id="@+id/btnInici"
             android:layout_width="180dp"
             android:layout_height="60dp"

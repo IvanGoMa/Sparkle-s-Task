@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class Settings: AppCompatActivity() {
     lateinit var back : LinearLayout
+    lateinit var btnSortir : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +24,10 @@ class Settings: AppCompatActivity() {
     private fun initListeners() {
         back.setOnClickListener {
             val intent = Intent(this, Menu::class.java)
+            startActivity(intent)
+        }
+        btnSortir.setOnClickListener {
+            val intent = Intent(this, Inici::class.java)
             startActivity(intent)
         }
     }
