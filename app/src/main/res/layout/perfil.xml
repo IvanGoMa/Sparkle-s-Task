@@ -100,7 +100,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <Button
-                    android:id="@+id/btnCollares"
+                    android:id="@+id/btnCollars"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/var1"
