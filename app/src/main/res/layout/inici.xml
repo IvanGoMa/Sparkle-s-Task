@@ -52,7 +52,6 @@
             android:src="@drawable/perfil_sin_fondo"
             android:layout_marginTop="40dp"
             android:scaleType="centerCrop"
-            app:ShapeAppearanceOverlay="@style/AvatarShape"
             />
 
         <EditText

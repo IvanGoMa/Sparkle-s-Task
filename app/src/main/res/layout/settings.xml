@@ -67,7 +67,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@id/ivPerfil"
-                app:layout_constraintTop_toBottomOf="@id/flFrameSparks"
                 android:textSize="20sp"
                 android:text="@string/username"
                 android:layout_marginStart="15sp"

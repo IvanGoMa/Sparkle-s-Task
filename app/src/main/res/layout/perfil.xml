@@ -55,8 +55,7 @@
             <ImageView
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:src="@drawable/perfil_sin_fondo"
-                app:ShapeAppearanceOverlay="@style/AvatarShape" />
+                android:src="@drawable/perfil_sin_fondo" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -270,5 +269,23 @@
         </ScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/pinkSurface"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/menuPlaceholder"
+            android:gravity="center_horizontal"/>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
