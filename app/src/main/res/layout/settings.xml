@@ -24,9 +24,9 @@
             android:textSize="20sp"
             />
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:src=""
+            android:src="@drawable/perfil_sin_fondo"
             />
 
     </LinearLayout>
@@ -53,7 +53,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
 
-                android:src=""
+                android:src="@drawable/perfil_sin_fondo"
                 />
             <TextView
                 android:id="@+id/tvUsername"
@@ -62,7 +62,7 @@
                 app:layout_constraintStart_toEndOf="@id/ivPerfil"
                 app:layout_constraintTop_toBottomOf="@id/flFrameSparks"
                 android:textSize="20sp"
-                android:text="Nombre de usuario"
+                android:text="@string/username"
                 android:layout_marginStart="15sp"
                 android:textColor="@color/pinkOnSurface"
                 />
@@ -90,46 +90,52 @@
                 android:id="@+id/etUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:autofillHints="@string/changeUsername"
                 app:layout_constraintTop_toBottomOf="@id/cvPerfil"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="50sp"
                 android:textSize="18sp"
-                android:text="Canvia el teu nom d'usuari"
+                android:hint="@string/changeUsername"
+                android:inputType="text"
                 />
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:autofillHints="@string/changePass"
                 app:layout_constraintTop_toBottomOf="@id/etUsername"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="30sp"
                 android:textSize="18sp"
-                android:text="Canvia la teva contrasenya"
+                android:hint="@string/changePass"
+                android:inputType="textVisiblePassword"
                 />
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 app:layout_constraintTop_toBottomOf="@id/etPassword"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="30sp"
                 android:textSize="18sp"
-                android:text="Canvia el teu email"
+                android:hint="@string/changeEmail"
+                android:inputType="textEmailAddress"
                 />
             <Switch
                 android:id="@+id/swMode"
                 app:layout_constraintTop_toBottomOf="@id/etEmail"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="200sp"
-                android:layout_height="10sp"
-                android:text="Mode nit/ Mode dia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/changeMode"
                 android:layout_marginTop="30sp"
 
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Guardar els canvis"
+                android:text="@string/saveChanges"
                 android:layout_marginTop="30sp"
                 android:layout_marginBottom="30sp"
                 android:backgroundTint="@color/pinkPrimary"
@@ -140,7 +146,7 @@
         android:id="@+id/btnSortir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tanca sessió"
+        android:text="@string/closeSession"
         android:textSize="16sp"
         android:layout_marginHorizontal="100sp"
         android:layout_marginTop="8dp"
@@ -159,7 +165,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aquí estarà el menú"
+            android:text="@string/menuPlaceholder"
             android:gravity="center_horizontal"/>
 
     </LinearLayout>
