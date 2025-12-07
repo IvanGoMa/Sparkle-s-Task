@@ -34,7 +34,7 @@ class Inici : AppCompatActivity() {
             if (user.isBlank() || pass.isBlank()){
                 Toast.makeText(this, "Completa tots els camps. ", Toast.LENGTH_SHORT).show()
             } else if (pass == password){
-                val intent = Intent(this, Home::class.java)
+                val intent = Intent(this, Menu::class.java)
                 startActivity(intent)
             }else {
                 Toast.makeText(this, "Contrasenya no és correcta", Toast.LENGTH_SHORT).show()
@@ -49,8 +49,5 @@ class Inici : AppCompatActivity() {
 
     }
 
-    fun navegarInicio(usuario: String){
-        val intent = Intent(this, Inici::class.java)
-        intent.put
-    }
+
 }
