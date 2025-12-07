@@ -11,8 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class Menu: AppCompatActivity() {
     lateinit var btnHome: Button
-    lateinit var btnRegister: Button
-    lateinit var btnLogin: Button
+
     lateinit var btnPerfil: Button
     lateinit var btnAjustos: Button
 
@@ -26,8 +25,6 @@ class Menu: AppCompatActivity() {
 
     private fun initComponents() {
         btnHome=findViewById(R.id.btnHome)
-        btnRegister=findViewById(R.id.btnRegister)
-        btnLogin=findViewById(R.id.btnLogin)
         btnPerfil=findViewById(R.id. btnPerfil)
         btnAjustos=findViewById(R.id.btnAjustos)
 
@@ -39,21 +36,12 @@ class Menu: AppCompatActivity() {
             startActivity(intent)
         }
 
-        btnRegister.setOnClickListener {
-            val intent = Intent(this, Register::class.java)
-            startActivity(intent)
-        }
 
-        btnLogin.setOnClickListener {
-            val intent = Intent(this, Inici::class.java)
-            startActivity(intent)
-        }
-        /*
+
         btnPerfil.setOnClickListener {
             val intent = Intent(this, Perfil::class.java)
             startActivity(intent)
         }
-        */
 
         btnAjustos.setOnClickListener {
             val intent = Intent(this, Settings::class.java)
