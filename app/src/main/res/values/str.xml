@@ -8,4 +8,7 @@
     <string name="search">Busca</string>
     <string name="email">Email</string> (67 de register.xml)
     <string name="instrx">Instodueix les dades necesaries per poder formar part de la nostra familía!</string> (61 de register.xml)
+    <string name="var1">Collars</string>
+    <string name="var2">Anells</string>
+    <string name="var3">Gorros</string>
 </resources>
