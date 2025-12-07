@@ -21,7 +21,7 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/perfil"
+                android:src="@drawable/moneda"
                 android:layout_marginTop="10dp"
 
 
