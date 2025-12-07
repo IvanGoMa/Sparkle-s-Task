@@ -22,9 +22,9 @@
             android:textSize="20sp"
             />
         <ImageView
-            android:layout_width="0dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:src="@drawable/perfil2"
+            android:src="@drawable/perfil_sin_fondo"
             />
 
     </LinearLayout>
@@ -53,7 +53,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:textSize="25sp"
                 android:layout_marginTop="10dp"
-                android:text="Calendari"
+                android:text="@string/calendari"
                 android:layout_marginStart="15dp"
                 />
             <CalendarView
@@ -92,7 +92,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cardCalendari"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="15dp"
-                android:text="Tasques"
+                android:text="@string/tasques"
                 android:textSize="25sp"
                 android:layout_marginTop="20dp"
                 />
@@ -347,7 +347,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Afegir tasca"
+        android:text="@string/addTask"
         app:layout_constraintTop_toBottomOf="@id/cardTasques"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="35dp"
@@ -367,7 +367,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Aquí estarà el menú"
+        android:text="@string/menuPlaceholder"
         android:gravity="center_horizontal"/>
 
     </LinearLayout>

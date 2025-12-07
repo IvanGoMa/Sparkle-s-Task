@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changeUsername">Canvia el teu nom d\'usuari</string>
+    <string name="changePass">Canvia la teva contrasenya</string>
+    <string name="changeEmail">Canvia el teu email</string>
+    <string name="changeMode">Mode nit</string>
+    <string name="saveChanges">Guardar els canvis</string>
+    <string name="closeSession">Tanca sessió</string>
+    <string name="username">Nom d\'usuari</string>
+    <string name="menuPlaceholder">Aquí estarà el menú</string>
+    <string name="calendari">Calendari</string>
+    <string name="tasques">Tasques</string>
+    <string name="addTask">Afegir tasca</string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+</resources>
