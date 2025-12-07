@@ -8,28 +8,33 @@
 
 
     <LinearLayout
-        android:id="@+id/flFrameSparks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:layoutDirection="ltr"
-        >
+        android:id="@+id/cosa"
+        tools:ignore="UseCompoundDrawables">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/sparkCoin"
+            android:src="@drawable/moneda"
+            android:layout_marginTop="10dp"/>
+
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10000"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:text="@string/sparksTotals"
             android:textSize="20sp"
-            />
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/perfil_sin_fondo"
             />
 
     </LinearLayout>
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvPerfil"
         android:layout_width="match_parent"
@@ -45,11 +50,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center">
+            android:gravity="center"
+            tools:ignore="UseCompoundDrawables">
             <ImageView
                 android:id="@+id/ivPerfil"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
+                android:contentDescription="@string/pfp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
 
@@ -94,9 +101,10 @@
                 app:layout_constraintTop_toBottomOf="@id/cvPerfil"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="50sp"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:hint="@string/changeUsername"
                 android:inputType="text"
+                android:textColorHint="@color/black"
                 />
             <EditText
                 android:id="@+id/etPassword"
@@ -106,9 +114,10 @@
                 app:layout_constraintTop_toBottomOf="@id/etUsername"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="30sp"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:hint="@string/changePass"
                 android:inputType="textVisiblePassword"
+                android:textColorHint="@color/black"
                 />
             <EditText
                 android:id="@+id/etEmail"
@@ -118,9 +127,10 @@
                 app:layout_constraintTop_toBottomOf="@id/etPassword"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="30sp"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:hint="@string/changeEmail"
                 android:inputType="textEmailAddress"
+                android:textColorHint="@color/black"
                 />
             <Switch
                 android:id="@+id/swMode"
@@ -130,7 +140,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/changeMode"
                 android:layout_marginTop="30sp"
-
+                android:padding="10dp"
+                android:textSize="17sp"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
             <Button
                 android:layout_width="wrap_content"
@@ -144,11 +157,12 @@
     </androidx.cardview.widget.CardView>
     <Button
         android:id="@+id/btnSortir"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/closeSession"
         android:textSize="16sp"
-        android:layout_marginHorizontal="100sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/cvSettings"
         android:backgroundTint="@color/pinkPrimary"
