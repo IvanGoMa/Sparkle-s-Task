@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Pink.SparklesTask">
         <activity
+            android:name=".HomeHelp"
+            android:exported="false" />
+        <activity
             android:name=".AfegirTasca"
             android:exported="false" />
         <activity
