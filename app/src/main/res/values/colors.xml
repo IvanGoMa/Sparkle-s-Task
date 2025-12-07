@@ -2,6 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="blueLight">#C812356A</color>
+    <color name="pinckyLight">#BADB7083</color>
+    <color name="purlpeLIght">#CF9B5ADC</color>
+    <color name="greenLight">#EA3F812C</color>
+
     <color name="orange">#CE5E3B</color>
     <color name="orangeLight">#9CD77A5C</color>
 </resources>
