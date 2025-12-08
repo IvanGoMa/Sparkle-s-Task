@@ -78,7 +78,7 @@ class Home : AppCompatActivity() {
         }
     }
     fun initComponents(){
-        cvCalendari = findViewById<CalendarView>(R.id.cvCalendari)
+        cvCalendari = findViewById(R.id.cvCalendari)
         cvCalendari.minDate = System.currentTimeMillis()
         cvCalendari.maxDate = System.currentTimeMillis() + 14*24*60*60*1000
         back = findViewById(R.id.back)
