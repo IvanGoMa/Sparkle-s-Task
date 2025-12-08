@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 
 class Settings: AppCompatActivity() {
-    lateinit var back : LinearLayout
+    lateinit var btnGuarda : Button
     lateinit var btnSortir : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,13 +18,13 @@ class Settings: AppCompatActivity() {
     }
 
     private fun initComponents() {
-        back = findViewById(R.id.back)
+        btnGuarda = findViewById(R.id.btnGuarda)
         btnSortir = findViewById(R.id.btnSortir)
     }
 
     private fun initListeners() {
-        back.setOnClickListener {
-            val intent = Intent(this, Menu::class.java)
+        btnGuarda.setOnClickListener {
+            val intent = Intent(this, Home::class.java)
             startActivity(intent)
         }
         btnSortir.setOnClickListener {
