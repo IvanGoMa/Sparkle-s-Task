@@ -19,7 +19,7 @@
             android:fontFamily="@font/alice"
             android:gravity="center_horizontal"
             android:text="@string/app_name"
-            android:textColor="@color/pinkPrimaryVariant"
+            android:textColor="@color/pinkPrimary"
             android:textSize="70sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,40 +37,40 @@
 
         <Button
             android:id="@+id/btnHome"
-            android:layout_width="match_parent"
+            android:layout_width="290dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="60dp"
+            android:layout_marginHorizontal="150dp"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/pinkPrimary"
             android:text="@string/btnHome"
-            android:textColor="@color/white"
+            android:textColor="@color/pinkOnPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivSparkle" />
 
         <Button
             android:id="@+id/btnPerfil"
-            android:layout_width="match_parent"
+            android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="60dp"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/pinkPrimary"
             android:text="@string/btnPerfil"
-            android:textColor="@color/white"
+            android:textColor="@color/pinkOnPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnHome" />
 
         <Button
             android:id="@+id/btnAjustos"
-            android:layout_width="match_parent"
+            android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="60dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="50dp"
             android:backgroundTint="@color/pinkPrimary"
             android:text="@string/btnAjustos"
-            android:textColor="@color/white"
+            android:textColor="@color/pinkOnPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnPerfil" />

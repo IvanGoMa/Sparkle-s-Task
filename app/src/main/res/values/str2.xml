@@ -31,6 +31,10 @@
     <string name="logo">Logo Sparkle\'s Task</string>
     <string name="sparksTotals">10000</string>
     <string name="sparkCoin">Sparks imatge</string>
+    <string name="perfilHelp">Imatge d\'ajuda perfil</string>
+    <string name="perfilGetHelp">Ajuda pantalla perfil</string>
+    <string name="exit">Sortir</string>
+
 
 
 

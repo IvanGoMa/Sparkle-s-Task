@@ -5,21 +5,24 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeHelp"
-    android:background="@drawable/home_help">
+    tools:context=".PerfilHelp">
 
     <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/perfilHelp"
+        android:src="@drawable/perfil_help"/>
+    <ImageView
         android:id="@+id/ivSortir"
+        android:contentDescription="@string/exit"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:src="@drawable/sortir_rosa"
+        android:rotation="45"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
-        android:contentDescription="@string/exit"
-        android:rotation="45"
-        android:src="@drawable/sortir_rosa"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
 
-        tools:ignore="ImageContrastCheck" />
-
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
