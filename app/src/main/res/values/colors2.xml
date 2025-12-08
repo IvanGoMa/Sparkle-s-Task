@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="pinkPrimary">#ED609D</color>
+    <color name="pinkPrimary">#C7457E</color>
     <color name="pinkOnPrimary">#FFFFFF</color>
     <color name="pinkPrimaryVariant">#B3EB609C</color>
 
-    <color name="pinkSecondary">#337FAB</color>
-    <color name="pinkOnSecondary">#000000</color>
+    <color name="pinkSecondary">#286F97</color>
+    <color name="pinkOnSecondary">#FFFFFF</color>
     <color name="pinkSecondaryVariant">#B3337EAA</color>
 
     <color name="pinkBackground">#91cbed</color>

@@ -14,7 +14,8 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/cosa">
+        android:id="@+id/cosa"
+        tools:ignore="UseCompoundDrawables">
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -154,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/pinkSecondary"
                         android:text="@string/saveChanges"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/pinkOnSecondary"/>
 
                 </LinearLayout>
 
@@ -169,6 +170,7 @@
             android:text="@string/eliminaTasca"
             android:layout_marginTop="10dp"
             android:layout_marginHorizontal="80dp"
+            android:textColor="@color/pinkOnPrimary"
             />
     </LinearLayout>
 

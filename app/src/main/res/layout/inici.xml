@@ -49,6 +49,7 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:contentDescription="@string/logo"
             android:src="@drawable/perfil_sin_fondo"
             android:layout_marginTop="40dp"
             android:scaleType="centerCrop"
@@ -60,6 +61,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:hint="@string/user"
+            android:importantForAutofill="no"
+            android:inputType="text"
             />
 
         <EditText
@@ -68,7 +71,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:hint="@string/pw"
-            />
+            android:importantForAutofill="no"
+            android:inputType="textVisiblePassword"/>
 
         <Button
             android:id="@+id/btnInici"
