@@ -143,6 +143,7 @@
                 android:scaleY="1.2"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
             <Button
+                android:id="@+id/btnGuarda"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/saveChanges"
