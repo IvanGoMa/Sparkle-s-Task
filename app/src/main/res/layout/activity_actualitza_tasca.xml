@@ -16,12 +16,14 @@
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/cosa"
         tools:ignore="UseCompoundDrawables">
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:contentDescription="@string/sparkCoin"
             android:src="@drawable/moneda"
-            android:layout_marginTop="10dp"/>
+            tools:ignore="ImageContrastCheck" />
 
 
 
