@@ -2,8 +2,10 @@
     <string name="app_name">Sparkle\'s Task</string>
     <string name="user">Usuari</string>
     <string name="pw">Contrasenya</string>
-    <string name="enter">Inici</string>
-    <string name="reg">Registrar-me</string>
+    <string name="enter">Inici de sessió</string>
+    <string name="inici">Inici</string>
+    <string name="reg">Registra\'t</string>
+    <string name="registra">Registrar-me</string>
 
     <string name="search">🔎 Buscar item</string>
     <string name="email">Email</string> (67 de register.xml)

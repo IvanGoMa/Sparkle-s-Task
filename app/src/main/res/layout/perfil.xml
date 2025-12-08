@@ -26,12 +26,14 @@
         android:layout_marginTop="15dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
+            android:contentDescription="@string/sparkCoin"
             android:src="@drawable/moneda" />
 
         <TextView
@@ -103,6 +105,7 @@
 
             <LinearLayout
                 android:id="@+id/llFilter"
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -114,26 +117,35 @@
 
                 <Button
                     android:id="@+id/btnCollars"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/var1"
-                    android:textSize="22sp" />
+                    android:textSize="22sp"
+                    android:backgroundTint="@color/pinkPrimary"
+                    android:textColor="@color/pinkOnPrimary"/>
 
                 <Button
                     android:id="@+id/btnPulseras"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/var2"
-                    android:textSize="22sp" />
+                    android:textSize="22sp"
+                    android:backgroundTint="@color/pinkPrimary"
+                    android:textColor="@color/pinkOnPrimary"/>
 
                 <Button
                     android:id="@+id/btnAnillos"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/var3"
-                    android:textSize="22sp" />
+                    android:textSize="22sp"
+                    android:backgroundTint="@color/pinkPrimary"
+                    android:textColor="@color/pinkOnPrimary"/>
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
