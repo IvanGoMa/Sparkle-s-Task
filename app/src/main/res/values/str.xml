@@ -14,4 +14,5 @@
     <string name="var2">Anells</string>
     <string name="var3">Gorros</string>
     <string name="back">←</string>
+    <string name="descMoneda">Imatge de la moneda</string>
 </resources>
