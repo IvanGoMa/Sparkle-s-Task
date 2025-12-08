@@ -3,12 +3,13 @@ package cat.ivha.sparklestask
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
 
 class Register : AppCompatActivity() {
-    lateinit var btnBack : Button
+    lateinit var btnBack : ImageButton
     lateinit var btnInici: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {

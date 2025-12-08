@@ -53,6 +53,7 @@
             android:src="@drawable/perfil_sin_fondo"
             android:layout_marginTop="40dp"
             android:scaleType="centerCrop"
+            android:background="@drawable/circle_pink"
             />
 
         <EditText
@@ -63,6 +64,8 @@
             android:hint="@string/user"
             android:importantForAutofill="no"
             android:inputType="text"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
             />
 
         <EditText
@@ -72,7 +75,10 @@
             android:layout_marginTop="10dp"
             android:hint="@string/pw"
             android:importantForAutofill="no"
-            android:inputType="textVisiblePassword"/>
+            android:inputType="textVisiblePassword"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
+            />
 
         <Button
             android:id="@+id/btnInici"
@@ -80,7 +86,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/pinkPrimary"
-            android:text="@string/enter"
+            android:text="@string/inici"
             android:textSize="22sp"
             />
 

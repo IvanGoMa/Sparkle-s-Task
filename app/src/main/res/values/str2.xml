@@ -34,6 +34,8 @@
     <string name="perfilHelp">Imatge d\'ajuda perfil</string>
     <string name="perfilGetHelp">Ajuda pantalla perfil</string>
     <string name="exit">Sortir</string>
+    <string name="dataNaixement">Data de naixement</string>
+    <string name="pwCheck">Confirma la contrasenya</string>
 
 
 
