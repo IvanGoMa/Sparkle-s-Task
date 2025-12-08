@@ -28,7 +28,7 @@
         <item name="colorOnSecondary">@color/pinkOnSecondary</item>
         <item name="colorSurface">@color/pinkSurface</item>
         <item name="colorOnSurface">@color/pinkOnSurface</item>
-        <item name="android:colorBackground">@color/pinkBackground</item>
+        <item name="android:colorBackground">#286F97</item>
         <item name="colorOnBackground">@color/pinkOnBackground</item>
         <item name="colorError">@color/pinkError</item>
         <item name="colorOnError">@color/pinkOnError</item>
