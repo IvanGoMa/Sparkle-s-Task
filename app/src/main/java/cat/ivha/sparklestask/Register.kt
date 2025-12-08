@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
-lateinit var btnBack : Button
+
 class Register : AppCompatActivity() {
+    lateinit var btnBack : Button
+    lateinit var btnInici: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,11 +21,17 @@ class Register : AppCompatActivity() {
 
     private fun initComponents() {
         btnBack = findViewById(R.id.btnBack)
+        btnInici = findViewById(R.id.btnInici)
     }
 
     private fun initListeners() {
         btnBack.setOnClickListener {
             val intent = Intent(this, Inici::class.java)
+            startActivity(intent)
+        }
+
+        btnInici.setOnClickListener {
+            val intent = Intent(this, Menu::class.java)
             startActivity(intent)
         }
     }
