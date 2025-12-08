@@ -19,6 +19,7 @@ class Settings: AppCompatActivity() {
 
     private fun initComponents() {
         back = findViewById(R.id.back)
+        btnSortir = findViewById(R.id.btnSortir)
     }
 
     private fun initListeners() {
