@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_sparkle"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@drawable/fondo_sparkle">
 
     <LinearLayout
         android:id="@+id/llKoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -30,447 +30,420 @@
 
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardCalendari"
+    <LinearLayout
+        android:id="@+id/llCalendari"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="70dp"
-        app:cardBackgroundColor="@color/pinkSurface"
-        app:cardCornerRadius="15dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp">
-        <LinearLayout
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvCalendari_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/round_pink_sec"
+            android:text="@string/calendari"
+            android:textColor="@color/pinkOnPrimary"
+            android:textSize="22sp" />
+
+        <CalendarView
+            android:id="@+id/cvCalendari"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/pinkSurface">
-            <TextView
-                android:id="@+id/tvCalendari_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:textSize="25sp"
-                android:layout_marginTop="10dp"
-                android:text="@string/calendari"
-                android:layout_marginStart="15dp"
-                />
+            android:layout_height="220dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_pink"
+            android:maxDate=""
+            android:minDate="" />
+    </LinearLayout>
 
-            <CalendarView
-                android:id="@+id/cvCalendari"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:maxDate=""
-                android:minDate=""
-                app:layout_constraintTop_toBottomOf="@id/tvCalendari_title"
-
-                />
-        </LinearLayout>
-</androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardTasques"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/cardCalendari"
-        app:layout_constraintBottom_toTopOf="@id/btnAfegir"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        app:cardBackgroundColor="@color/pinkSurface"
-        app:cardCornerRadius="15dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/pinkPrimaryVariant"
+        android:orientation="vertical"
+        android:layout_marginStart="15dp"
+        app:layout_constraintTop_toBottomOf="@id/llCalendari">
+
+        <TextView
+            android:id="@+id/tvTasques"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_pink_sec"
+            android:text="@string/tasques"
+            android:textColor="@color/pinkOnPrimary"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ScrollView
+            android:id="@+id/svTasques"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tvTasques"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTasques">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/cardCalendari"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="15dp"
-                android:text="@string/tasques"
-                android:textSize="25sp"
-                android:layout_marginTop="10dp"
-                />
+                android:orientation="vertical">
 
-            <ScrollView
-                android:id="@+id/svTasques"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTasques"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginTop="5dp"
-                >
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvTasca1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvTasca1"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/pinkPrimaryVariant"
+                    app:cardCornerRadius="15dp">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/design_default_color_secondary"
-                        app:cardCornerRadius="15dp"
-                        android:layout_marginBottom="5dp">
+                        android:layout_height="60dp"
+                        android:gravity="center_vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:gravity="center_vertical"
-                            >
-                            <CheckBox
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_marginStart="5dp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/task"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:text="@string/prizePlaceholder"
-                                android:textColor="@color/black"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:text="@string/datePlaceholder"/>
+                        <CheckBox
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="5dp" />
 
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/task" />
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvTasca2"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:text="@string/prizePlaceholder"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:text="@string/datePlaceholder" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvTasca2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/pinkPrimaryVariant"
+                    app:cardCornerRadius="15dp">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/design_default_color_secondary"
-                        app:cardCornerRadius="15dp"
-                        android:layout_marginBottom="5dp">
+                        android:layout_height="60dp"
+                        android:gravity="center_vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:gravity="center_vertical"
-                            >
-                            <CheckBox
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_marginStart="5dp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/task"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:text="@string/prizePlaceholder"
-                                android:textColor="@color/black"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:text="@string/datePlaceholder"/>
+                        <CheckBox
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="5dp" />
 
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/task" />
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvTasca3"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:text="@string/prizePlaceholder"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:text="@string/datePlaceholder" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvTasca3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/pinkPrimaryVariant"
+                    app:cardCornerRadius="15dp">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/design_default_color_secondary"
-                        app:cardCornerRadius="15dp"
-                        android:layout_marginBottom="5dp">
+                        android:layout_height="60dp"
+                        android:gravity="center_vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:gravity="center_vertical"
-                            >
-                            <CheckBox
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_marginStart="5dp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/task"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:text="@string/prizePlaceholder"
-                                android:textColor="@color/black"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:text="@string/datePlaceholder"/>
+                        <CheckBox
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="5dp" />
 
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/task" />
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvTasca4"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:text="@string/prizePlaceholder"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:text="@string/datePlaceholder" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvTasca4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/pinkPrimaryVariant"
+                    app:cardCornerRadius="15dp">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/design_default_color_secondary"
-                        app:cardCornerRadius="15dp"
-                        android:layout_marginBottom="5dp">
+                        android:layout_height="60dp"
+                        android:gravity="center_vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:gravity="center_vertical"
-                            >
-                            <CheckBox
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_marginStart="5dp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/task"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:text="@string/prizePlaceholder"
-                                android:textColor="@color/black"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:text="@string/datePlaceholder"/>
+                        <CheckBox
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="5dp" />
 
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/task" />
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvTasca5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/design_default_color_secondary"
-                        app:cardCornerRadius="15dp"
-                        android:layout_marginBottom="5dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:text="@string/prizePlaceholder"
+                            android:textColor="@color/black" />
 
-                        <LinearLayout
-                            android:layout_width="327dp"
-                            android:layout_height="60dp"
-                            android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:text="@string/datePlaceholder" />
 
-                            <CheckBox
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_marginStart="5dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/task" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvTasca5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/pinkPrimaryVariant"
+                    app:cardCornerRadius="15dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:text="@string/prizePlaceholder"
-                                android:textColor="@color/black" />
+                    <LinearLayout
+                        android:layout_width="327dp"
+                        android:layout_height="60dp"
+                        android:gravity="center_vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:text="@string/datePlaceholder" />
+                        <CheckBox
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="5dp" />
 
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/task" />
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvTasca6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/design_default_color_secondary"
-                        app:cardCornerRadius="15dp"
-                        android:layout_marginBottom="5dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:text="@string/prizePlaceholder"
+                            android:textColor="@color/black" />
 
-                        <LinearLayout
-                            android:layout_width="327dp"
-                            android:layout_height="60dp"
-                            android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:text="@string/datePlaceholder" />
 
-                            <CheckBox
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_marginStart="5dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/task" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvTasca6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/pinkPrimaryVariant"
+                    app:cardCornerRadius="15dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:text="@string/prizePlaceholder"
-                                android:textColor="@color/black" />
+                    <LinearLayout
+                        android:layout_width="327dp"
+                        android:layout_height="60dp"
+                        android:gravity="center_vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:text="@string/datePlaceholder" />
+                        <CheckBox
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="5dp" />
 
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/task" />
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvTasca7"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/design_default_color_secondary"
-                        app:cardCornerRadius="15dp"
-                        android:layout_marginBottom="5dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:text="@string/prizePlaceholder"
+                            android:textColor="@color/black" />
 
-                        <LinearLayout
-                            android:layout_width="327dp"
-                            android:layout_height="60dp"
-                            android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:text="@string/datePlaceholder" />
 
-                            <CheckBox
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_marginStart="5dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/task" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvTasca7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/pinkPrimaryVariant"
+                    app:cardCornerRadius="15dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:text="@string/prizePlaceholder"
-                                android:textColor="@color/black" />
+                    <LinearLayout
+                        android:layout_width="327dp"
+                        android:layout_height="60dp"
+                        android:gravity="center_vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:text="@string/datePlaceholder" />
+                        <CheckBox
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="5dp" />
 
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/cvTasca8"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:cardBackgroundColor="@color/design_default_color_secondary"
-                                app:cardCornerRadius="15dp"
-                                android:layout_marginBottom="5dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/task" />
 
-                                <LinearLayout
-                                    android:layout_width="327dp"
-                                    android:layout_height="40dp"
-                                    android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:text="@string/prizePlaceholder"
+                            android:textColor="@color/black" />
 
-                                    <CheckBox
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:layout_marginStart="20dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:text="@string/datePlaceholder" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="20dp"
-                                        android:text="@string/task" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvTasca8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    app:cardBackgroundColor="@color/pinkPrimaryVariant"
+                    app:cardCornerRadius="15dp">
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="30dp"
-                                        android:text="@string/prizePlaceholder"
-                                        android:textColor="@color/black" />
+                    <LinearLayout
+                        android:layout_width="327dp"
+                        android:layout_height="40dp"
+                        android:gravity="center_vertical">
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="25dp"
-                                        android:text="@string/datePlaceholder" />
+                        <CheckBox
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="20dp" />
 
-                                </LinearLayout>
-                            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="@string/task" />
 
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:text="@string/prizePlaceholder"
+                            android:textColor="@color/black" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:text="@string/datePlaceholder" />
 
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
+            </LinearLayout>
 
+        </ScrollView>
 
+        <Button
+            android:id="@+id/btnAfegir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addTask"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:layout_marginStart="250dp"
+            android:backgroundTint="@color/pinkSecondaryVariant" />
 
+    </LinearLayout>
 
-
-                </LinearLayout>
-
-            </ScrollView>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-    <Button
-        android:id="@+id/btnAfegir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/addTask"
-        app:layout_constraintBottom_toTopOf="@id/back"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/pinkPrimary"/>
 
     <LinearLayout
         android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:background="@color/pinkSurface"
         android:gravity="center"
-        >
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/menuPlaceholder"
-        android:gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/menuPlaceholder" />
 
     </LinearLayout>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

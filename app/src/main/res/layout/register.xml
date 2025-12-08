@@ -111,15 +111,15 @@
         android:hint="@string/user"
         />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnBack"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etHB"
-            android:layout_marginTop="40dp"
-            android:drawableLeft="@drawable/back"
-            android:backgroundTint="@color/pinkPrimaryVariant"
+            android:layout_marginTop="45dp"
+            android:src="@drawable/back"
+            android:background="@drawable/round_pink"
             />
 
         <Button
