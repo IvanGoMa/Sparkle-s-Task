@@ -12,20 +12,17 @@ class HomeHelp : AppCompatActivity() {
 
     lateinit var ivSortir : ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        setContentView(R.layout.home_help)
         initComponents()
         initListeners()
-
-
 
     }
 
     private fun initListeners() {
         ivSortir.setOnClickListener {
-            val intent = Intent(this, Perfil::class.java)
+            val intent = Intent(this, Home::class.java)
             startActivity(intent)
         }
     }

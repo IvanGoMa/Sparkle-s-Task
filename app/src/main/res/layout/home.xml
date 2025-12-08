@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondo_sparkle">
 
+    <ImageView
+        android:id="@+id/ivHelp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/perfilGetHelp"
+        android:src="@drawable/baseline_help_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <LinearLayout
         android:id="@+id/llKoin"
         android:layout_width="wrap_content"
@@ -37,7 +49,7 @@
         android:id="@+id/llCalendari"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="60dp"
         android:gravity="start"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
@@ -60,6 +72,7 @@
             android:layout_height="260dp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/round_pink"
             android:dateTextAppearance="@style/CalendarTextWhite"
             android:maxDate=""
@@ -72,7 +85,9 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/pinkPrimaryVariant"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/llCalendari">
+        app:layout_constraintTop_toBottomOf="@id/llCalendari"
+        app:layout_constraintBottom_toTopOf="@id/back">
+
 
         <TextView
             android:id="@+id/tvTasques"
@@ -105,7 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    app:cardBackgroundColor="@color/pinkPrimaryVariant"
+                    app:cardBackgroundColor="@color/pinkPrimary"
                     app:cardCornerRadius="15dp">
 
                     <LinearLayout
@@ -148,7 +163,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    app:cardBackgroundColor="@color/pinkPrimaryVariant"
+                    app:cardBackgroundColor="@color/pinkPrimary"
                     app:cardCornerRadius="15dp">
 
                     <LinearLayout
@@ -191,7 +206,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    app:cardBackgroundColor="@color/pinkPrimaryVariant"
+                    app:cardBackgroundColor="@color/pinkPrimary"
                     app:cardCornerRadius="15dp">
 
                     <LinearLayout
@@ -234,7 +249,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    app:cardBackgroundColor="@color/pinkPrimaryVariant"
+                    app:cardBackgroundColor="@color/pinkPrimary"
                     app:cardCornerRadius="15dp">
 
                     <LinearLayout
@@ -277,7 +292,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    app:cardBackgroundColor="@color/pinkPrimaryVariant"
+                    app:cardBackgroundColor="@color/pinkPrimary"
                     app:cardCornerRadius="15dp">
 
                     <LinearLayout
@@ -325,7 +340,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="250dp"
             android:layout_marginTop="10dp"
-            android:backgroundTint="@color/pinkSecondaryVariant"
+            android:backgroundTint="@color/pinkSecondary"
             android:text="@string/addTask"
             android:textColor="@color/white" />
 
