@@ -4,12 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CalendarView
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 
 class Home : AppCompatActivity() {
+
+    lateinit var ivHelp : ImageView
     lateinit var cvCalendari: CalendarView
     lateinit var back : LinearLayout
 
@@ -68,6 +71,11 @@ class Home : AppCompatActivity() {
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
         }
+
+        ivHelp.setOnClickListener {
+            val intent = Intent(this, HomeHelp::class.java)
+            startActivity(intent)
+        }
     }
     fun initComponents(){
         cvCalendari = findViewById<CalendarView>(R.id.cvCalendari)
@@ -80,6 +88,7 @@ class Home : AppCompatActivity() {
         tasca4 = findViewById(R.id.cvTasca4)
         tasca5 = findViewById(R.id.cvTasca5)
         btnAfegir = findViewById(R.id.btnAfegir)
+        ivHelp = findViewById(R.id.ivHelp)
 
 
 
