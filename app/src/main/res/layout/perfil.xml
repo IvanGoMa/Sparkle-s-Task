@@ -56,16 +56,17 @@
             <ImageView
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:src="@drawable/perfil_sin_fondo" />
+                android:src="@drawable/perfil_sin_fondo"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="25dp"
-                android:text="@string/app_name"
+                android:text="@string/username"
                 android:textColor="@color/pinkOnPrimary"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:background="@drawable/round_pink_sec"/>
 
         </LinearLayout>
 
