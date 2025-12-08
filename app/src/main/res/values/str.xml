@@ -15,4 +15,6 @@
     <string name="var3">Gorros</string>
     <string name="back">←</string>
     <string name="descMoneda">Imatge de la moneda</string>
+    <string name="imatgeUsuari">Aqui hi anira limatge escollida per lusuari</string>
+    <string name="descItem">Imatge de litem disponible per lusuari</string>
 </resources>

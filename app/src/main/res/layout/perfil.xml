@@ -71,6 +71,7 @@
             <ImageView
                 android:layout_width="110dp"
                 android:layout_height="110dp"
+                android:contentDescription="@string/imatgeUsuari"
                 android:src="@drawable/perfil_sin_fondo" />
 
             <TextView
@@ -181,26 +182,31 @@
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/moneda" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/perfil_sin_fondo" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/moneda" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/perfil_sin_fondo" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/moneda" />
                         </LinearLayout>
 
@@ -213,26 +219,31 @@
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/perfil_sin_fondo" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/moneda" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/perfil_sin_fondo" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/moneda" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/perfil_sin_fondo" />
                         </LinearLayout>
 
@@ -245,26 +256,31 @@
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/moneda" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/perfil_sin_fondo" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/moneda" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/perfil_sin_fondo" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/moneda" />
                         </LinearLayout>
 
@@ -277,26 +293,31 @@
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/perfil_sin_fondo" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/moneda" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/perfil_sin_fondo" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/moneda" />
 
                             <ImageView
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
+                                android:contentDescription="@string/descItem"
                                 android:src="@drawable/perfil_sin_fondo" />
                         </LinearLayout>
 
