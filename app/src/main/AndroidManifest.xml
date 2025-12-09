@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Pink.SparklesTask">
         <activity
+            android:name=".MenuBottom"
+            android:exported="false" />
+        <activity
             android:name=".PerfilHelp"
             android:exported="false" />
         <activity
