@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/iHome"
+        android:icon="@drawable/moneda"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/iPerfil"
+        android:icon="@drawable/moneda"
+        android:title="Perfil"/>
+
+    <item
+        android:id="@+id/iSetting"
+        android:icon="@drawable/moneda"
+        android:title="Settings"/>
+
+</menu>
