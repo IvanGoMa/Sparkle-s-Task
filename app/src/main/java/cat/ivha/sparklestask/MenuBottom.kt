@@ -3,6 +3,7 @@ package cat.ivha.sparklestask
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 
@@ -12,6 +13,7 @@ class MenuBottom : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.menu_main)
+
 
         initComponents()
         initListeners()
@@ -26,8 +28,15 @@ class MenuBottom : AppCompatActivity() {
             val selectedFragment : Fragment? = when (item.itemId) {
                 R.id.iHome -> HomeFragment()
                 R.id.iPerfil -> PerfilFragment()
-                R.id.iSetting -> SettingFragment()
+                R.id.iSetting -> SettingsFragment()
+                else -> null
             }
+            if (selectedFragment != null) {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, selectedFragment)
+                    .commit()
+            }
+            true
         }
     }
 }

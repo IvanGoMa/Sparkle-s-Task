@@ -14,7 +14,7 @@
 
     <item
         android:id="@+id/iSetting"
-        android:icon="@drawable/moneda"
+        android:icon="@drawable/ajustes_icon"
         android:title="Settings"/>
 
 </menu>
