@@ -4,17 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.activity.enableEdgeToEdge
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 
-class PerfilFragment : Fragment(R.layout.perfil) {
+class PerfilFragment : Fragment(R.layout.perfil_rv) {
 
     lateinit var back : LinearLayout
     lateinit var ivHelp : ImageView
+    private lateinit var adapter: MyAdapter
+    private lateinit var recyclerView: RecyclerView
 
 
 
@@ -22,17 +26,31 @@ class PerfilFragment : Fragment(R.layout.perfil) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ) : View? {
-        return inflater.inflate(R.layout.perfil, container, false)
+        return inflater.inflate(R.layout.perfil_rv, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        back = view.findViewById(R.id.back)
         ivHelp = view.findViewById(R.id.ivHelp)
+        recyclerView = view.findViewById(R.id.rvItems)
+
+        val items = DataSource.items
+        adapter = MyAdapter(
+            items = items,
+            onItemClick = { item ->
+                Toast.makeText(
+                    requireContext(),
+                    "Has clicat",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        )
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
 
-        back.setOnClickListener {
-            val intent = Intent(requireContext(), Menu::class.java)
+        ivHelp.setOnClickListener {
+            val intent = Intent(requireContext(), PerfilHelp::class.java)
             startActivity(intent)
         }
         ivHelp.setOnClickListener {

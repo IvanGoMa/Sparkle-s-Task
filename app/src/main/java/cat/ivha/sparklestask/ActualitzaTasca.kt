@@ -23,15 +23,15 @@ class ActualitzaTasca : AppCompatActivity() {
 
     private fun initListeners() {
         btnCancel.setOnClickListener {
-            val intent = Intent(this,Home::class.java)
+            val intent = Intent(this, HomeFragment::class.java)
             startActivity(intent)
         }
         btnSave.setOnClickListener {
-            val intent = Intent(this,Home::class.java)
+            val intent = Intent(this,HomeFragment::class.java)
             startActivity(intent)
         }
         btnDelete.setOnClickListener {
-            val intent = Intent(this,Home::class.java)
+            val intent = Intent(this,HomeFragment::class.java)
             startActivity(intent)
         }
     }
