@@ -22,11 +22,11 @@ class AfegirTasca : AppCompatActivity() {
 
     private fun initListeners() {
         btnCancel.setOnClickListener {
-            val intent = Intent(this,Home::class.java)
+            val intent = Intent(this,HomeFragment::class.java)
             startActivity(intent)
         }
         btnCreate.setOnClickListener {
-            val intent = Intent(this,Home::class.java)
+            val intent = Intent(this,HomeFragment::class.java)
             startActivity(intent)
         }
 

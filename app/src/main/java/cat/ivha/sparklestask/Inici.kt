@@ -34,7 +34,7 @@ class Inici : AppCompatActivity() {
             if (user.isBlank() || pass.isBlank()){
                 Toast.makeText(this, "Completa tots els camps. ", Toast.LENGTH_SHORT).show()
             } else if (pass == password){
-                val intent = Intent(this, Menu::class.java)
+                val intent = Intent(this, HomeFragment::class.java)
                 startActivity(intent)
             }else {
                 Toast.makeText(this, "Contrasenya no és correcta", Toast.LENGTH_SHORT).show()
