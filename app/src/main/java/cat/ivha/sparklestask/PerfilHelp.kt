@@ -20,7 +20,7 @@ class PerfilHelp : AppCompatActivity() {
 
     private fun initListeners() {
         ivSortir.setOnClickListener {
-            val intent = Intent(this, Perfil::class.java)
+            val intent = Intent(this, PerfilFragment::class.java)
             startActivity(intent)
         }
     }
