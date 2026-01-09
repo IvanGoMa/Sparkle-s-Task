@@ -11,6 +11,7 @@
     app:layout_constraintTop_toTopOf="parent"
 
     >
+    <!--
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,6 +49,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 </LinearLayout>
+-->
+    <ImageView
+        android:id="@+id/ivImatge"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="120dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

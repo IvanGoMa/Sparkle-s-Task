@@ -11,13 +11,13 @@ class MyViewHolder (
     itemView: View,
     private val onItemClick: (Item) -> Unit
     ): RecyclerView.ViewHolder(itemView){
-        private val tvNom: TextView = itemView.findViewById(R.id.tvNom)
-        private val tvDesc: TextView = itemView.findViewById(R.id.tvDesc)
+        //private val tvNom: TextView = itemView.findViewById(R.id.tvNom)
+        //private val tvDesc: TextView = itemView.findViewById(R.id.tvDesc)
         private val ivImg: ImageView = itemView.findViewById(R.id.ivImatge)
 
     fun bind (item: Item){
-        tvNom.text = item.nom
-        tvDesc.text = item.desc
+        //tvNom.text = item.nom
+        //tvDesc.text = item.desc
         ivImg.setImageResource(item.img)
 
         itemView.setOnClickListener {
