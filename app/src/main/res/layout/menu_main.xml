@@ -19,11 +19,14 @@
         android:id="@+id/menu_bottom"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        app:itemGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_menu"
         android:background="@color/pinkPrimary"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
+        app:itemActiveIndicatorStyle="@null"
+        app:itemRippleColor="@android:color/transparent"
         />
 
 
