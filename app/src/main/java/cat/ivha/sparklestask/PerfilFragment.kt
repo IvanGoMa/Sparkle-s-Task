@@ -20,6 +20,9 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
     lateinit var ivHelp : ImageView
     private lateinit var adapter: MyAdapter
     private lateinit var recyclerView: RecyclerView
+    private lateinit var btnCollars: Button
+    private lateinit var btnGorros: Button
+    private lateinit var btnUlleres: Button
 
 
 
@@ -37,7 +40,7 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
 
         val items = DataSource.items
         adapter = MyAdapter(
-            items = items,
+            itemsComplets = items,
             onItemClick = { item ->
                 Toast.makeText(
                     requireContext(),
@@ -47,7 +50,7 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
             }
         )
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
 
 
         ivHelp.setOnClickListener {
