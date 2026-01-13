@@ -10,9 +10,9 @@
     <string name="search">🔎 Buscar item</string>
     <string name="email">Email</string> (67 de register.xml)
     <string name="instrx">Instodueix les dades necesaries per poder formar part de la nostra familía!</string> (61 de register.xml)
-    <string name="var1">Collars</string>
-    <string name="var2">Anells</string>
-    <string name="var3">Gorros</string>
+    <string name="collars">Collars</string>
+    <string name="gorros">Gorros</string>
+    <string name="ulleres">Ulleres</string>
     <string name="descMoneda">Imatge de la moneda</string>
     <string name="imatgeUsuari">Aqui hi anira l imatge escollida per l usuari</string>
     <string name="descItem">Imatge de l item disponible per l usuari</string>
