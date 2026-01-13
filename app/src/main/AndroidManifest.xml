@@ -13,13 +13,7 @@
         android:theme="@style/Pink.SparklesTask">
         <activity
             android:name=".MenuBottom"
-            android:exported="true" >
-
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
 
         <activity
             android:name=".PerfilHelp"
@@ -34,23 +28,16 @@
             android:name=".ActualitzaTasca"
             android:exported="false" />
         <activity
-            android:name=".Perfil"
-            android:exported="false" />
-        <activity
             android:name=".Register"
             android:exported="false" />
         <activity
-            android:name=".Home"
-            android:exported="false" />
-        <activity
-            android:name=".Settings"
-            android:exported="false" />
-        <activity
-            android:name=".Menu"
-            android:exported="false" />
-        <activity
             android:name=".Inici"
-            android:exported="false">
+            android:exported="true"
+            android:theme="@style/Theme.App.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
     </application>
