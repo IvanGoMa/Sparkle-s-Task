@@ -32,7 +32,7 @@ class Register : AppCompatActivity() {
         }
 
         btnInici.setOnClickListener {
-            val intent = Intent(this, HomeFragment::class.java)
+            val intent = Intent(this, MenuBottom::class.java)
             startActivity(intent)
         }
     }
