@@ -29,8 +29,29 @@ class CreateTask : DialogFragment() {
             btnCancel = view.findViewById<Button>(R.id.btnCancel)
             btnCreate = view.findViewById<Button>(R.id.btnCreate)
             builder.setView(view)
+            initListeners()
 
             builder.create()
+
         } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
+    }
+}
+
+private fun CreateTask.initListeners() {
+    btnCancel.setOnClickListener {
+        dismiss()
+    }
+
+    btnCreate.setOnClickListener {
+        dismiss()
     }
 }
