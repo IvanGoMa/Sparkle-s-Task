@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import kotlin.jvm.java
 
 
@@ -17,10 +18,11 @@ class Inici : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Pink_SparklesTask)
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.inici)
-
         val etUser = findViewById<EditText>(R.id.etUser)
         val etPassw = findViewById<EditText>(R.id.etPssw)
         val btnInici = findViewById<Button>(R.id.btnInici)
@@ -34,7 +36,7 @@ class Inici : AppCompatActivity() {
             if (user.isBlank() || pass.isBlank()){
                 Toast.makeText(this, "Completa tots els camps. ", Toast.LENGTH_SHORT).show()
             } else if (pass == password){
-                val intent = Intent(this, HomeFragment::class.java)
+                val intent = Intent(this, MenuBottom::class.java)
                 startActivity(intent)
             }else {
                 Toast.makeText(this, "Contrasenya no és correcta", Toast.LENGTH_SHORT).show()

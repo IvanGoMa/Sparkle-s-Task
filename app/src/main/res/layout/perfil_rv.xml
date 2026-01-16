@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/collars"
                     android:textSize="22sp"
-                    android:backgroundTint="@color/pinkPrimary"
+                    android:background="@drawable/round_pink"
                     android:textColor="@color/pinkOnPrimary"/>
 
                 <Button
@@ -136,7 +136,7 @@
                     android:layout_marginStart="8dp"
                     android:text="@string/gorros"
                     android:textSize="22sp"
-                    android:backgroundTint="@color/pinkPrimary"
+                    android:background="@drawable/round_pink"
                     android:textColor="@color/pinkOnPrimary"/>
 
                 <Button
@@ -147,7 +147,7 @@
                     android:layout_marginStart="8dp"
                     android:text="@string/ulleres"
                     android:textSize="22sp"
-                    android:backgroundTint="@color/pinkPrimary"
+                    android:background="@drawable/round_pink"
                     android:textColor="@color/pinkOnPrimary"/>
             </LinearLayout>
 

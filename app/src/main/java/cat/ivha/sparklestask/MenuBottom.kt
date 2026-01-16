@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 
 lateinit var menu_nav : BottomNavigationView
 class MenuBottom : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,6 +22,9 @@ class MenuBottom : AppCompatActivity() {
 
     private fun initComponents(){
         menu_nav = findViewById(R.id.menu_bottom)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, HomeFragment())
+            .commit()
     }
 
     private fun initListeners(){
