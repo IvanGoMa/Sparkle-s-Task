@@ -23,8 +23,10 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
     private lateinit var btnCollars: Button
     private lateinit var btnGorros: Button
     private lateinit var btnUlleres: Button
-    private var clicat: Boolean = false;
-
+    private var ultimClicat: String? = null
+    private val COLLARS: String = "Collars"
+    private val ULLERES: String = "Ulleres"
+    private val GORROS: String = "Gorros"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,13 +50,13 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
             onItemClick = { item ->
                 Toast.makeText(
                     requireContext(),
-                    "Has clicat ${item.nom}",
+                    item.desc,
                     Toast.LENGTH_SHORT
                 ).show()
             }
         )
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
 
 
         ivHelp.setOnClickListener {
@@ -67,18 +69,22 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
         }
 
         btnCollars.setOnClickListener {
-            adapter.filtra(if (!clicat) Categoria.COLLARS else null)
-            clicat = !clicat
+            adapter.filtra(if (ultimClicat == COLLARS) null
+                    else Categoria.COLLARS)
+            ultimClicat = if (ultimClicat == COLLARS) null else COLLARS
         }
 
         btnUlleres.setOnClickListener {
-            adapter.filtra(if (!clicat) Categoria.ULLERES else null)
-            clicat = !clicat
+            adapter.filtra(
+                if (ultimClicat == ULLERES) null
+                else Categoria.ULLERES)
+            ultimClicat = if (ultimClicat == ULLERES) null else ULLERES
         }
 
         btnGorros.setOnClickListener {
-            adapter.filtra(if (!clicat) Categoria.GORROS else null)
-            clicat = !clicat
+            adapter.filtra(if (ultimClicat == GORROS) null
+            else Categoria.GORROS)
+            ultimClicat = if (ultimClicat == GORROS) null else GORROS
         }
     }
 }
