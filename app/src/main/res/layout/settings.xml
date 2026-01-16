@@ -45,13 +45,15 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="65dp"
-        app:cardCornerRadius="15dp">
+        app:cardCornerRadius="15dp"
+        android:backgroundTint="@color/pinkSurface">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            tools:ignore="UseCompoundDrawables">
+            tools:ignore="UseCompoundDrawables"
+            >
             <ImageView
                 android:id="@+id/ivPerfil"
                 android:layout_width="100sp"
@@ -104,6 +106,7 @@
                 android:hint="@string/changeUsername"
                 android:inputType="text"
                 android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 />
             <EditText
                 android:id="@+id/etPassword"
@@ -117,6 +120,7 @@
                 android:hint="@string/changePass"
                 android:inputType="textVisiblePassword"
                 android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 />
             <EditText
                 android:id="@+id/etEmail"
@@ -130,6 +134,7 @@
                 android:hint="@string/changeEmail"
                 android:inputType="textEmailAddress"
                 android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 />
             <Switch
                 android:id="@+id/swMode"

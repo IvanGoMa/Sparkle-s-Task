@@ -66,6 +66,7 @@
             android:inputType="text"
             android:textColorHint="@color/black"
             android:textSize="20sp"
+            android:textColor="@color/black"
             />
 
         <EditText
@@ -78,6 +79,7 @@
             android:inputType="textVisiblePassword"
             android:textColorHint="@color/black"
             android:textSize="20sp"
+            android:textColor="@color/black"
             />
 
         <Button

@@ -72,7 +72,7 @@
             android:inputType="text"
             android:textSize="20sp"
             android:textColorHint="@color/black"
-
+            android:textColor="@color/black"
             />
 
         <EditText
@@ -86,7 +86,8 @@
             app:layout_constraintTop_toBottomOf="@id/etUser"
             android:inputType="textPassword"
             android:textSize="20sp"
-            android:textColorHint="@color/black"/>
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/etPsswX"
@@ -99,7 +100,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etPssw"
             android:textSize="20sp"
-            android:textColorHint="@color/black"/>
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/etEmail"
@@ -112,7 +114,8 @@
             app:layout_constraintTop_toBottomOf="@id/etPsswX"
             tools:ignore="Autofill"
             android:textSize="20sp"
-            android:textColorHint="@color/black"/>
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/etHB"
@@ -125,7 +128,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etEmail"
             android:textSize="20sp"
-            android:textColorHint="@color/black"/>
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"/>
 
         <ImageButton
             android:id="@+id/btnBack"

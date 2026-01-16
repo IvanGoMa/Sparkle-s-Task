@@ -3,42 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/fondo_sparkle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context=".ActualitzaTasca">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/cosa"
-        tools:ignore="UseCompoundDrawables">
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="@string/sparkCoin"
-            android:src="@drawable/moneda"
-            android:layout_marginTop="10dp"/>
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:text="@string/sparksTotals"
-            android:textSize="20sp"
-            />
-
-    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardModifica"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
@@ -58,74 +29,90 @@
 
             <TextView
                 android:id="@+id/tvModifica_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/titolAfegeix"
-                android:textSize="25sp" />
+                android:textSize="30sp"
+                android:textAlignment="center"/>
 
-            <TextView
-                android:id="@+id/modificaNom"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="30dp"
-                android:text="@string/modificaNom"
-                android:textSize="20sp" />
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp">
 
-            <EditText
+
+                <TextView
+                    android:id="@+id/modificaNom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/modificaNom"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:autofillHints="@string/nomTasca"
+                    android:hint="@string/nomTasca"
+                    android:inputType="text"
+                    android:textColorHint="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
-                android:autofillHints="@string/nomTasca"
-                android:hint="@string/nomTasca"
-                android:inputType="text"
-                android:textSize="20sp"
-                android:textColorHint="@color/black"/>
+                android:layout_marginHorizontal="20dp">
 
-            <TextView
-                android:id="@+id/modificaSparks"
+                <TextView
+                    android:id="@+id/modificaSparks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/modificaSparks"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:autofillHints="@string/modificaSparks"
+                    android:hint="@string/sparksObtinguts"
+                    android:inputType="number"
+                    android:textColorHint="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/modificaSparks"
-                android:textSize="20sp" />
+                android:layout_marginHorizontal="20dp">
 
-            <EditText
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="15dp"
-                android:autofillHints="@string/modificaSparks"
-                android:hint="@string/sparksObtinguts"
-                android:inputType="number"
-                android:textSize="20sp"
-                android:textColorHint="@color/black"/>
+                <TextView
+                    android:id="@+id/modificaData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/modificaData"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/modificaData"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/modificaData"
-                android:textSize="20sp" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
-                android:autofillHints="@string/modificaData"
-                android:hint="@string/datePlaceholder"
-                android:inputType="date"
-                android:textSize="20sp"
-                android:textColorHint="@color/black"
-                />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:autofillHints="@string/modificaData"
+                    android:hint="@string/datePlaceholder"
+                    android:inputType="date"
+                    android:textColorHint="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
             <LinearLayout
                 style="?android:attr/buttonBarStyle"
@@ -140,19 +127,21 @@
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/circle_pink"
                     android:layout_marginEnd="20dp"
                     android:backgroundTint="@color/pinkPrimary"
                     android:text="@string/cancel"
-                    android:textColor="@color/pinkOnPrimary"/>
+                    android:textColor="@color/pinkOnPrimary" />
 
                 <Button
                     android:id="@+id/btnCreate"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/circle_pink"
                     android:backgroundTint="@color/pinkSecondary"
                     android:text="@string/creaTasca"
-                    android:textColor="@color/pinkOnSecondary"/>
+                    android:textColor="@color/pinkOnSecondary" />
 
             </LinearLayout>
 

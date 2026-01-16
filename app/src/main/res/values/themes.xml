@@ -32,6 +32,10 @@
         <item name="colorOnBackground">@color/pinkOnBackground</item>
         <item name="colorError">@color/pinkError</item>
         <item name="colorOnError">@color/pinkOnError</item>
+        <item name="colorAccent">@color/pinkSecondary</item>
+        <item name="buttonStyle">@style/RoundedButton</item>
+        <item name="android:textColorPrimary">@color/pinkOnPrimary</item>
+
     </style>
 
     <style name="Yellow.SparklesTask" parent="Base.Theme.SparklesTask">
@@ -63,7 +67,7 @@
         <item name="colorError"></item>
         <item name="colorOnError"></item>
     </style>
-    <style name="Theme.SparklesTask" parent="Base.Theme.SparklesTask" />
+    <style name="Theme.SparklesTask" parent="Pink.SparklesTask" />
     <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_animation</item>
         <item name="postSplashScreenTheme">@style/Pink.SparklesTask</item>

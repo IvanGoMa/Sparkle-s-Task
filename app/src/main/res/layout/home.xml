@@ -83,10 +83,13 @@
     <LinearLayout
         android:id="@+id/llTaskas"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="0dp"
         android:backgroundTint="@color/pinkPrimaryVariant"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/llCalendari">
+        app:layout_constraintTop_toBottomOf="@id/llCalendari"
+        app:layout_constraintBottom_toTopOf="@id/btnAfegir"
+        android:layout_marginBottom="10dp"
+       >
 
 
         <TextView
@@ -104,11 +107,12 @@
         <ScrollView
             android:id="@+id/svTasques"
             android:layout_width="wrap_content"
-            android:layout_height="250dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTasques">
+            app:layout_constraintTop_toBottomOf="@id/tvTasques"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -345,9 +349,10 @@
         android:text="@string/addTask"
         android:layout_marginTop="8dp"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/llTaskas"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="45dp"/>
+        android:layout_marginEnd="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginVertical="10dp"/>
 
 
 
