@@ -3,7 +3,6 @@ package cat.ivha.sparklestask
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -24,9 +22,9 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
     private lateinit var btnGorros: Button
     private lateinit var btnUlleres: Button
     private var ultimClicat: String? = null
-    private val COLLARS: String = "Collars"
-    private val ULLERES: String = "Ulleres"
-    private val GORROS: String = "Gorros"
+    private val collars: String = "Collars"
+    private val ulleres: String = "Ulleres"
+    private val gorros: String = "Gorros"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,22 +67,22 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
         }
 
         btnCollars.setOnClickListener {
-            adapter.filtra(if (ultimClicat == COLLARS) null
+            adapter.filtra(if (ultimClicat == collars) null
                     else Categoria.COLLARS)
-            ultimClicat = if (ultimClicat == COLLARS) null else COLLARS
+            ultimClicat = if (ultimClicat == collars) null else collars
         }
 
         btnUlleres.setOnClickListener {
             adapter.filtra(
-                if (ultimClicat == ULLERES) null
+                if (ultimClicat == ulleres) null
                 else Categoria.ULLERES)
-            ultimClicat = if (ultimClicat == ULLERES) null else ULLERES
+            ultimClicat = if (ultimClicat == ulleres) null else ulleres
         }
 
         btnGorros.setOnClickListener {
-            adapter.filtra(if (ultimClicat == GORROS) null
+            adapter.filtra(if (ultimClicat == gorros) null
             else Categoria.GORROS)
-            ultimClicat = if (ultimClicat == GORROS) null else GORROS
+            ultimClicat = if (ultimClicat == gorros) null else gorros
         }
     }
 }

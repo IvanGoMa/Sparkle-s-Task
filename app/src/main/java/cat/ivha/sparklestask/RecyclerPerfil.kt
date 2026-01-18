@@ -1,10 +1,10 @@
 package cat.ivha.sparklestask
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class MyViewHolder (
@@ -33,6 +33,7 @@ class MyAdapter(
 
     private var itemsFiltrados = itemsComplets.toList()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun filtra(categoria : Categoria?){
         itemsFiltrados = if (categoria == null){
             itemsComplets.toList()

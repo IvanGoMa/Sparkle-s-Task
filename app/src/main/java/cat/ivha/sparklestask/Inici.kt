@@ -16,10 +16,9 @@ class Inici : AppCompatActivity() {
     private val password = "1234"
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Pink_SparklesTask)
-        val splashScreen = installSplashScreen()
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.inici)
