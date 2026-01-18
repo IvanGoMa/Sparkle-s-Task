@@ -1,6 +1,5 @@
 package cat.ivha.sparklestask
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,48 +7,40 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.RecyclerView
 
-class HomeFragment : Fragment(R.layout.home) {
+class HomeFragment : Fragment(R.layout.home_rv) {
 
     lateinit var ivHelp : ImageView
     lateinit var cvCalendari: CalendarView
     lateinit var btnAfegir: Button
-    lateinit var tasca1 : CardView
-    lateinit var tasca2 : CardView
-    lateinit var tasca3 : CardView
-    lateinit var tasca4 : CardView
-    lateinit var tasca5 : CardView
+    private lateinit var adapter: MyAdapter
+    private lateinit var recyclerView: RecyclerView
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.home,container,false)
+        return inflater.inflate(R.layout.home_rv,container,false)
     }
+
+
     override fun onViewCreated(view: View, savedInstanceState:Bundle?){
         super.onViewCreated(view, savedInstanceState)
-        initComponents(view)
-        initListeners()
+        btnAfegir = view.findViewById(R.id.btnAfegir)
+
+        val tasques = TasksList.items
+        adapter = TasksAdapter(
+
+        )
     }
 
     private fun initListeners() {
         btnAfegir.setOnClickListener {
             CreateTask().show(parentFragmentManager,"Crear Tasca")
-        }
-
-        tasca1.setOnClickListener {
-            ActualitzaTasca().show(parentFragmentManager, "Actualitza tasca")
         }
     }
 

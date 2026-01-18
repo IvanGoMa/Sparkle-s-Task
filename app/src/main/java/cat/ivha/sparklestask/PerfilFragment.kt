@@ -17,15 +17,16 @@ import androidx.recyclerview.widget.RecyclerView
 
 class PerfilFragment : Fragment(R.layout.perfil_rv) {
 
-    lateinit var back : LinearLayout
     lateinit var ivHelp : ImageView
     private lateinit var adapter: MyAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var btnCollars: Button
     private lateinit var btnGorros: Button
     private lateinit var btnUlleres: Button
-
-
+    private var ultimClicat: String? = null
+    private val COLLARS: String = "Collars"
+    private val ULLERES: String = "Ulleres"
+    private val GORROS: String = "Gorros"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +39,10 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
         super.onViewCreated(view, savedInstanceState)
         ivHelp = view.findViewById(R.id.ivHelp)
         recyclerView = view.findViewById(R.id.rvItems)
+        btnCollars = view.findViewById(R.id.btnCollars)
+        btnUlleres = view.findViewById(R.id.btnUlleres)
+        btnGorros = view.findViewById(R.id.btnGorros)
+
 
         val items = DataSource.items
         adapter = MyAdapter(
@@ -45,13 +50,13 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
             onItemClick = { item ->
                 Toast.makeText(
                     requireContext(),
-                    "Has clicat",
+                    item.desc,
                     Toast.LENGTH_SHORT
                 ).show()
             }
         )
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
 
 
         ivHelp.setOnClickListener {
@@ -61,6 +66,25 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
         ivHelp.setOnClickListener {
             val intent = Intent(requireContext(), PerfilHelp::class.java)
             startActivity(intent)
+        }
+
+        btnCollars.setOnClickListener {
+            adapter.filtra(if (ultimClicat == COLLARS) null
+                    else Categoria.COLLARS)
+            ultimClicat = if (ultimClicat == COLLARS) null else COLLARS
+        }
+
+        btnUlleres.setOnClickListener {
+            adapter.filtra(
+                if (ultimClicat == ULLERES) null
+                else Categoria.ULLERES)
+            ultimClicat = if (ultimClicat == ULLERES) null else ULLERES
+        }
+
+        btnGorros.setOnClickListener {
+            adapter.filtra(if (ultimClicat == GORROS) null
+            else Categoria.GORROS)
+            ultimClicat = if (ultimClicat == GORROS) null else GORROS
         }
     }
 }
