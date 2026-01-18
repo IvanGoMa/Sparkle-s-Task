@@ -12,23 +12,16 @@ import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.RecyclerView
 
 class HomeFragment : Fragment(R.layout.home) {
 
     lateinit var ivHelp : ImageView
     lateinit var cvCalendari: CalendarView
     lateinit var btnAfegir: Button
-    lateinit var tasca1 : CardView
-    lateinit var tasca2 : CardView
-    lateinit var tasca3 : CardView
-    lateinit var tasca4 : CardView
-    lateinit var tasca5 : CardView
+    lateinit var recyclerView: RecyclerView
+    lateinit var adapter: TasksAdapter
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +32,7 @@ class HomeFragment : Fragment(R.layout.home) {
     }
     override fun onViewCreated(view: View, savedInstanceState:Bundle?){
         super.onViewCreated(view, savedInstanceState)
+        recyclerView = view.findViewById(R.id.rec)
         initComponents(view)
         initListeners()
     }

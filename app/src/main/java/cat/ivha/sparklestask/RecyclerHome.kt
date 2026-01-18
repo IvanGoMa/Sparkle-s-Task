@@ -6,52 +6,54 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.util.Date
 
 class TasksViewHolder (
     itemView: View,
-    private val onItemClick: (Item) -> Unit
+    private val onItemClick: (Task) -> Unit
 ): RecyclerView.ViewHolder(itemView){
-    //private val tvNom: TextView = itemView.findViewById(R.id.tvNom)
-    //private val tvDesc: TextView = itemView.findViewById(R.id.tvDesc)
-    private val ivImg: ImageView = itemView.findViewById(R.id.ivImatge)
+    private val tvNom: TextView = itemView.findViewById(R.id.tvNom)
+    private val tvSparks: TextView = itemView.findViewById(R.id.tvSparks)
+    private val tvData: TextView = itemView.findViewById(R.id.tvData)
 
-    fun bind (item: Item){
-        //tvNom.text = item.nom
-        //tvDesc.text = item.desc
-        ivImg.setImageResource(item.img)
+    fun bind (task: Task){
+        tvNom.text = task.title
+        tvSparks.text = task.sparks.toString()
+        tvData.text = task.data.toString()
 
         itemView.setOnClickListener {
-            onItemClick(item)
+            onItemClick(task)
         }
     }
 }
 
 class TasksAdapter(
-    private val itemsComplets: List<Item>,
-    private val onItemClick: (Item) -> Unit
-) : RecyclerView.Adapter<MyViewHolder>(){
+    private val itemsComplets: List<Task>,
+    private val onItemClick: (Task) -> Unit
+) : RecyclerView.Adapter<TasksViewHolder>(){
 
     private var itemsFiltrados = itemsComplets.toList()
 
-    fun filtra(categoria : Categoria?){
-        itemsFiltrados = if (categoria == null){
+    fun filtra(data : Date?){
+        itemsFiltrados = if (data == null){
             itemsComplets.toList()
         } else {
-            itemsComplets.filter { it.categoria == categoria }
+            itemsComplets.filter { it.data == data }
         }
         notifyDataSetChanged() // Actualizar la vista
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val view = inflater.inflate(R.layout.rv_tasques_home, parent, false)
+        return TasksViewHolder(view, onItemClick)
+    }
+
     override fun getItemCount(): Int = itemsFiltrados.size
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TasksViewHolder, position: Int) {
         val item = itemsFiltrados[position]
         holder.bind(item)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.rv_items_perfil, parent, false)
-        return MyViewHolder(view, onItemClick)
-    }
 }
