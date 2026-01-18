@@ -10,4 +10,5 @@
 
     <color name="orange">#CE5E3B</color>
     <color name="orangeLight">#9CD77A5C</color>
+    <color name="transparent">#00000000</color>
 </resources>
