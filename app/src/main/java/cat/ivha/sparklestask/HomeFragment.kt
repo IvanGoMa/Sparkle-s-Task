@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 
 class HomeFragment : Fragment(R.layout.home) {
 
@@ -26,6 +27,7 @@ class HomeFragment : Fragment(R.layout.home) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -38,8 +40,18 @@ class HomeFragment : Fragment(R.layout.home) {
     override fun onViewCreated(view: View, savedInstanceState:Bundle?){
         super.onViewCreated(view, savedInstanceState)
         initComponents(view)
+        initListeners()
     }
 
+    private fun initListeners() {
+        btnAfegir.setOnClickListener {
+            CreateTask().show(parentFragmentManager,"Crear Tasca")
+        }
+
+        tasca1.setOnClickListener {
+            ActualitzaTasca().show(parentFragmentManager, "Actualitza tasca")
+        }
+    }
 
 
     private fun initComponents(view: View) {

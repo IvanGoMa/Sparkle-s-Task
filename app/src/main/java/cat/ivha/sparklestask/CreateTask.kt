@@ -2,9 +2,6 @@ package cat.ivha.sparklestask
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
@@ -18,19 +15,38 @@ class CreateTask : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
-            val builder = AlertDialog.Builder(it)
-            // Get the layout inflater.
-            val inflater = requireActivity().layoutInflater;
 
-            // Inflate and set the layout for the dialog.
-            // Pass null as the parent view because it's going in the dialog
-            // layout.
+            val builder = AlertDialog.Builder(it)
+            val inflater = requireActivity().layoutInflater
             val view = inflater.inflate(R.layout.activity_afegir_tasca, null)
-            btnCancel = view.findViewById<Button>(R.id.btnCancel)
-            btnCreate = view.findViewById<Button>(R.id.btnCreate)
+
+            btnCancel = view.findViewById(R.id.btnCancel)
+            btnCreate = view.findViewById(R.id.btnCreate)
+
             builder.setView(view)
+            initListeners()
 
             builder.create()
+
         } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
+    }
+}
+
+private fun CreateTask.initListeners() {
+    btnCancel.setOnClickListener {
+        dismiss()
+    }
+
+    btnCreate.setOnClickListener {
+        dismiss()
     }
 }
