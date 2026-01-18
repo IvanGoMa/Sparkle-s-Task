@@ -13,7 +13,7 @@ fun dateOf(year: Int, month: Int, day: Int): Date {
 
 
 object TasksList {
-    val items = mutableListOf<Task>(
+    val items = mutableListOf(
         Task(dateOf(2026,1,19),"Recollir",10),
         Task(dateOf(2026,1,19),"Recollir",10),
         Task(dateOf(2026,1,19),"Recollir",10),
