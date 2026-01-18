@@ -31,7 +31,11 @@ class ActualitzaTasca(var item: Task) : DialogFragment() {
             etNom = view.findViewById(R.id.etNom)
             etSparks = view.findViewById(R.id.etSparks)
             etData = view.findViewById(R.id.etData)
-            etNom.setText
+
+            etNom.setText(item.title)
+            etData.setText(item.data.toString())
+            etSparks.setText(item.sparks.toString())
+
 
 
             builder.setView(view)
