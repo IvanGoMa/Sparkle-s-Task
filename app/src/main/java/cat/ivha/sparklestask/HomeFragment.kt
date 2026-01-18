@@ -40,12 +40,16 @@ class HomeFragment : Fragment(R.layout.home) {
     override fun onViewCreated(view: View, savedInstanceState:Bundle?){
         super.onViewCreated(view, savedInstanceState)
         initComponents(view)
-        initLlisteners()
+        initListeners()
     }
 
-    private fun initLlisteners() {
+    private fun initListeners() {
         btnAfegir.setOnClickListener {
             CreateTask().show(parentFragmentManager,"Crear Tasca")
+        }
+
+        tasca1.setOnClickListener {
+            ActualitzaTasca().show(parentFragmentManager, "Actualitza tasca")
         }
     }
 

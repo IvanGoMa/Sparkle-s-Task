@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 
 
 class SettingsFragment : Fragment() {
@@ -32,11 +33,26 @@ class SettingsFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
         initComponents(view)
+        initListeners()
     }
 
     private fun initComponents(view: View) {
         btnGuarda = view.findViewById(R.id.btnGuarda)
         btnSortir = view.findViewById(R.id.btnSortir)
+    }
+
+    fun initListeners(){
+        btnSortir.setOnClickListener {
+            val intent = Intent(requireContext(), Inici::class.java)
+            startActivity(intent)
+        }
+        btnGuarda.setOnClickListener{
+            Toast.makeText(
+                requireContext(),
+                "Preferencies guardades",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
 
