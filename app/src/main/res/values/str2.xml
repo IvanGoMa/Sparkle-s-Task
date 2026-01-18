@@ -14,7 +14,7 @@
     <string name="datePlaceholder">05/12/2026</string>
     <string name="prizePlaceholder">+10 Sparks</string>
     <string name="task"> Recollir</string>
-    <string name="titolActualitza"> Modifica els valors de la teva tasca</string>
+    <string name="titolActualitza"> Modifica la teva tasca</string>
     <string name="modificaNom"> Nom:</string>
     <string name="modificaSparks"> Sparks per completar:</string>
     <string name="modificaData"> Data límit:</string>

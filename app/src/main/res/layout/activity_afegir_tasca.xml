@@ -70,7 +70,8 @@
                     android:hint="@string/nomTasca"
                     android:inputType="text"
                     android:textColorHint="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
             </LinearLayout>
 
 
@@ -96,7 +97,8 @@
                     android:hint="@string/sparksObtinguts"
                     android:inputType="number"
                     android:textColorHint="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
             </LinearLayout>
 
             <LinearLayout
@@ -121,7 +123,8 @@
                     android:hint="@string/datePlaceholder"
                     android:inputType="date"
                     android:textColorHint="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
             </LinearLayout>
 
 
@@ -152,7 +155,8 @@
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/pinkPrimary"
             android:text="@string/cancel"
-            android:textColor="@color/pinkOnPrimary" />
+            android:textColor="@color/pinkOnPrimary"
+            android:textSize="20sp"/>
 
         <Button
             android:id="@+id/btnCreate"
@@ -163,7 +167,8 @@
             android:background="@drawable/circle_pink"
             android:backgroundTint="@color/pinkSecondary"
             android:text="@string/creaTasca"
-            android:textColor="@color/pinkOnSecondary" />
+            android:textColor="@color/pinkOnSecondary"
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
