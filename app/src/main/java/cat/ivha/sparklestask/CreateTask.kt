@@ -4,14 +4,19 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import java.text.SimpleDateFormat
 
 
 class CreateTask : DialogFragment() {
 
     lateinit var btnCancel: Button
     lateinit var btnCreate: Button
+    lateinit var etNom: EditText
+    lateinit var etSparks: EditText
+    lateinit var etData: EditText
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
@@ -22,6 +27,9 @@ class CreateTask : DialogFragment() {
 
             btnCancel = view.findViewById(R.id.btnCancel)
             btnCreate = view.findViewById(R.id.btnCreate)
+            etNom = view.findViewById<EditText>(R.id.etNom)
+            etSparks = view.findViewById<EditText>(R.id.etSparks)
+            etData = view.findViewById<EditText>(R.id.etData)
 
             builder.setView(view)
             initListeners()
@@ -47,6 +55,9 @@ private fun CreateTask.initListeners() {
     }
 
     btnCreate.setOnClickListener {
+        val df: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
+
+        TasksList.items.add(Task(df.parse(etData.text.toString()), etNom.text.toString(),etSparks.toString().toInt()))
         dismiss()
     }
 }
