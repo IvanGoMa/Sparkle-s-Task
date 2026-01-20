@@ -8,6 +8,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 class CreateTask : DialogFragment() {
@@ -55,9 +56,9 @@ private fun CreateTask.initListeners() {
     }
 
     btnCreate.setOnClickListener {
-        val df: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
+        val df: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
 
-        TasksList.items.add(Task(df.parse(etData.text.toString()), etNom.text.toString(),etSparks.toString().toInt()))
+        TasksList.items.add(Task(df.parse(etData.text.toString())!!, etNom.text.toString(),etSparks.toString().toInt()))
         dismiss()
     }
 }

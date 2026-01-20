@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 
 
 class Register : AppCompatActivity() {
+    private val viewmodel: RegisterViewModel by viewModels()
     lateinit var btnBack : ImageButton
     lateinit var btnInici: Button
 
