@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModel
 import kotlin.jvm.java
 
@@ -18,16 +19,11 @@ import kotlin.jvm.java
 class Inici : AppCompatActivity() {
 
 
-    private val ViewModel: ViewModelLogin by ViewModel
-    private val password = "1234"
+    private val ViewModel: IniciViewModel by ViewModel
     private lateinit var etUser: EditText
     private lateinit var etPassw: EditText
     private lateinit var btnInici: Button
     private lateinit var btnRegister: Button
-
-
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,26 +52,17 @@ class Inici : AppCompatActivity() {
 
     fun initListeners() {
 
-
-        btnInici.setOnClickListener {
-
-
-            val user = etUser.text.toString()
-            val pass = etPassw.text.toString()
-
-
-            if (user.isBlank() || pass.isBlank()) {
-                Toast.makeText(this, "Completa tots els camps. ", Toast.LENGTH_SHORT).show()
-            } else if (pass == password) {
-                val intent = Intent(this, MenuBottom::class.java)
-                startActivity(intent)
-            } else {
-                Toast.makeText(this, "Contrasenya no és correcta", Toast.LENGTH_SHORT).show()
-            }
-
-
+        etUser.addTextChangedListener{ text ->
+            ViewModel.onEmailChanged(text.toString())
         }
 
+        etPassw.addTextChangedListener{ text ->
+            ViewModel.onPasswChanged(text.toString())
+        }
+
+        btnInici.setOnClickListener {
+            ViewModel.onLoginClick()
+        }
 
         btnRegister.setOnClickListener {
             val intent = Intent(this, Register::class.java)
