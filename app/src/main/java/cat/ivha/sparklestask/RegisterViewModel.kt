@@ -1,5 +1,6 @@
 package cat.ivha.sparklestask
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import java.text.SimpleDateFormat
@@ -7,12 +8,28 @@ import java.util.Calendar
 import java.util.Locale
 
 class RegisterViewModel: ViewModel() {
-    val username = MutableLiveData("")
-    val password = MutableLiveData("")
-    val passwordValidation = MutableLiveData("")
-    val email = MutableLiveData("")
-    val date = MutableLiveData(Calendar.getInstance())
-    val correct = false
+    private val _username = MutableLiveData("")
+    var username: LiveData<String> = _username
+    private val _password = MutableLiveData("")
+    var password: LiveData<String> = _password
+    private val _passwordValidation = MutableLiveData("")
+    var passwordValidation: LiveData<String> = _passwordValidation
+    private val _email = MutableLiveData("")
+    var email: LiveData<String> = _email
+    private val _date = MutableLiveData(Calendar.getInstance())
+    var date: LiveData<Calendar> = _date
+    private val _correct = false
+
+
+
+
+
+
+    fun checkAll() = checkPassword() && checkUsername() && checkEmail() && checkPasswordValidation() && checkDate()
+
+    fun getData(usernameInput: String, emailInput: String, passwordInput: String, passwordValidationInput: String, dateInput:String){
+
+    }
 
     fun checkUsername(): Boolean{
         return (username.toString().length < 5)
@@ -32,7 +49,7 @@ class RegisterViewModel: ViewModel() {
             else symbol = true
         }
 
-        return ((pwd.length > 7) and minus and mayus and digit and symbol)
+        return ((pwd.length > 7) && minus && mayus && digit && symbol)
     }
     fun checkPasswordValidation(): Boolean{
         return passwordValidation == password
