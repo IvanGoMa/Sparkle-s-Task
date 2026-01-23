@@ -7,24 +7,28 @@ import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import cat.ivha.sparklestask.databinding.RegisterBinding
 
 
 class Register : AppCompatActivity() {
     private val viewmodel: RegisterViewModel by viewModels()
-    lateinit var btnBack : ImageButton
-    lateinit var btnInici: Button
+    private lateinit var binding : RegisterBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.register)
+        binding = RegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initComponents()
         initListeners()
     }
 
     private fun initComponents() {
-        btnBack = findViewById(R.id.btnBack)
-        btnInici = findViewById(R.id.btnInici)
+        val btnBack = binding.btnBack
+        val btnInici = binding.btnInici
+        val etEmail = binding.etEmail
+        val etUser = binding.etUser
     }
 
     private fun initListeners() {
