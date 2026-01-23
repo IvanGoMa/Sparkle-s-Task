@@ -11,6 +11,8 @@
     tools:context=".Inici">
 
 
+
+
     <TextView
         android:id="@+id/tvApp"
         android:layout_width="match_parent"
@@ -24,6 +26,7 @@
         android:textStyle="bold"
         />
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,6 +34,7 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         >
+
 
         <TextView
             android:id="@+id/tvRegister"
@@ -46,6 +50,7 @@
             android:textStyle="bold"
             />
 
+
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
@@ -55,6 +60,7 @@
             android:scaleType="centerCrop"
             android:background="@drawable/circle_pink"
             />
+
 
         <EditText
             android:id="@+id/etUser"
@@ -69,6 +75,7 @@
             android:textColor="@color/black"
             />
 
+
         <EditText
             android:id="@+id/etPssw"
             android:layout_width="200dp"
@@ -82,6 +89,7 @@
             android:textColor="@color/black"
             />
 
+
         <Button
             android:id="@+id/btnInici"
             android:layout_width="170dp"
@@ -91,6 +99,7 @@
             android:text="@string/inici"
             android:textSize="22sp"
             />
+
 
         <Button
             android:id="@+id/btnRegister"
@@ -103,7 +112,11 @@
             />
 
 
+
+
     </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
