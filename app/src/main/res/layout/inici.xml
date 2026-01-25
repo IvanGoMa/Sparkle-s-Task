@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -9,9 +10,6 @@
     android:padding="30dp"
     android:fontFamily="@font/alice"
     tools:context=".Inici">
-
-
-
 
     <TextView
         android:id="@+id/tvApp"
@@ -23,33 +21,26 @@
         android:textSize="60sp"
         android:textColor="@color/pinkPrimary"
         android:fontFamily="@font/alice"
-        android:textStyle="bold"
-        />
-
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/tvApp"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-        >
-
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/tvApp"
             android:background="@drawable/round_pink_sec"
             android:layout_marginTop="25dp"
             android:gravity="center_horizontal"
             android:text="@string/enter"
             android:textSize="34sp"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            />
-
+            android:textStyle="bold"/>
 
         <ImageView
             android:layout_width="150dp"
@@ -58,37 +49,44 @@
             android:src="@drawable/perfil_sin_fondo"
             android:layout_marginTop="40dp"
             android:scaleType="centerCrop"
-            android:background="@drawable/circle_pink"
-            />
+            android:background="@drawable/circle_pink"/>
 
-
-        <EditText
-            android:id="@+id/etUser"
-            android:layout_width="200dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailInputLayout"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:hint="@string/user"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:textColorHint="@color/black"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            />
+            app:errorEnabled="true"
+            app:errorTextColor="@color/pinkPrimary">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/etPssw"
-            android:layout_width="200dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwInputLayout"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:hint="@string/pw"
-            android:importantForAutofill="no"
-            android:inputType="textVisiblePassword"
-            android:textColorHint="@color/black"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            />
+            app:errorEnabled="true"
+            app:errorTextColor="@color/pinkPrimary"
+            app:passwordToggleEnabled="true">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPssw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnInici"
@@ -98,8 +96,7 @@
             android:backgroundTint="@color/pinkPrimary"
             android:text="@string/inici"
             android:textSize="22sp"
-            />
-
+            android:enabled="false"/>
 
         <Button
             android:id="@+id/btnRegister"
@@ -108,15 +105,8 @@
             android:layout_marginTop="5dp"
             android:backgroundTint="@color/pinkSecondary"
             android:text="@string/reg"
-            android:textSize="15sp"
-            />
-
-
-
+            android:textSize="15sp"/>
 
     </LinearLayout>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
