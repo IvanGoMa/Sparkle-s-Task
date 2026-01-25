@@ -66,7 +66,7 @@ class RegisterViewModel: ViewModel() {
     fun checkDate():Boolean{
         val toDate = Calendar.getInstance()
         val birthDate = Calendar.getInstance()
-        val df = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val df = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         birthDate.time = df.parse(date.value.toString())!!
 
         if (toDate.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR) > 18) {
