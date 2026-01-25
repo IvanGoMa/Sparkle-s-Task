@@ -1,6 +1,5 @@
 package cat.ivha.sparklestask
 
-import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +11,7 @@ class IniciViewModel : ViewModel() {
         password = "1234"
     )
 
-
+    // LiveData privados
     private val _email = MutableLiveData<String>("")
     private val _passw = MutableLiveData<String>("")
     private val _emailError = MutableLiveData<String?>()
@@ -20,7 +19,7 @@ class IniciViewModel : ViewModel() {
     private val _isLoginButtonOn = MutableLiveData<Boolean>(false)
     private val _loginSuccesEvent = MutableLiveData<Boolean>()
 
-
+    // LiveData públicos
     val email: LiveData<String> = _email
     val passw: LiveData<String> = _passw
     val emailError: LiveData<String?> = _emailError
@@ -39,24 +38,24 @@ class IniciViewModel : ViewModel() {
         validatePassw(newPassw)
         updateLoginButtonState()
     }
+
     fun onLoginClick() {
         val currentEmail = _email.value ?: ""
         val currentPassw = _passw.value ?: ""
 
-        if (validateEmail(currentEmail) && validatePassw(currentPassw)) {
-            if (validateCredencials(currentEmail, currentPassw)) {
-                procesLogin(currentEmail, currentPassw)
-            }
+        if (validateCredencials(currentEmail, currentPassw)) {
+            procesLogin()
         }
     }
 
+    // Validación simple (sin Patterns)
     private fun validateEmail(email: String): Boolean {
         return when {
             email.isEmpty() -> {
                 _emailError.value = "L'email no pot estar buit"
                 false
             }
-            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+            !email.contains("@") -> {  // Validación simple
                 _emailError.value = "Format d'email invàlid"
                 false
             }
@@ -70,7 +69,7 @@ class IniciViewModel : ViewModel() {
     private fun validatePassw(passw: String): Boolean {
         return when {
             passw.isEmpty() -> {
-                _passwError.value = "Vigila! T'oblides la contrasenya"
+                _passwError.value = "La contrasenya no pot estar buida"
                 false
             }
             else -> {
@@ -99,11 +98,10 @@ class IniciViewModel : ViewModel() {
     private fun updateLoginButtonState() {
         val emailValid = _emailError.value == null && !_email.value.isNullOrEmpty()
         val passwValid = _passwError.value == null && !_passw.value.isNullOrEmpty()
-
         _isLoginButtonOn.value = emailValid && passwValid
     }
 
-    private fun procesLogin(email: String, passw: String) {
+    private fun procesLogin() {
         _loginSuccesEvent.value = true
     }
 
