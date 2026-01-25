@@ -28,14 +28,15 @@ En aquesta secció s'expliquen les eines i tecnologies utilitzades per implement
 # Documentació Tècnica - Sparkle's Task
 
 ## Índex
-1. RecyclerView: Adapter i ViewHolder
-2. Splash Screen
-3. Menú de Navegació
-4. Dialogs
+1. [RecyclerView: Adapter i ViewHolder](#1)
+2. [Splash Screen](#2)
+3. [Menú de Navegació](#3)
+4. [Dialogs](#4)
+5. [Viewbinding i ViewModel](#5)
 
 ---
 
-## RecyclerView: Adapter i ViewHolder
+## RecyclerView: Adapter i ViewHolder<a name="1"></a>
 
 El **RecyclerView** és un component d'Android que permet mostrar llistes grans de dades de manera eficient. A Sparkle's Task, s'utilitza per mostrar la col·lecció d'accessoris disponibles a la botiga del perfil i les tasques a home.
 
@@ -360,7 +361,7 @@ Usuari clica "Ulleres":
 
 ---
 
-## Splash Screen
+## Splash Screen<a name="2"></a>
 
 La **Splash Screen** és la pantalla inicial que apareix quan l'usuari obre l'aplicació, mentre es carreguen els recursos necessaris. Proporciona una experiència visual professional i fluida.
 
@@ -555,7 +556,7 @@ class Inici : AppCompatActivity() {
 
 ---
 
-## Menú de Navegació
+## Menú de Navegació<a name="3"></a>
 
 El menú de navegació inferior (Bottom Navigation) permet als usuaris moure's entre les diferents seccions principals de l'aplicació mitjançant fragments.
 
@@ -828,7 +829,7 @@ Un **Fragment** és un component reutilitzable que representa una porció de la 
 
 ---
 
-## Dialogs
+## Dialogs<a name="4"></a>
 
 Els **Dialogs** són finestres modals que apareixen sobre la interfície principal per sol·licitar informació a l'usuari o mostrar missatges importants. A Sparkle's Task, s'utilitzen per crear i modificar tasques.
 
@@ -1150,4 +1151,82 @@ L'aplicació Sparkle's Task utilitza un conjunt de components ben integrats:
 4. **DialogFragments**: Interacció modal per crear i modificar tasques
 
 Aquesta estructura segueix les millors pràctiques d'Android i proporciona una base sòlida per a futures ampliacions de l'aplicació.
+
+
+## Viewbinding i ViewModel<a name="5"></a>
+
+### Viewbinding
+El Viewbinding ens permet accedir a les ids del layout de forma molt més cómode. Per a utilitzar-ho primer l'hem d'afegir al build.gradle.kts:
+```kotlin
+buildFeatures {
+        viewBinding = true
+    }
+
+```
+Desrpés de sincronitzar el Gradle, se'ns crearà automaticament un binding per a cadascuna de les nostres acticities. Quan el volem fer servir només em de crear una variable de tipus <Nom de l'Activity>Binding i inflar el layout al onCreate:
+
+```kotlin
+private lateinit var binding : RegisterBinding
+override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        binding = RegisterBinding.inflate(layoutInflater)
+```
+
+Un cop fet això podem fer el setContentView i accedir als elements del layout utilitzant el binding d'aquesta manera:
+
+```kotlin
+ setContentView(binding.root)
+ val btnBack = binding.btnBack
+```
+
+Això ens permet no haver de crear les variables amb lateinit var i treballar més cómodament
+
+### ViewModel
+És la capa on es troba la llógica de negoci quan s'utilitza l'arquitectura MVVM. La classe ViewModel té un cicle de vida més llarg que les Activities, i ens permet guardar dades per tal de no perdre-les en una possible rotació de pantalla o minimització de l'aplicació.
+Per a utilitzar-ho, haurem de crear una classe de tipus ViewModel.
+
+```kotlin
+class RegisterViewModel: ViewModel() {
+    private val _username = MutableLiveData("")
+    var username: LiveData<String> = _username
+```
+
+Com es pot veure al codi, utilitzem variables de tipus LiveData, per a poder fer observe() posteriorment.
+Com en aquesta capa va la llògica de negoci necessitem carregar les dades de l'activity. En el cas de Registre ho hem fet de la següent manera:
+
+```kotlin
+fun getData(usernameInput: String, emailInput: String, passwordInput: String, passwordValidationInput: String, dateInput:String){
+        _username.value = usernameInput
+        _email.value = emailInput
+        _password.value = passwordInput
+        _passwordValidation.value = passwordValidationInput
+        _date.value = dateInput
+
+    }
+```
+Posteriorment hem creat les funcions de comprovació de tots els camps.
+
+A la activity asociada a aquest viewmodel hem de crear una variable amb el tipus de la classe que hem creat:
+
+```kotlin
+ private val viewmodel: RegisterViewModel by viewModels()
+```
+
+Després ja podem utilitzar les funcions definides al viewModel:
+
+```kotlin
+viewmodel.getData(etUser.text.toString(),
+                etEmail.text.toString(),
+                etPssw.text.toString(),
+                etPsswX.text.toString(),
+                etData.text.toString())
+if (!viewmodel.checkUsername()){
+                Toast.makeText(this,"El nom d'usuari ha de tenir més de 5 caràcters", Toast.LENGTH_SHORT).show()
+            }
+```
+
+D'aquesta manera separem la llògica de negoci de la UI, com recomanen les bones pràctiques.
+
+
 
