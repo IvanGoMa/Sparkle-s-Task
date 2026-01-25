@@ -2,239 +2,72 @@
 
 ## Introducció
 
-**Sparkle's Task** és una aplicació d'organització de tasques amb un enfocament lúdic i gamificat. L'aplicació transforma les tasques diàries en una experiència semblant a un joc, facilitant la seva finalització mitjançant un sistema de recompenses.
+Sparkle's Task és una aplicació d'organització de tasques amb un enfocament lúdic i gamificat. L'aplicació transforma les tasques diàries en una experiència semblant a un joc, facilitant la seva finalització mitjançant un sistema de recompenses.
 
-### Característiques principals
-
-- Gestió de tasques diàries
-- Experiència gamificada
-- Sistema de recompenses amb Sparks (monedes virtuals)
-- Personalització del perfil amb accessoris
-- Motivació per completar tasques
+Característiques principals:
+· Gestió de tasques diàries
+· Experiència gamificada
+· Sistema de recompenses amb Sparks (monedes virtuals)
+· Personalització del perfil amb accessoris
+· Motivació per completar tasques
 
 ## Com funciona
 
-1. **Crea tasques** - Organitza les teves activitats diàries
-2. **Completa-les** - Marca les tasques com a finalitzades
-3. **Guanya Sparks** - Obté monedes virtuals com a recompensa
-4. **Compra accessoris** - Utilitza els Sparks per millorar el teu perfil
+El funcionament de l'aplicació és molt senzill i intuitiu. Primer, l'usuari crea tasques per organitzar les seves activitats diàries. Després, a mesura que completa aquestes tasques, les marca com a finalitzades i guanya Sparks, que són les monedes virtuals de l'aplicació. Finalment, amb aquests Sparks acumulats pot comprar accessoris per personalitzar i millorar el seu perfil dins de l'aplicació.
 
 ---
 
 ## Part Tècnica
 
-En aquesta secció s'expliquen les eines i tecnologies utilitzades per implementar les diferents funcionalitats de l'aplicació.
-
-# Documentació Tècnica - Sparkle's Task
-
-## Índex
-1. [RecyclerView: Adapter i ViewHolder](#1)
-2. [Splash Screen](#2)
-3. [Menú de Navegació](#3)
-4. [Dialogs](#4)
-5. [Viewbinding i ViewModel](#5)
+Per desenvolupar Sparkle's Task hem utilitzat Kotlin com a llenguatge de programació principal, treballant sobre la plataforma Android amb Android Studio com a entorn de desenvolupament integrat. L'aplicació fa ús de diversos components importants com Fragments per gestionar diferents pantalles, RecyclerView per mostrar llistes eficients, BottomNavigationView per la navegació inferior, DialogFragment per finestres modals, ViewModel per gestionar l'estat i View Binding per accedir de manera segura a les vistes.
 
 ---
 
-## RecyclerView: Adapter i ViewHolder<a name="1"></a>
+## RecyclerView: Adapter i ViewHolder
 
-El **RecyclerView** és un component d'Android que permet mostrar llistes grans de dades de manera eficient. A Sparkle's Task, s'utilitza per mostrar la col·lecció d'accessoris disponibles a la botiga del perfil i les tasques a home.
+El RecyclerView és un dels components més importants de l'aplicació perquè permet mostrar llistes molt grans de dades de manera eficient. En el nostre cas, l'utilitzem principalment per mostrar la col·lecció d'accessoris disponibles a la botiga del perfil de l'usuari.
 
-### Components principals
+### Estructura de dades
 
-#### 1. Data Class - Item
-
-La classe `Item` defineix l'estructura de cada accessori:
+Per organitzar la informació dels accessoris, hem creat una data class anomenada Item que defineix l'estructura de cada accessori. Aquesta classe conté quatre propietats bàsiques: el nom de l'accessori, la seva descripció, la imatge associada i la categoria a la qual pertany. Utilitzar una data class en lloc d'una classe normal té l'avantatge que Kotlin genera automàticament mètodes útils com equals, hashCode i toString.
 
 ```kotlin
 data class Item (
-    val nom: String,          // Nom de l'accessori
-    val desc: String,         // Descripció
-    val img: Int,            // ID del recurs drawable de la imatge
-    val categoria: Categoria // Categoria a la qual pertany
+    val nom: String,
+    val desc: String,
+    val img: Int,
+    val categoria: Categoria
 )
 ```
 
-**Característiques:**
-- `data class`: Tipus especial de classe en Kotlin que genera automàticament mètodes com `equals()`, `hashCode()`, `toString()` i `copy()`
-- Tots els camps són immutables (`val`) per garantir la seguretat de les dades
-- `img` és de tipus `Int` perquè emmagatzema l'ID del recurs (per exemple, `R.drawable.gafasrosas`)
+Per garantir que les categories siguin sempre vàlides i evitar errors tipogràfics, hem definit un enum class amb les tres categories possibles: COLLARS, GORROS i ULLERES. Això fa que sigui impossible assignar una categoria que no existeixi.
 
-#### 2. Enum Class - Categoria
+Totes les dades dels accessoris es guarden en un object anomenat DataSource. Utilitzar object en lloc de class implementa el patró Singleton, que garanteix que només existeix una única instància durant tota l'execució de l'aplicació. Això és ideal per a un repositori de dades centralitzat. La llista és de tipus MutableList perquè necessitem poder afegir o eliminar elements dinàmicament si fos necessari en el futur.
 
-L'enumeració defineix les categories possibles d'accessoris:
+### Patró ViewHolder
+
+El ViewHolder és un patró de disseny fonamental per millorar el rendiment del RecyclerView. El problema que resol és que findViewById és una operació computacionalment costosa, i sense ViewHolder es faria aquesta cerca cada vegada que es mostra un element. El ViewHolder emmagatzema les referències a les vistes una sola vegada quan es crea.
+
+A més, quan l'usuari fa scroll i alguns elements surten de la pantalla, el RecyclerView no els destrueix sinó que els reutilitza per mostrar els nous elements que entren. Això redueix significativament l'ús de memòria i millora la fluïdesa del scroll.
+
+El nostre ViewHolder rep la vista inflada i una funció lambda per gestionar els clics. Té un mètode bind que s'encarrega d'assignar les dades de cada Item als elements visuals corresponents:
 
 ```kotlin
-enum class Categoria {
-    COLLARS,
-    GORROS,
-    ULLERES
+fun bind (item: Item){
+    ivImg.setImageResource(item.img)
+    itemView.setOnClickListener { onItemClick(item) }
 }
 ```
 
-**Avantatges d'utilitzar enum:**
-- Garanteix que només es poden utilitzar valors vàlids
-- Evita errors tipogràfics en strings
-- Proporciona autocompletat a l'IDE
-- Facilita el manteniment del codi
+### Adapter com a pont
 
-#### 3. DataSource - Proveïdor de dades
+L'Adapter és el component que fa de pont entre les nostres dades i la interfície visual del RecyclerView. Una característica important del nostre adapter és que manté dues llistes diferents: itemsComplets que conté sempre tots els accessoris originals sense modificar, i itemsFiltrados que conté només els elements que s'han de mostrar després d'aplicar els filtres que l'usuari ha seleccionat.
 
-L'`object DataSource` actua com a repositori centralitzat de dades:
-
-```kotlin
-object DataSource {
-    val items: MutableList<Item> = mutableListOf(
-        Item("Gafa rosa", "Un accesori per l'avatar", R.drawable.gafasrosas, Categoria.ULLERES),
-        Item("Cowboy Marron", "Un accesori per l'avatar", R.drawable.cowmarron, Categoria.GORROS),
-        // ... més items
-    )
-}
-```
-
-**Característiques:**
-- `object`: Patró Singleton en Kotlin. Només existeix una instància durant tota l'execució
-- `MutableList`: Llista modificable que permet afegir o eliminar elements dinàmicament
-- Centralitza totes les dades en un sol lloc, facilitant la seva gestió i actualització
-
-### ViewHolder - Patró de disseny
-
-El **ViewHolder** és un patró de disseny que millora significativament el rendiment del RecyclerView.
-
-```kotlin
-class MyViewHolder (
-    itemView: View,
-    private val onItemClick: (Item) -> Unit
-): RecyclerView.ViewHolder(itemView){
-    
-    private val ivImg: ImageView = itemView.findViewById(R.id.ivImatge)
-
-    fun bind (item: Item){
-        ivImg.setImageResource(item.img)
-        
-        itemView.setOnClickListener {
-            onItemClick(item)
-        }
-    }
-}
-```
-
-**Funcionament detallat:**
-
-1. **Constructor:**
-   - Rep la `View` inflada (el layout de cada element)
-   - Rep una funció lambda `onItemClick` per gestionar els clics
-   - Busca i emmagatzema les referències als elements visuals
-
-2. **Mètode `bind()`:**
-   - Assigna les dades de l'objecte `Item` als elements visuals
-   - `setImageResource()`: Carrega la imatge corresponent
-   - `setOnClickListener()`: Configura l'acció quan l'usuari fa clic sobre l'element
-
-3. **Per què és important?**
-   - **Rendiment**: `findViewById()` és una operació costosa. El ViewHolder la fa només una vegada per vista
-   - **Reutilització**: Quan fas scroll, les vistes que surten de la pantalla es reutilitzen per mostrar nous elements
-   - **Memòria**: Evita crear noves vistes constantment, reduint l'ús de memòria
-
-### Adapter - Pont entre dades i interfície
-
-L'**Adapter** és el component que connecta les dades amb la interfície visual del RecyclerView.
-
-```kotlin
-class MyAdapter(
-    private val itemsComplets: List<Item>,
-    private val onItemClick: (Item) -> Unit
-) : RecyclerView.Adapter<MyViewHolder>(){
-
-    private var itemsFiltrados = itemsComplets.toList()
-
-    override fun getItemCount(): Int = itemsFiltrados.size
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.rv_items_perfil, parent, false)
-        return MyViewHolder(view, onItemClick)
-    }
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = itemsFiltrados[position]
-        holder.bind(item)
-    }
-}
-```
-
-**Mètodes fonamentals:**
-
-1. **`getItemCount()`:**
-   - Indica el nombre total d'elements a mostrar
-   - **Important**: Utilitza `itemsFiltrados`, no `itemsComplets`, per reflectir els filtres aplicats
-
-2. **`onCreateViewHolder()`:**
-   - S'executa quan el RecyclerView necessita crear una nova vista
-   - **LayoutInflater**: Converteix el fitxer XML del layout en un objecte View
-   - `inflate()`: Procés de crear la vista a partir del XML
-   - Paràmetres d'inflate:
-     - `R.layout.rv_items_perfil`: El layout a inflar
-     - `parent`: El ViewGroup contenidor
-     - `false`: No adjuntar la vista al parent immediatament
-   - Retorna un nou ViewHolder amb la vista creada
-
-3. **`onBindViewHolder()`:**
-   - S'executa cada vegada que un element es mostra a la pantalla
-   - Obté l'`Item` de la posició corresponent
-   - Crida al mètode `bind()` del ViewHolder per actualitzar la interfície
-
-**Flux de funcionament:**
-
-```
-Inici del RecyclerView
-    ↓
-getItemCount() → RecyclerView sap quants elements hi ha
-    ↓
-onCreateViewHolder() → Crea ViewHolders (només els necessaris per pantalla)
-    ↓
-onBindViewHolder() → Assigna dades als ViewHolders visibles
-    ↓
-L'usuari fa scroll
-    ↓
-onBindViewHolder() → Reutilitza ViewHolders existents amb noves dades
-```
-
-### Layout de cada element
-
-El layout `rv_items_perfil.xml` defineix com es veu cada accessori:
-
-```xml
-<androidx.constraintlayout.widget.ConstraintLayout 
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="4dp">
-
-    <ImageView
-        android:id="@+id/ivImatge"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-```
-
-**Aspectes clau:**
-
-- **`layout_width="0dp"` i `layout_height="0dp"`**: En ConstraintLayout, `0dp` significa "match_constraint", permet que les constraints defineixin la mida
-- **`app:layout_constraintDimensionRatio="1:1"`**: Manté una proporció 1:1 (quadrat), adaptant-se a qualsevol mida de pantalla
-- **`scaleType="centerCrop"`**: Escala la imatge per omplir tot l'espai, retallant si cal per mantenir les proporcions
-- **`layout_margin="4dp"`**: Espai entre elements per evitar que estiguin enganxats
+L'adapter té tres mètodes principals que RecyclerView crida automàticament. getItemCount retorna el nombre d'elements que s'han de mostrar, i és molt important que utilitzi la llista filtrada i no la completa. onCreateViewHolder s'executa quan cal crear una nova vista, utilitzant el LayoutInflater per convertir el fitxer XML en un objecte View. onBindViewHolder s'executa cada vegada que un element es mostra a la pantalla, obtenint l'Item corresponent i cridant el mètode bind del ViewHolder.
 
 ### Sistema de filtres
 
-El sistema de filtres permet mostrar només els accessoris d'una categoria específica.
-
-#### Mètode de filtratge a l'Adapter
+El sistema de filtres és una funcionalitat important que permet a l'usuari veure només els accessoris d'una categoria específica. Hem implementat un mètode filtra que rep una categoria que pot ser null. Si és null significa que no volem cap filtre i per tant mostrem tots els elements. Si té un valor, utilitzem la funció filter de Kotlin per crear una nova llista que només conté els elements que coincideixen amb la categoria seleccionada.
 
 ```kotlin
 fun filtra(categoria : Categoria?){
@@ -247,986 +80,169 @@ fun filtra(categoria : Categoria?){
 }
 ```
 
-**Funcionament pas a pas:**
+Al fragment, la implementació dels filtres utilitza una lògica de toggle. Això significa que si l'usuari clica un botó de categoria que ja estava actiu, el filtre s'elimina i es mostren tots els accessoris de nou. Si clica un botó diferent, canvia directament al nou filtre. Aquesta funcionalitat es controla amb la variable ultimClicat que recorda quin filtre està actiu actualment.
 
-1. **Paràmetre `categoria: Categoria?`:**
-   - El `?` indica que pot ser `null`
-   - `null` significa "sense filtre" (mostrar tot)
-   - Qualsevol altra categoria aplicarà el filtre corresponent
-
-2. **Expressió condicional:**
-   ```kotlin
-   if (categoria == null) {
-       itemsComplets.toList()  // Copia tota la llista original
-   } else {
-       itemsComplets.filter { it.categoria == categoria }  // Filtra
-   }
-   ```
-
-3. **`filter { }`:**
-   - Funció d'ordre superior que recorre la llista
-   - `it` representa cada element
-   - Només manté els elements on `it.categoria == categoria` és `true`
-   - Retorna una nova llista amb els elements filtrats
-
-4. **`notifyDataSetChanged()`:**
-   - Notifica al RecyclerView que les dades han canviat
-   - Força la re-renderització de tots els elements visibles
-   - **Important**: Aquest mètode és necessari perquè el RecyclerView actualitzi la interfície
-
-#### Implementació al Fragment
-
-```kotlin
-class PerfilFragment : Fragment(R.layout.perfil_rv) {
-    
-    private var ultimClicat: String? = null
-    private val COLLARS = "Collars"
-    private val ULLERES = "Ulleres"
-    private val GORROS = "Gorros"
-    
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        
-        // Configuració del RecyclerView
-        val items = DataSource.items
-        adapter = MyAdapter(
-            itemsComplets = items,
-            onItemClick = { item ->
-                Toast.makeText(requireContext(), item.desc, Toast.LENGTH_SHORT).show()
-            }
-        )
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
-        
-        // Configuració dels filtres
-        btnCollars.setOnClickListener {
-            adapter.filtra(if (ultimClicat == COLLARS) null else Categoria.COLLARS)
-            ultimClicat = if (ultimClicat == COLLARS) null else COLLARS
-        }
-        
-        btnUlleres.setOnClickListener {
-            adapter.filtra(if (ultimClicat == ULLERES) null else Categoria.ULLERES)
-            ultimClicat = if (ultimClicat == ULLERES) null else ULLERES
-        }
-        
-        btnGorros.setOnClickListener {
-            adapter.filtra(if (ultimClicat == GORROS) null else Categoria.GORROS)
-            ultimClicat = if (ultimClicat == GORROS) null else GORROS
-        }
-    }
-}
-```
-
-**Lògica del toggle (activar/desactivar filtre):**
-
-```
-Estat inicial:
-- ultimClicat = null
-- Mostrant tots els accessoris
-
-Usuari clica "Collars":
-├─ ultimClicat != COLLARS → Aplicar filtre
-├─ adapter.filtra(Categoria.COLLARS)
-├─ ultimClicat = "Collars"
-└─ Resultat: Mostra només collars
-
-Usuari clica "Collars" de nou:
-├─ ultimClicat == COLLARS → Eliminar filtre
-├─ adapter.filtra(null)
-├─ ultimClicat = null
-└─ Resultat: Mostra tots els accessoris
-
-Usuari clica "Ulleres":
-├─ ultimClicat != ULLERES → Aplicar nou filtre
-├─ adapter.filtra(Categoria.ULLERES)
-├─ ultimClicat = "Ulleres"
-└─ Resultat: Mostra només ulleres
-```
-
-**Per què aquesta implementació?**
-
-- **Només un filtre actiu**: No pots tenir collars i ulleres filtrats simultàniament
-- **Toggle intuïtiu**: Clicar el mateix botó dues vegades elimina el filtre
-- **Canvi de categoria**: Clicar un botó diferent canvia directament al nou filtre
-
-**Variables utilitzades:**
-
-- **`ultimClicat: String?`**: Guarda quin filtre està actiu actualment (`null` si no n'hi ha cap)
-- **Constants `COLLARS`, `ULLERES`, `GORROS`**: Eviten errors tipogràfics i faciliten comparacions
-
-**`GridLayoutManager(requireContext(), 3)`:**
-- Organitza els elements en una graella de 3 columnes
-- S'adapta automàticament a l'amplada de la pantalla
-- Cada element ocupa 1/3 de l'amplada disponible
+Per mostrar els accessoris en format de graella en lloc de llista vertical, utilitzem GridLayoutManager amb 3 columnes. Això fa que tres accessoris es mostrin per fila i s'adapti automàticament a l'amplada de la pantalla del dispositiu.
 
 ---
 
-## Splash Screen<a name="2"></a>
+## Splash Screen
 
-La **Splash Screen** és la pantalla inicial que apareix quan l'usuari obre l'aplicació, mentre es carreguen els recursos necessaris. Proporciona una experiència visual professional i fluida.
+La Splash Screen és la pantalla inicial que apareix quan l'usuari obre l'aplicació per primera vegada. Aquesta pantalla té diverses funcions importants: ofereix una aparença professional a l'aplicació, oculta el temps que triga l'aplicació a inicialitzar-se carregant tots els recursos necessaris, mostra el logotip i la identitat visual de l'aplicació, i proporciona una transició suau fins al contingut principal.
 
-### 1. Afegir la dependència
+### Implementació pas a pas
 
-Al fitxer `build.gradle.kts` (nivell app), s'afegeix la llibreria de Splash Screen:
+Per implementar la Splash Screen, primer cal afegir la dependència corresponent al fitxer build.gradle. Aquesta llibreria proporciona totes les funcionalitats necessàries i és compatible amb versions antigues d'Android des de l'API 21.
 
-```kotlin
-dependencies {
-    // ... altres dependències
-    implementation(libs.androidx.core.splashscreen)
-}
-```
+Després cal crear un theme específic per a la Splash Screen al fitxer themes.xml. Aquest theme hereta de Theme.SplashScreen i defineix tres propietats clau. La primera és windowSplashScreenAnimatedIcon que especifica quina imatge o animació es mostrarà. La segona, i molt important, és postSplashScreenTheme que indica quin theme utilitzar un cop la Splash Screen desapareix. Sense aquesta propietat l'aplicació perdria tot l'estil visual. La tercera és windowSplashScreenAnimationDuration que controla quant de temps dura l'animació en mil·lisegons.
 
-**Què fa aquesta dependència?**
-- Proporciona la classe `SplashScreen` i les seves funcionalitats
-- Gestiona la transició entre la splash screen i l'activitat principal
-- Compatible amb versions antigues d'Android (API 21+)
+L'animació es crea amb objectAnimator, que és una eina molt potent d'Android per animar propietats dels objectes. En el nostre cas hem creat tres animacions que s'executen simultàniament gràcies a l'etiqueta set. Les dues primeres controlen l'escala horitzontal i vertical, fent que la imatge creixi des d'un 10% fins a un 60% de la seva mida original. La tercera controla l'opacitat, fent que la imatge aparegui gradualment des d'invisible fins a completament visible.
 
-### 2. Crear el theme de la Splash Screen
+Al fitxer AndroidManifest.xml cal configurar l'activitat Inici perquè utilitzi el theme de la Splash Screen. L'atribut exported="true" és obligatori perquè permet que el sistema Android pugui llançar aquesta activitat. L'intent-filter amb MAIN i LAUNCHER fa que aquesta sigui la primera activitat que es mostra quan l'usuari obre l'aplicació.
 
-Al fitxer `themes.xml`, es defineix l'estil visual de la splash screen:
-
-```xml
-<style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
-    <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_animation</item>
-    <item name="postSplashScreenTheme">@style/Pink.SparklesTask</item>
-    <item name="windowSplashScreenAnimationDuration">10000</item>
-</style>
-```
-
-**Propietats explicades:**
-
-1. **`parent="Theme.SplashScreen"`:**
-   - Hereta del theme base de la llibreria SplashScreen
-   - Proporciona tot el comportament estàndar de les splash screens
-
-2. **`windowSplashScreenAnimatedIcon`:**
-   - Defineix la imatge/animació que es mostrarà
-   - Pot ser un drawable estàtic o un AnimatedVectorDrawable
-   - En aquest cas: `@drawable/ic_splash_animation`
-
-3. **`postSplashScreenTheme`:**
-   - **Molt important**: Indica quin theme utilitzar DESPRÉS de la splash screen
-   - Aquí s'especifica `Pink.SparklesTask`, el theme principal de l'aplicació
-   - Sense aquesta línia, l'aplicació perdria tot l'estil en acabar la splash screen
-
-4. **`windowSplashScreenAnimationDuration`:**
-   - Durada de l'animació en mil·lisegons (10000ms = 10 segons)
-   - Controla quant de temps es mostrarà l'animació
-
-### 3. Crear l'animació
-
-Fitxer `ic_splash_animation.xml` (drawable animat):
-
-```xml
-<set xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <objectAnimator
-        android:propertyName="scaleX"
-        android:valueFrom="0.1"
-        android:valueTo="0.6"
-        android:duration="500"
-        android:interpolator="@android:interpolator/fast_out_slow_in" />
-
-    <objectAnimator
-        android:propertyName="scaleY"
-        android:valueFrom="0.1"
-        android:valueTo="0.6"
-        android:duration="500"
-        android:interpolator="@android:interpolator/fast_out_slow_in" />
-
-    <objectAnimator
-        android:propertyName="alpha"
-        android:valueFrom="0"
-        android:valueTo="1"
-        android:duration="1000" />
-
-</set>
-```
-
-**Desglossament de l'animació:**
-
-1. **`<set>`:** Contenidor que agrupa múltiples animacions per executar-les simultàniament
-
-2. **Primera animació - `scaleX`:**
-   - **`propertyName="scaleX"`**: Escala horitzontal
-   - **`valueFrom="0.1"`**: Comença al 10% de la mida original
-   - **`valueTo="0.6"`**: Arriba al 60% de la mida original
-   - **`duration="500"`**: Durada de 500ms (mig segon)
-   - **`interpolator="fast_out_slow_in"`**: Comença ràpid i alenteix al final
-
-3. **Segona animació - `scaleY`:**
-   - Idèntica a scaleX però per l'escala vertical
-   - S'executa simultàniament per mantenir les proporcions
-
-4. **Tercera animació - `alpha`:**
-   - **`propertyName="alpha"`**: Opacitat/transparència
-   - **`valueFrom="0"`**: Comença invisible (transparent)
-   - **`valueTo="1"`**: Acaba completament visible (opac)
-   - **`duration="1000"`**: Durada d'1 segon (més llarga que l'escala)
-
-**Efecte visual resultant:**
-- La imatge apareix des del centre
-- Creix des de molt petita (10%) fins al 60% de mida
-- Simultàniament, va apareixent gradualment (fade in)
-- L'efecte és suau gràcies a l'interpolador
-
-### 4. Configurar el Manifest
-
-Al fitxer `AndroidManifest.xml`, es configura quina activitat utilitzarà la splash screen:
-
-```xml
-<application
-    android:theme="@style/Theme.SparklesTask">
-    
-    <activity
-        android:name=".Inici"
-        android:exported="true"
-        android:theme="@style/Theme.App.SplashScreen">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-    
-    <!-- Altres activitats -->
-</application>
-```
-
-**Elements clau:**
-
-1. **`android:exported="true"`:**
-   - Permet que el sistema Android pugui llançar aquesta activitat
-   - **Obligatori** per a l'activitat LAUNCHER (punt d'entrada de l'app)
-
-2. **`android:theme="@style/Theme.App.SplashScreen"`:**
-   - Aplica el theme de la splash screen **només** a aquesta activitat
-   - Sobreescriu el theme per defecte de l'aplicació
-
-3. **`<intent-filter>`:**
-   - **`MAIN`**: Indica que és un punt d'entrada principal
-   - **`LAUNCHER`**: Fa que l'activitat aparegui al llançador d'aplicacions
-   - **Aquesta activitat serà la primera que es mostri** quan s'obri l'app
-
-### 5. Gestionar la Splash Screen al codi
-
-A l'activitat `Inici.kt`:
-
-```kotlin
-class Inici : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        // IMPORTANT: installSplashScreen() s'ha de cridar ABANS de super.onCreate()
-        installSplashScreen()
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_inici)
-        
-        // Aquí continuaria el codi de la teva activitat
-    }
-}
-```
-
-**Per què `installSplashScreen()` va primer?**
-- Ha de configurar-se abans que l'activitat es creï completament
-- Si es crida després de `super.onCreate()`, la splash screen no funcionarà correctament
-
-### Flux complet de la Splash Screen
-
-```
-1. L'usuari obre l'aplicació
-    ↓
-2. Android llegeix el Manifest i veu que Inici és LAUNCHER
-    ↓
-3. Android aplica Theme.App.SplashScreen a Inici
-    ↓
-4. Es mostra la splash screen amb l'animació
-    ↓
-5. L'animació s'executa durant el temps especificat
-    ↓
-6. installSplashScreen() gestiona la transició
-    ↓
-7. S'aplica el postSplashScreenTheme (Pink.SparklesTask)
-    ↓
-8. L'activitat continua carregant normalment amb el theme correcte
-```
-
-**Avantatges d'aquest sistema:**
-- **Professional**: Proporciona una experiència polida
-- **Temps de càrrega**: Oculta el temps que triga l'app a inicialitzar-se
-- **Branding**: Mostra el logotip de l'aplicació
-- **Transició suau**: Canvi fluid entre la splash screen i el contingut principal
+Finalment, al codi de l'activitat Inici cal cridar installSplashScreen abans de super.onCreate. L'ordre és molt important perquè la Splash Screen s'ha de configurar abans que l'activitat es creï completament, altrament no funcionaria correctament.
 
 ---
 
-## Menú de Navegació<a name="3"></a>
+## Menú de Navegació
 
-El menú de navegació inferior (Bottom Navigation) permet als usuaris moure's entre les diferents seccions principals de l'aplicació mitjançant fragments.
+El menú de navegació inferior és un component essencial de l'aplicació perquè permet als usuaris moure's fàcilment entre les diferents seccions principals. Hem optat per un BottomNavigationView perquè és més accessible amb una mà en dispositius grans i segueix les directrius de Material Design.
 
-### Components del menú
+### Estructura del menú
 
-#### 1. Fitxer del menú - `bottom_menu.xml`
+El menú es defineix en un fitxer XML anomenat bottom_menu.xml que conté els diferents ítems. Cada item té un identificador únic per poder referenciar-lo al codi, una icona que es mostra visualment i un títol que apareix sota la icona.
 
-Defineix els ítems que apareixen al menú inferior:
+Una característica important és que utilitzem selectors per a les icones. Un selector és un tipus especial de drawable que canvia automàticament segons l'estat de l'element. En el nostre cas, quan un item està seleccionat mostra una icona plena, i quan no està seleccionat mostra només el contorn. Aquest canvi és completament automàtic i no cal programar-lo.
 
-```xml
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/iHome"
-        android:icon="@drawable/selector_home"
-        android:title="Home"/>
+El layout principal menu_main.xml està dividit en dues parts principals. A la part superior hi ha un FragmentContainerView que ocupa tot l'espai disponible entre el top de la pantalla i el menú inferior. Aquest contenidor és on es carreguen i es mostren els diferents fragments segons la secció que l'usuari ha seleccionat.
 
-    <item
-        android:id="@+id/iPerfil"
-        android:icon="@drawable/selector_perfil"
-        android:title="Perfil"/>
+A la part inferior hi ha el BottomNavigationView que té una altura fixa de 80dp. Hem personalitzat el seu comportament amb diverses propietats. itemActiveIndicatorStyle amb valor null elimina la bombolla de fons que apareix per defecte darrere l'ítem seleccionat. itemRippleColor amb valor transparent elimina l'efecte d'onada que apareix quan es fa clic. Aquestes personalitzacions donen una aparença més neta i minimalista al menú.
 
-    <item
-        android:id="@+id/iSetting"
-        android:icon="@drawable/selector_setting"
-        android:title="Settings"/>
-</menu>
-```
+### Gestió de la navegació
 
-**Estructura de cada `<item>`:**
+L'activitat MenuBottom.kt és la responsable de gestionar tota la lògica de navegació. Quan l'aplicació s'inicia, el mètode initComponents carrega el HomeFragment com a fragment per defecte. Això es fa mitjançant el supportFragmentManager que és el gestor de fragments de l'activitat.
 
-- **`android:id`**: Identificador únic per referenciar l'ítem al codi
-- **`android:icon`**: Drawable que es mostrarà (en aquest cas, selectors que canvien segons l'estat)
-- **`android:title`**: Text que apareix sota la icona
+El mètode initListeners configura un listener que s'executa cada vegada que l'usuari selecciona un item del menú. Utilitza una estructura when per determinar quin fragment correspon a cada item del menú. Si el fragment no és null, s'inicia una transacció de fragments que substitueix el contingut actual del FragmentContainerView pel nou fragment seleccionat.
 
-**Selectors d'icones:**
+### Avantatges dels Fragments
 
-Els selectors són drawables especials que canvien automàticament segons l'estat:
+Un Fragment és un component reutilitzable que representa una porció de la interfície d'usuari. Utilitzar fragments en lloc d'activitats diferents té diversos avantatges importants. Primer, canviar entre fragments és molt més ràpid i eficient que canviar entre activitats perquè no cal crear una nova activitat sencera. Segon, redueix l'ús de memòria perquè només hi ha una activitat principal activa. Tercer, facilita compartir dades entre diferents seccions de l'aplicació. I finalment, proporciona una millor experiència d'usuari perquè el menú inferior es manté sempre visible i accessible.
 
-```xml
-<!-- Exemple: selector_home.xml -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/ic_home_filled" android:state_checked="true"/>
-    <item android:drawable="@drawable/ic_home_outline" android:state_checked="false"/>
-</selector>
-```
-
-- **`state_checked="true"`**: Icona quan l'ítem està seleccionat (ple)
-- **`state_checked="false"`**: Icona quan l'ítem NO està seleccionat (contorn)
-- El canvi és automàtic, no cal programar-ho
-
-#### 2. Layout principal - `menu_main.xml`
-
-Defineix l'estructura visual de la pantalla amb menú:
-
-```xml
-<androidx.constraintlayout.widget.ConstraintLayout 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/menu_bottom"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/menu_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        app:itemGravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_menu"
-        android:background="@color/pinkPrimary"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        app:itemActiveIndicatorStyle="@null"
-        app:itemRippleColor="@android:color/transparent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-```
-
-**Anàlisi dels components:**
-
-**FragmentContainerView:**
-- **`android:layout_height="0dp"`**: En ConstraintLayout, `0dp` significa "match_constraint"
-- **`app:layout_constraintBottom_toTopOf="@id/menu_bottom"`**: S'estén fins just a sobre del menú
-- **`app:layout_constraintTop_toTopOf="parent"`**: Comença a dalt de tot
-- **Resultat**: Ocupa tot l'espai disponible entre la part superior i el menú inferior
-
-**BottomNavigationView - Propietats visuals:**
-
-1. **`android:layout_height="80dp"`**: Altura fixa del menú
-2. **`app:itemGravity="center"`**: Centra verticalment les icones i text
-3. **`android:background="@color/pinkPrimary"`**: Color de fons del menú
-4. **`app:itemIconTint="@color/white"`**: Color de les icones (blanc)
-5. **`app:itemTextColor="@color/white"`**: Color del text (blanc)
-
-**BottomNavigationView - Personalització del comportament:**
-
-1. **`app:itemActiveIndicatorStyle="@null"`:**
-   - Elimina l'indicador per defecte (la "bombolla" que apareix darrere l'ítem seleccionat)
-   - Permet utilitzar només els selectors d'icones per indicar l'estat
-
-2. **`app:itemRippleColor="@android:color/transparent"`:**
-   - Elimina l'efecte ripple (onada) quan es fa clic
-   - Proporciona una interacció més neta i minimalista
-
-3. **`app:menu="@menu/bottom_menu"`:**
-   - Enllaça amb el fitxer XML del menú creat anteriorment
-
-#### 3. Activitat - `MenuBottom.kt`
-
-Gestiona la lògica de navegació entre fragments:
-
-```kotlin
-class MenuBottom : AppCompatActivity() {
-
-    lateinit var menu_nav : BottomNavigationView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.menu_main)
-
-        initComponents()
-        initListeners()
-    }
-
-    private fun initComponents(){
-        menu_nav = findViewById(R.id.menu_bottom)
-        
-        // Carregar el fragment inicial
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, HomeFragment())
-            .commit()
-    }
-
-    private fun initListeners(){
-        menu_nav.setOnItemSelectedListener { item ->
-            val selectedFragment : Fragment? = when (item.itemId) {
-                R.id.iHome -> HomeFragment()
-                R.id.iPerfil -> PerfilFragment()
-                R.id.iSetting -> SettingsFragment()
-                else -> null
-            }
-            
-            if (selectedFragment != null) {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, selectedFragment)
-                    .commit()
-            }
-            true
-        }
-    }
-}
-```
-
-**Desglossament del codi:**
-
-**`initComponents()`:**
-
-```kotlin
-supportFragmentManager.beginTransaction()
-    .replace(R.id.fragmentContainer, HomeFragment())
-    .commit()
-```
-
-- **`supportFragmentManager`**: Gestor de fragments de l'activitat
-- **`beginTransaction()`**: Inicia una transacció de fragments (conjunt d'operacions)
-- **`.replace()`**: Substitueix el contingut del contenidor pel fragment especificat
-- **`.commit()`**: Confirma i executa la transacció
-- **Per què?**: Carrega el `HomeFragment` quan s'obre l'aplicació (pantalla inicial)
-
-**`initListeners()`:**
-
-```kotlin
-menu_nav.setOnItemSelectedListener { item ->
-    // Lambda que s'executa quan es selecciona un ítem
-}
-```
-
-**`when (item.itemId)`:**
-- Estructura similar al `switch` d'altres llenguatges
-- Comprova quin ítem del menú s'ha seleccionat
-- Retorna el fragment corresponent
-
-```kotlin
-val selectedFragment : Fragment? = when (item.itemId) {
-    R.id.iHome -> HomeFragment()      // Si és Home, crea HomeFragment
-    R.id.iPerfil -> PerfilFragment()  // Si és Perfil, crea PerfilFragment
-    R.id.iSetting -> SettingsFragment() // Si és Settings, crea SettingsFragment
-    else -> null                       // Si no coincideix amb cap, retorna null
-}
-```
-
-**Canvi de fragment:**
-
-```kotlin
-if (selectedFragment != null) {
-    supportFragmentManager.beginTransaction()
-        .replace(R.id.fragmentContainer, selectedFragment)
-        .commit()
-}
-true  // Retorna true per indicar que l'event s'ha gestionat
-```
-
-- **Comprova que `selectedFragment` no sigui null**: Seguretat per evitar errors
-- **Substitueix el fragment actual** pel nou al `FragmentContainerView`
-- **Retorna `true`**: Indica al sistema que l'event s'ha processat correctament
-
-### Què són els Fragments?
-
-Un **Fragment** és un component reutilitzable que representa una porció de la interfície d'usuari dins d'una Activity.
-
-**Característiques dels fragments:**
-
-- **Modularitat**: Cada fragment és independent i pot reutilitzar-se
-- **Cicle de vida propi**: Tenen els seus propis mètodes `onCreate()`, `onCreateView()`, etc.
-- **Flexibilitat**: Múltiples fragments poden existir simultàniament en una activitat
-- **Navegació lleugera**: Canviar entre fragments és més eficient que canviar entre activitats
-
-**Per què utilitzar fragments al menú?**
-
-1. **Rendiment**: Canviar fragments és més ràpid que canviar activitats
-2. **Memòria**: Només hi ha una activitat principal, reduint l'ús de recursos
-3. **Estat compartit**: Facilita compartir dades entre seccions
-4. **UX consistent**: El menú inferior es manté sempre visible
-
-**Fragments de Sparkle's Task:**
-
-1. **HomeFragment**:
-   - Mostra el calendari i la llista de tasques
-   - Permet afegir noves tasques
-   - És el fragment per defecte a l'inici
-
-2. **PerfilFragment**:
-   - Mostra el perfil de l'usuari i les monedes (Sparks)
-   - Conté la botiga d'accessoris amb RecyclerView
-   - Implementa el sistema de filtres per categories
-
-3. **SettingsFragment**:
-   - Permet modificar preferències de l'usuari
-   - Inclou opcions per canviar nom d'usuari, contrasenya i email
-   - Botó per tancar sessió
-
-### Flux complet de navegació
-
-```
-1. L'app s'inicia → MenuBottom.onCreate()
-    ↓
-2. initComponents() → Carrega HomeFragment per defecte
-    ↓
-3. L'usuari veu Home amb el calendari i tasques
-    ↓
-4. L'usuari clica la icona "Perfil" al menú
-    ↓
-5. setOnItemSelectedListener detecta el clic
-    ↓
-6. when(item.itemId) identifica R.id.iPerfil
-    ↓
-7. Crea una instància de PerfilFragment
-    ↓
-8. FragmentTransaction substitueix HomeFragment per PerfilFragment
-    ↓
-9. L'usuari veu ara la pantalla de Perfil amb els accessoris
-    ↓
-10. El selector d'icona canvia automàticament (outline → filled)
-```
+A Sparkle's Task tenim tres fragments principals. HomeFragment mostra el calendari on l'usuari pot veure les dates importants i la llista de tasques pendents. PerfilFragment mostra el perfil de l'usuari amb les seves monedes Sparks acumulades i la botiga d'accessoris amb el sistema de filtres implementat amb RecyclerView. SettingsFragment permet modificar les preferències de l'usuari com el nom d'usuari, contrasenya i email, i també inclou un botó per tancar la sessió.
 
 ---
 
-## Dialogs<a name="4"></a>
+## Dialogs
 
-Els **Dialogs** són finestres modals que apareixen sobre la interfície principal per sol·licitar informació a l'usuari o mostrar missatges importants. A Sparkle's Task, s'utilitzen per crear i modificar tasques.
+Els Dialogs són finestres modals que apareixen per sobre de la interfície principal quan necessitem sol·licitar informació específica a l'usuari o mostrar missatges importants. A Sparkle's Task els utilitzem específicament per crear noves tasques i per modificar o eliminar tasques existents.
 
-### Què és un DialogFragment?
+### DialogFragment vs Dialog tradicional
 
-Un `DialogFragment` és una classe especial que combina les característiques d'un Dialog i un Fragment:
+Hem optat per utilitzar DialogFragment en lloc del Dialog tradicional per diversos motius importants. Primer, DialogFragment gestiona automàticament el cicle de vida, això significa que s'adapta correctament als canvis de configuració com rotacions de pantalla sense perdre informació. Segon, s'integra perfectament amb el FragmentManager igual que qualsevol altre fragment. Tercer, permet personalitzar completament l'aparença del dialog carregant layouts XML personalitzats. I finalment, evita problemes comuns com memory leaks i crashes quan l'activitat canvia d'estat.
 
-**Avantatges sobre Dialog tradicional:**
-- **Gestió automàtica del cicle de vida**: S'adapta als canvis de configuració (rotacions, etc.)
-- **Integració amb FragmentManager**: Es gestiona com qualsevol altre fragment
-- **Més flexible**: Permet personalitzar completament l'aparença
-- **Segur**: Evita memory leaks i crashes en canvis d'estat
+### Implementació dels dialogs
 
-### 1. Dialog per crear tasques - `CreateTask`
+Tenim dos dialogs principals a l'aplicació. CreateTask s'utilitza per crear noves tasques i conté camps per introduir el nom de la tasca, els Sparks que s'obtindran en completar-la i la data límit. ActualitzaTasca s'utilitza per modificar tasques existents i té la mateixa estructura però afegeix un tercer botó per eliminar la tasca.
+
+El mètode onCreateDialog és on es construeix el dialog. Primer es crea un AlertDialog.Builder que és el constructor estàndard de dialogs amb estil Material Design. Després s'utilitza el layoutInflater per convertir el fitxer XML del layout personalitzat en una vista. Un cop inflat el layout, s'obtenen les referències als botons i altres elements que necessitem controlar. Finalment s'assigna aquesta vista personalitzada al builder i es crea el dialog.
 
 ```kotlin
-class CreateTask : DialogFragment() {
-
-    lateinit var btnCancel: Button
-    lateinit var btnCreate: Button
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
-            val inflater = requireActivity().layoutInflater
-            val view = inflater.inflate(R.layout.activity_afegir_tasca, null)
-
-            btnCancel = view.findViewById(R.id.btnCancel)
-            btnCreate = view.findViewById(R.id.btnCreate)
-
-            builder.setView(view)
-            initListeners()
-
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        dialog?.window?.setLayout(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
-    }
-}
-
-private fun CreateTask.initListeners() {
-    btnCancel.setOnClickListener {
-        dismiss()
-    }
-
-    btnCreate.setOnClickListener {
-        dismiss()
-    }
+override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    return activity?.let {
+        val builder = AlertDialog.Builder(it)
+        val view = requireActivity().layoutInflater
+            .inflate(R.layout.activity_afegir_tasca, null)
+        builder.setView(view)
+        builder.create()
+    } ?: throw IllegalStateException("Activity cannot be null")
 }
 ```
 
-**Desglossament del codi:**
+El mètode onStart s'executa just després que el dialog s'hagi creat i la finestra estigui disponible. Aquí és on configurem la mida del dialog perquè s'ajusti al contingut amb WRAP_CONTENT en lloc d'ocupar tota la pantalla. També fem el fons transparent perquè el nostre layout personalitzat amb corners arrodonits es vegi correctament. Sense aquesta configuració, hi hauria un fons gris rectangular per defecte que quedaria malament.
 
-**`onCreateDialog()`:**
+Per mostrar un dialog des d'un fragment, simplement es crea una nova instància i es crida el mètode show passant-li el parentFragmentManager. El segon paràmetre és un tag que serveix per identificar el dialog, útil per depuració.
 
-```kotlin
-return activity?.let {
-    // Codi del dialog
-} ?: throw IllegalStateException("Activity cannot be null")
-```
+---
 
-- **`activity?.let`**: Operador de seguretat de Kotlin
-  - Si `activity` no és null, executa el bloc
-  - Si és null, llança una excepció
-- **Per què és necessari?**: Els fragments necessiten una activitat per funcionar
+## View Binding
 
-**Construcció del Dialog:**
+View Binding és una característica molt útil que genera automàticament una classe de binding per cada layout XML de l'aplicació. Aquesta classe conté referències directes a totes les vistes que tenen un ID definit al layout. L'objectiu principal és eliminar la necessitat d'utilitzar findViewById i proporcionar més seguretat en accedir als elements de la interfície.
 
-```kotlin
-val builder = AlertDialog.Builder(it)
-```
-- **`AlertDialog.Builder`**: Constructor de dialogs amb estil Material Design
-- Proporciona mètodes per configurar el dialog fàcilment
+### Avantatges principals
 
-```kotlin
-val inflater = requireActivity().layoutInflater
-val view = inflater.inflate(R.layout.activity_afegir_tasca, null)
-```
-- **`layoutInflater`**: Objecte que converteix XML en Views
-- **`inflate()`**: Crea la vista a partir del layout XML
-- **`R.layout.activity_afegir_tasca`**: Layout personalitzat del dialog
+El primer gran avantatge és la seguretat de tipus. Amb findViewById, si et confons i intentes accedir a una vista amb el tipus incorrecte, l'error només es detectarà quan l'aplicació s'executi i pot provocar un crash. Amb View Binding, aquests errors es detecten en temps de compilació, abans que l'aplicació s'executi.
+
+El segon avantatge és la null safety. View Binding només genera referències per vistes que realment existeixen al layout. Si intentes accedir a una vista que no existeix, el codi ni tan sols compilarà. Això evita molts errors de NullPointerException.
+
+El tercer avantatge és l'eficiència. Encara que findViewById no és extremadament lent, View Binding elimina completament aquestes crides repetitives, fent el codi una mica més eficient.
+
+Finalment, redueix significativament la quantitat de codi repetitiu. En lloc d'haver de declarar variables i fer findViewById per cada element de la interfície, simplement accedim directament a través del binding.
+
+### Ús a l'aplicació
+
+A la nostra classe Inici hem implementat View Binding de la següent manera. Primer declarem una variable lateinit de tipus IniciBinding, que és la classe que s'ha generat automàticament a partir del layout inici.xml. Al mètode onCreate, utilitzem el mètode inflate del layoutInflater per crear la instància del binding. Després, en lloc de passar directament el layout a setContentView, passem binding.root que és la vista arrel del layout.
 
 ```kotlin
-btnCancel = view.findViewById(R.id.btnCancel)
-btnCreate = view.findViewById(R.id.btnCreate)
-```
-- Obté les referències als botons del layout inflat
-- Es fa sobre `view`, no sobre `activity`, perquè són elements del layout personalitzat
+private lateinit var binding: IniciBinding
 
-```kotlin
-builder.setView(view)
-initListeners()
-builder.create()
-```
-- **`setView(view)`**: Assigna el layout personalitzat al dialog
-- **`initListeners()`**: Configura els listeners dels botons
-- **`create()`**: Construeix i retorna el dialog
-
-**`onStart()`:**
-
-```kotlin
-override fun onStart() {
-    super.onStart()
-    dialog?.window?.setLayout(
-        ViewGroup.LayoutParams.WRAP_CONTENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT
-    )
-    dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    binding = IniciBinding.inflate(layoutInflater)
+    setContentView(binding.root)
 }
 ```
 
-- **Per què en `onStart()` i no en `onCreateDialog()`?**
-  - En `onStart()`, el dialog ja està creat i la finestra està disponible
-  - Permet modificar propietats visuals de la finestra
+A partir d'aquest moment, podem accedir a qualsevol vista del layout directament a través del binding. Per exemple, en lloc d'utilitzar findViewById(R.id.etUser), simplement fem servir binding.etUser. Això fa el codi molt més net i llegible, especialment quan tens molts elements a la interfície.
 
-- **`setLayout(WRAP_CONTENT, WRAP_CONTENT)`:**
-  - Ajusta la mida del dialog al contingut
-  - Evita que ocupi tota la pantalla
+---
 
-- **`setBackgroundDrawableResource(android.R.color.transparent)`:**
-  - Fa el fons transparent
-  - Permet que el layout personalitzat amb corners arrodonits es vegi correctament
-  - Sense això, hi hauria un fons gris rectangular per defecte
+## ViewModel
 
-**Listeners:**
+ViewModel és un dels components més importants de l'arquitectura moderna d'Android. Forma part del patró arquitectònic MVVM (Model-View-ViewModel) i el seu paper principal és gestionar totes les dades relacionades amb la interfície d'usuari de manera que sobrevisquin als canvis de configuració del dispositiu.
+
+### Per què utilitzar ViewModel
+
+El problema que resol ViewModel és molt comú en Android. Quan l'usuari gira el dispositiu, l'activitat es destrueix completament i es torna a crear amb la nova orientació. Sense ViewModel, totes les dades que l'usuari havia introduït es perdrien i hauria de tornar a començar. ViewModel sobreviu a aquests canvis de configuració, mantenint les dades intactes.
+
+A més, ViewModel ajuda a separar les responsabilitats dins de l'aplicació. La lògica de negoci, les validacions i la gestió de dades estan totes dins del ViewModel, mentre que l'Activity o Fragment només s'encarrega de mostrar les dades i capturar les interaccions de l'usuari. Això fa que el codi sigui molt més organitzat i fàcil de mantenir.
+
+També facilita enormement fer testing perquè es pot provar tota la lògica del ViewModel sense necessitat de crear la interfície d'usuari. Això fa els tests més ràpids i fiables.
+
+### LiveData i observabilitat
+
+ViewModel treballa conjuntament amb LiveData, que és un tipus especial de dades observable. LiveData notifica automàticament a la interfície quan les dades canvien, fent que la UI sigui reactiva. Això elimina la necessitat de refrescar manualment la pantalla cada vegada que alguna cosa canvia.
+
+Al nostre IniciViewModel utilitzem un patró important: tenim variables privades de tipus MutableLiveData que poden ser modificades (per això tenen el prefix _ al nom), i variables públiques de tipus LiveData que són només lectura. Això garanteix que només el ViewModel pot modificar els valors, mentre que l'Activity només pot observar-los i llegir-los.
 
 ```kotlin
-private fun CreateTask.initListeners() {
-    btnCancel.setOnClickListener {
-        dismiss()
-    }
+private val _email = MutableLiveData<String>("")
+val email: LiveData<String> = _email
+```
 
-    btnCreate.setOnClickListener {
-        dismiss()
-    }
+### Implementació a l'aplicació
+
+Al nostre IniciViewModel gestionem tot el procés d'inici de sessió. Tenim LiveData per l'email, la contrasenya, els errors de validació, l'estat del botó d'inici i l'event d'èxit del login. Quan l'usuari escriu a un camp, es crida un mètode com onEmailChanged que actualitza el valor, valida el camp i actualitza l'estat del botó.
+
+Les validacions són molt completes. Per l'email comprovem que no estigui buit, que tingui un format vàlid utilitzant Patterns.EMAIL_ADDRESS, i finalment que estigui registrat al sistema. Per la contrasenya comprovem que no estigui buida i que coincideixi amb la contrasenya registrada.
+
+```kotlin
+fun onEmailChanged(newEmail: String) {
+    _email.value = newEmail
+    validateEmail(newEmail)
+    updateLoginButtonState()
 }
 ```
 
-- **`dismiss()`**: Tanca el dialog
-- **`btnCancel`**: Tanca sense guardar res
-- **`btnCreate`**: Aquí s'afegiria la lògica per crear la tasca abans de tancar
+A l'Activity utilitzem el mètode observe per escoltar els canvis. Quan emailError canvia, actualitzem el missatge d'error del camp. Quan isLoginButtonOn canvia, habilitem o deshabilitem el botó. Quan loginSuccesEvent indica èxit, mostrem un missatge i naveguem a la pantalla principal.
 
-### 2. Dialog per actualitzar tasques - `ActualitzaTasca`
-
-```kotlin
-class ActualitzaTasca : DialogFragment() {
-
-    lateinit var btnCancel: Button
-    lateinit var btnSave: Button
-    lateinit var btnDelete: Button
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
-            val inflater = requireActivity().layoutInflater
-            val view = inflater.inflate(R.layout.activity_actualitza_tasca, null)
-
-            btnCancel = view.findViewById(R.id.btnCancel)
-            btnSave = view.findViewById(R.id.btnSave)
-            btnDelete = view.findViewById(R.id.btnDelete)
-
-            builder.setView(view)
-            initListeners()
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        dialog?.window?.setLayout(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
-    }
-
-    private fun initListeners() {
-        btnCancel.setOnClickListener {
-            dismiss()
-        }
-        btnSave.setOnClickListener {
-            dismiss()
-        }
-        btnDelete.setOnClickListener {
-            dismiss()
-        }
-    }
-}
-```
-
-**Diferències amb CreateTask:**
-
-1. **Tres botons** en lloc de dos:
-   - `btnCancel`: Cancel·la sense canvis
-   - `btnSave`: Guarda les modificacions
-   - `btnDelete`: Elimina la tasca
-
-2. **Layout diferent**: Utilitza `activity_actualitza_tasca.xml`
-
-3. **Propòsit**: Modificar una tasca existent en lloc de crear-ne una de nova
-
-### Layout dels Dialogs
-
-**`activity_afegir_tasca.xml`** (Crear tasca):
-
-```xml
-<androidx.constraintlayout.widget.ConstraintLayout>
-    
-    <TextView
-        android:id="@+id/tvModifica_title"
-        android:text="@string/titolAfegeix"
-        android:background="@drawable/round_pink" />
-    
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardModifica">
-        
-        <LinearLayout>
-            <!-- Camps per al nom de la tasca -->
-            <EditText android:hint="@string/nomTasca" />
-            
-            <!-- Camps per als Sparks -->
-            <EditText android:hint="@string/sparksObtinguts" />
-            
-            <!-- Camps per a la data -->
-            <EditText android:hint="@string/datePlaceholder" />
-        </LinearLayout>
-        
-    </androidx.cardview.widget.CardView>
-    
-    <LinearLayout>
-        <Button android:id="@+id/btnCancel" android:text="@string/cancel" />
-        <Button android:id="@+id/btnCreate" android:text="@string/creaTasca" />
-    </LinearLayout>
-    
-</androidx.constraintlayout.widget.ConstraintLayout>
-```
-
-**Estructura visual:**
-1. **Títol**: TextView amb fons arrodonit que indica "Afegir Tasca"
-2. **Card blanc**: Conté els camps d'entrada de dades
-3. **Botons**: Cancel·lar i Crear, en una fila horitzontal
-
-**`activity_actualitza_tasca.xml`** (Modificar tasca):
-
-Idèntic a l'anterior però amb:
-- Títol diferent: "Actualitzar Tasca"
-- Botó addicional: "Eliminar"
-- ID de botó canviat: `btnCreate` → `btnSave`
-
-### Com utilitzar els Dialogs
-
-Des del `HomeFragment`:
-
-```kotlin
-btnAfegir.setOnClickListener {
-    CreateTask().show(parentFragmentManager, "Crear Tasca")
-}
-```
-
-**Explicació:**
-
-- **`CreateTask()`**: Crea una nova instància del DialogFragment
-- **`.show()`**: Mostra el dialog
-  - **`parentFragmentManager`**: El FragmentManager del fragment pare (necessari perquè el dialog és un fragment)
-  - **`"Crear Tasca"`**: Tag per identificar el dialog (útil per depuració)
-
-### Flux complet d'un Dialog
-
-```
-1. L'usuari clica el botó "Afegir" a HomeFragment
-    ↓
-2. btnAfegir.setOnClickListener s'executa
-    ↓
-3. CreateTask().show(parentFragmentManager, "Crear Tasca")
-    ↓
-4. El FragmentManager crida onCreateDialog()
-    ↓
-5. S'infla el layout activity_afegir_tasca.xml
-    ↓
-6. Es crea l'AlertDialog amb el layout personalitzat
-    ↓
-7. onStart() configura la mida i transparència
-    ↓
-8. El dialog es mostra sobre la pantalla actual
-    ↓
-9. L'usuari omple els camps i clica "Crear"
-    ↓
-10. btnCreate.setOnClickListener s'executa
-    ↓
-11. dismiss() tanca el dialog
-    ↓
-12. L'usuari torna a veure HomeFragment
-```
-
-**Per què utilitzar DialogFragment?**
-
-1. **Modal**: Bloqueja la interacció amb la pantalla de fons
-2. **Focus**: L'usuari se centra en una tasca específica
-3. **Temporal**: Només apareix quan és necessari
-4. **Reutilitzable**: Es pot utilitzar des de diferents llocs de l'app
-5. **Fàcil de tancar**: Clicar fora del dialog o prémer "Enrere" el tanca automàticament
+Aquest sistema reactiu fa que la interfície respongui automàticament a qualsevol canvi d'estat sense haver de gestionar manualment les actualitzacions, resultant en un codi molt més net i menys propens a errors.
 
 ---
 
 ## Resum de l'arquitectura
 
-L'aplicació Sparkle's Task utilitza un conjunt de components ben integrats:
+L'aplicació Sparkle's Task està construïda seguint les millors pràctiques i patrons de desenvolupament d'Android. Utilitza RecyclerView amb el patró Adapter i ViewHolder per mostrar llistes eficients amb funcionalitat de filtres. Implementa una Splash Screen professional que ofereix una bona primera impressió. El sistema de navegació amb Bottom Navigation i Fragments proporciona una experiència d'usuari fluida i eficient.
 
-1. **RecyclerView amb Adapter i ViewHolder**: Mostra llistes eficients amb filtres
-2. **Splash Screen**: Proporciona una entrada visual professional
-3. **Bottom Navigation amb Fragments**: Navegació intuïtiva entre seccions
-4. **DialogFragments**: Interacció modal per crear i modificar tasques
+Per a la interacció amb l'usuari utilitzem DialogFragments que ofereixen finestres modals segures i ben integrades amb el cicle de vida. View Binding elimina codi repetitiu i proporciona accés segur a les vistes. Finalment, el patró ViewModel amb LiveData gestiona l'estat de manera reactiva seguint l'arquitectura MVVM.
 
-Aquesta estructura segueix les millors pràctiques d'Android i proporciona una base sòlida per a futures ampliacions de l'aplicació.
-
-
-## Viewbinding i ViewModel<a name="5"></a>
-
-### Viewbinding
-El Viewbinding ens permet accedir a les ids del layout de forma molt més cómode. Per a utilitzar-ho primer l'hem d'afegir al build.gradle.kts:
-```kotlin
-buildFeatures {
-        viewBinding = true
-    }
-
-```
-Desrpés de sincronitzar el Gradle, se'ns crearà automaticament un binding per a cadascuna de les nostres acticities. Quan el volem fer servir només em de crear una variable de tipus <Nom de l'Activity>Binding i inflar el layout al onCreate:
-
-```kotlin
-private lateinit var binding : RegisterBinding
-override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        binding = RegisterBinding.inflate(layoutInflater)
-```
-
-Un cop fet això podem fer el setContentView i accedir als elements del layout utilitzant el binding d'aquesta manera:
-
-```kotlin
- setContentView(binding.root)
- val btnBack = binding.btnBack
-```
-
-Això ens permet no haver de crear les variables amb lateinit var i treballar més cómodament
-
-### ViewModel
-És la capa on es troba la llógica de negoci quan s'utilitza l'arquitectura MVVM. La classe ViewModel té un cicle de vida més llarg que les Activities, i ens permet guardar dades per tal de no perdre-les en una possible rotació de pantalla o minimització de l'aplicació.
-Per a utilitzar-ho, haurem de crear una classe de tipus ViewModel.
-
-```kotlin
-class RegisterViewModel: ViewModel() {
-    private val _username = MutableLiveData("")
-    var username: LiveData<String> = _username
-```
-
-Com es pot veure al codi, utilitzem variables de tipus LiveData, per a poder fer observe() posteriorment.
-Com en aquesta capa va la llògica de negoci necessitem carregar les dades de l'activity. En el cas de Registre ho hem fet de la següent manera:
-
-```kotlin
-fun getData(usernameInput: String, emailInput: String, passwordInput: String, passwordValidationInput: String, dateInput:String){
-        _username.value = usernameInput
-        _email.value = emailInput
-        _password.value = passwordInput
-        _passwordValidation.value = passwordValidationInput
-        _date.value = dateInput
-
-    }
-```
-Posteriorment hem creat les funcions de comprovació de tots els camps.
-
-A la activity asociada a aquest viewmodel hem de crear una variable amb el tipus de la classe que hem creat:
-
-```kotlin
- private val viewmodel: RegisterViewModel by viewModels()
-```
-
-Després ja podem utilitzar les funcions definides al viewModel:
-
-```kotlin
-viewmodel.getData(etUser.text.toString(),
-                etEmail.text.toString(),
-                etPssw.text.toString(),
-                etPsswX.text.toString(),
-                etData.text.toString())
-if (!viewmodel.checkUsername()){
-                Toast.makeText(this,"El nom d'usuari ha de tenir més de 5 caràcters", Toast.LENGTH_SHORT).show()
-            }
-```
-
-D'aquesta manera separem la llògica de negoci de la UI, com recomanen les bones pràctiques.
-
-
-
+Aquesta combinació de tecnologies i patrons crea una base sòlida, escalable i mantenible per a l'aplicació, facilitant futures ampliacions i millores.
