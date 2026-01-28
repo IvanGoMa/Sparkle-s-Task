@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class TasksViewHolder (
     itemView: View,
@@ -17,9 +19,10 @@ class TasksViewHolder (
     private val tvData: TextView = itemView.findViewById(R.id.tvData)
 
     fun bind (task: Task){
+        val df = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         tvNom.text = task.title
         tvSparks.text = task.sparks.toString()
-        tvData.text = task.data.toString()
+        tvData.text = df.format(task.data)
 
         itemView.setOnClickListener {
             onItemClick(task)
@@ -55,5 +58,6 @@ class TasksAdapter(
         val item = itemsFiltrados[position]
         holder.bind(item)
     }
+
 
 }

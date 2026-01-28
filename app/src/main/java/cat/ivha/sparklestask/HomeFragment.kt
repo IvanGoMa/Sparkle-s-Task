@@ -19,6 +19,8 @@ class HomeFragment : Fragment(R.layout.home_rv) {
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: TasksAdapter
 
+    val items = TasksList.items
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +33,6 @@ class HomeFragment : Fragment(R.layout.home_rv) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.rvTasques)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val items = TasksList.items
         adapter = TasksAdapter(
             itemsComplets = items,
             onItemClick = { item ->
@@ -47,6 +48,10 @@ class HomeFragment : Fragment(R.layout.home_rv) {
     private fun initListeners() {
         btnAfegir.setOnClickListener {
             CreateTask().show(parentFragmentManager,"Crear Tasca")
+        }
+        cvCalendari.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            val selectedDate = dateOf(year, month + 1, dayOfMonth)
+            adapter.filtra(selectedDate)
         }
 
 
