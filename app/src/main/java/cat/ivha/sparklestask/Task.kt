@@ -3,7 +3,7 @@ package cat.ivha.sparklestask
 import java.util.Date
 
 data class Task(
-    val data: Date,
-    val title: String,
-    val sparks: Int,
+    var data: Date,
+    var title: String,
+    var sparks: Int,
 )

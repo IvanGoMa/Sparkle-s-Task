@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ActualitzaTasca(var item: Task) : DialogFragment() {
 
@@ -16,7 +18,7 @@ class ActualitzaTasca(var item: Task) : DialogFragment() {
     lateinit var etNom: EditText
     lateinit var etSparks: EditText
     lateinit var etData: EditText
-
+    val df = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
@@ -24,6 +26,7 @@ class ActualitzaTasca(var item: Task) : DialogFragment() {
             val inflater = requireActivity().layoutInflater
             val view = inflater.inflate(R.layout.activity_actualitza_tasca, null)
             val item = this.item
+
 
             btnCancel = view.findViewById(R.id.btnCancel)
             btnSave = view.findViewById(R.id.btnSave)
@@ -33,7 +36,7 @@ class ActualitzaTasca(var item: Task) : DialogFragment() {
             etData = view.findViewById(R.id.etData)
 
             etNom.setText(item.title)
-            etData.setText(item.data.toString())
+            etData.setText(df.format(item.data))
             etSparks.setText(item.sparks.toString())
 
 
@@ -58,9 +61,14 @@ class ActualitzaTasca(var item: Task) : DialogFragment() {
             dismiss()
         }
         btnSave.setOnClickListener {
+
+            item.title = etNom.text.toString()
+            item.sparks = etSparks.text.toString().toInt()
+            item.data = df.parse(etData.text.toString())?: item.data
             dismiss()
         }
         btnDelete.setOnClickListener {
+            TasksList.items.remove(item)
             dismiss()
         }
     }
