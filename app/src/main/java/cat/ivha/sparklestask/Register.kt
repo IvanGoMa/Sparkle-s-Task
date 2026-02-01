@@ -2,15 +2,12 @@ package cat.ivha.sparklestask
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import cat.ivha.sparklestask.databinding.RegisterBinding
-import kotlin.toString
 
 
 class Register : AppCompatActivity() {
@@ -29,56 +26,43 @@ class Register : AppCompatActivity() {
         // Utilitzem el binding per fer el setContentView()
         setContentView(binding.root)
 
-        // Inicialtitzem variables amb el binding
-        val btnBack = binding.btnBack
-        val btnInici = binding.btnInici
-        val etEmail = binding.etEmail
-        val etUser = binding.etUser
-        val etPssw = binding.etPssw
-        val etPsswX = binding.etPsswX
-        val etData = binding.etHB
+        initListeners()
 
-        // Listeners
-        btnBack.setOnClickListener {
+    }
+
+    private fun initListeners(){
+
+        binding.btnBack.setOnClickListener {
             val intent = Intent(this, Inici::class.java)
             startActivity(intent)
         }
 
-        btnInici.setOnClickListener {
-
-            // Passem els valors dels EditText al ViewModel
-            viewmodel.getData(etUser.text.toString(),
-                etEmail.text.toString(),
-                etPssw.text.toString(),
-                etPsswX.text.toString(),
-                etData.text.toString())
-
-            // Utilitzem les funcions del ViewModel per fer les comprovacions
-            if (!viewmodel.checkUsername()){
-                Toast.makeText(this,"El nom d'usuari ha de tenir més de 5 caràcters", Toast.LENGTH_SHORT).show()
-            }
-
-            else if (!viewmodel.checkPassword()){
-                Toast.makeText(this,"La contrasenya ha de contenir minúscules, majúscules, nombres, símbols i tenir més de 7 caràcters", Toast.LENGTH_SHORT).show()
-            }
-
-            else if (!viewmodel.checkPasswordValidation()){
-                Toast.makeText(this,"La contrasenya no és igual als dos camps", Toast.LENGTH_SHORT).show()
-            }
-
-            else if (!viewmodel.checkEmail()){
-                Toast.makeText(this,"Email invàlid", Toast.LENGTH_SHORT).show()
-            }
-
-            else if (!viewmodel.checkDate()){
-                Toast.makeText(this,"Has de ser major d'edat", Toast.LENGTH_SHORT).show()
-            }
-
-            else{
-                val intent = Intent(this, MenuBottom::class.java)
-                startActivity(intent)
-            }
+        binding.etUser.addTextChangedListener { text ->
+            viewmodel.onUserChanged(text.toString())
         }
+
+        binding.etEmail.addTextChangedListener { text ->
+            viewmodel.onEmailChanged(text.toString())
+        }
+
+        binding.etPssw.addTextChangedListener { text ->
+            viewmodel.onPsswChanged(text.toString())
+        }
+
+        binding.etPsswX.addTextChangedListener { text ->
+            viewmodel.onPsswXChanged(text.toString())
+        }
+
+        binding.etHB.addTextChangedListener { text ->
+            viewmodel.onDateChanged(text.toString())
+        }
+
+
+
+    }
+
+    private fun observeViewmodel(){
+        viewmodel.user
     }
 
 
