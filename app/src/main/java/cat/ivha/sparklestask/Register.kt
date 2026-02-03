@@ -27,6 +27,7 @@ class Register : AppCompatActivity() {
         setContentView(binding.root)
 
         initListeners()
+        observeViewmodel()
 
     }
 
@@ -57,12 +58,45 @@ class Register : AppCompatActivity() {
             viewmodel.onDateChanged(text.toString())
         }
 
+        binding.btnInici.setOnClickListener {
+            viewmodel.onRegisterClick()
+        }
+
 
 
     }
 
     private fun observeViewmodel(){
-        viewmodel.user
+        viewmodel.usernameError.observe(this){
+            error -> binding.etUser.error = error
+        }
+
+        viewmodel.passwordError.observe(this){
+                error -> binding.etPssw.error = error
+        }
+
+        viewmodel.passwordValidationError.observe(this){
+                error -> binding.etPsswX.error = error
+        }
+
+        viewmodel.emailError.observe(this){
+                error -> binding.etEmail.error = error
+        }
+
+        viewmodel.dateError.observe(this){
+                error -> binding.etHB.error = error
+        }
+
+        viewmodel.registerSucces.observe(this){ success ->
+            if(success){
+                Toast.makeText(this,"Usuari registrat",Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MenuBottom::class.java)
+                startActivity(intent)
+                finish()
+                viewmodel.onRegisterEventHandled()
+
+            }
+        }
     }
 
 

@@ -1,5 +1,5 @@
 package cat.ivha.sparklestask
-
+/*
 class ItemAPI {
     companion object {
         private var mItemAPI: ItemService? = null
@@ -22,3 +22,4 @@ class ItemAPI {
         }
     }
 }
+*/

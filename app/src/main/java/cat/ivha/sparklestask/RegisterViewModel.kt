@@ -1,5 +1,6 @@
 package cat.ivha.sparklestask
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,9 @@ import java.util.Calendar
 import java.util.Locale
 
 class RegisterViewModel: ViewModel() {
+
+    private val _registerSucces = MutableLiveData<Boolean>()
+    val registerSucces: LiveData<Boolean> = _registerSucces
     private val _username = MutableLiveData("")
     private val _usernameError = MutableLiveData<String?>()
     var username: LiveData<String> = _username
@@ -59,6 +63,12 @@ class RegisterViewModel: ViewModel() {
         _date.value = date
         if (!checkDate()) _dateError.value = "Has de ser major d'edat"
         else _dateError.value = null
+    }
+
+    fun onRegisterClick(){
+        if (checkAll()){
+            _registerSucces.value = true
+        }
     }
 
 
@@ -128,6 +138,10 @@ class RegisterViewModel: ViewModel() {
 
         }
         return false
+    }
+
+    fun onRegisterEventHandled() {
+        _registerSucces.value = false
     }
 
 }
