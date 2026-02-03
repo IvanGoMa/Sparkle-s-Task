@@ -49,7 +49,6 @@ class Inici : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        // ✅ Observar errores del email
         viewModel.emailError.observe(this) { error ->
             binding.emailInputLayout.error = error
         }
