@@ -6,7 +6,10 @@ import java.util.Date
 
 fun dateOf(year: Int, month: Int, day: Int): Date {
     return Calendar.getInstance().apply {
-        set(year, month - 1, day)
+        set(year, month - 1, day)  // month - 1 porque Calendar usa 0-11
+        set(Calendar.HOUR_OF_DAY, 0)
+        set(Calendar.MINUTE, 0)
+        set(Calendar.SECOND, 0)
         set(Calendar.MILLISECOND, 0)
     }.time
 }

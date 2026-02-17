@@ -1,6 +1,7 @@
 [versions]
-agp = "8.13.1"
+agp = "8.4.1"
 coreSplashscreen = "1.2.0"
+fragmentKtx = "1.8.9"
 kotlin = "2.0.21"
 coreKtx = "1.17.0"
 junit = "4.13.2"
@@ -9,13 +10,15 @@ espressoCore = "3.7.0"
 appcompat = "1.7.1"
 loggingInterceptor = "5.3.2"
 material = "1.13.0"
-activity = "1.11.0"
-constraintlayout = "2.2.1"
+activity = "1.12.4"
+constraintlayout = "2.0.0"
 retrofit = "3.0.0"
 
 [libraries]
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
