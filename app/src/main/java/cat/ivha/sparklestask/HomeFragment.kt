@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import cat.ivha.sparklestask.databinding.HomeRvBinding
+import kotlin.getValue
 
 class HomeFragment : Fragment() {
 
