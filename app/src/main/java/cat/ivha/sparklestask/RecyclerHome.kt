@@ -3,11 +3,9 @@ package cat.ivha.sparklestask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 class TasksViewHolder (
@@ -31,19 +29,14 @@ class TasksViewHolder (
 }
 
 class TasksAdapter(
-    private val itemsComplets: List<Task>,
+    private var itemsComplets: List<Task>,
     private val onItemClick: (Task) -> Unit
 ) : RecyclerView.Adapter<TasksViewHolder>(){
 
-    private var itemsFiltrados = itemsComplets.toList()
 
-    fun filtra(data : Date?){
-        itemsFiltrados = if (data == null){
-            itemsComplets.toList()
-        } else {
-            itemsComplets.filter { it.data == data }
-        }
-        notifyDataSetChanged() // Actualizar la vista
+    fun updateTasks(newTasks: List<Task>) {
+        itemsComplets = newTasks
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksViewHolder {
@@ -52,10 +45,10 @@ class TasksAdapter(
         return TasksViewHolder(view, onItemClick)
     }
 
-    override fun getItemCount(): Int = itemsFiltrados.size
+    override fun getItemCount(): Int = itemsComplets.size
 
     override fun onBindViewHolder(holder: TasksViewHolder, position: Int) {
-        val item = itemsFiltrados[position]
+        val item = itemsComplets[position]
         holder.bind(item)
     }
 

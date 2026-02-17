@@ -3,40 +3,31 @@ package cat.ivha.sparklestask
 import android.app.Dialog
 import android.os.Bundle
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import cat.ivha.sparklestask.databinding.ActivityAfegirTascaBinding
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
-
 
 class CreateTask : DialogFragment() {
 
-    lateinit var btnCancel: Button
-    lateinit var btnCreate: Button
-    lateinit var etNom: EditText
-    lateinit var etSparks: EditText
-    lateinit var etData: EditText
+    private var _binding: ActivityAfegirTascaBinding? = null
+    private val binding get() = _binding!!
+
+    private val df = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
+        return activity?.let { activity ->
+            _binding = ActivityAfegirTascaBinding.inflate(layoutInflater)
 
-            val builder = AlertDialog.Builder(it)
-            val inflater = requireActivity().layoutInflater
-            val view = inflater.inflate(R.layout.activity_afegir_tasca, null)
+            val builder = AlertDialog.Builder(activity)
+            builder.setView(binding.root)
 
-            btnCancel = view.findViewById(R.id.btnCancel)
-            btnCreate = view.findViewById(R.id.btnCreate)
-            etNom = view.findViewById<EditText>(R.id.etNom)
-            etSparks = view.findViewById<EditText>(R.id.etSparks)
-            etData = view.findViewById<EditText>(R.id.etData)
-
-            builder.setView(view)
             initListeners()
 
             builder.create()
-
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
@@ -48,17 +39,69 @@ class CreateTask : DialogFragment() {
         )
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
     }
-}
 
-private fun CreateTask.initListeners() {
-    btnCancel.setOnClickListener {
-        dismiss()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
-    btnCreate.setOnClickListener {
-        val df: SimpleDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    private fun initListeners() {
+        binding.btnCancel.setOnClickListener {
+            dismiss()
+        }
 
-        TasksList.items.add(Task(df.parse(etData.text.toString())!!, etNom.text.toString(),etSparks.text.toString().toInt()))
+        binding.btnCreate.setOnClickListener {
+            crearTasca()
+        }
+    }
+
+    private fun crearTasca() {
+        val nom = binding.etNom.text.toString()
+        val sparksText = binding.etSparks.text.toString()
+        val dataText = binding.etData.text.toString()
+
+
+        if (nom.isBlank()) {
+            Toast.makeText(context, "El nom no pot estar buit", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (sparksText.isBlank()) {
+            Toast.makeText(context, "Els sparks no poden estar buits", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val sparks = sparksText.toIntOrNull()
+        if (sparks == null) {
+            Toast.makeText(context, "Els sparks han de ser un número", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (dataText.isBlank()) {
+            Toast.makeText(context, "La data no pot estar buida", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val data = try {
+            df.parse(dataText) ?: Date()
+        } catch (e: Exception) {
+            Toast.makeText(
+                context,
+                "Format de data invàlid. Utilitza dd/MM/yyyy",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+
+        val novaTasca = Task(
+            data = data,
+            title = nom,
+            sparks = sparks
+        )
+
+        (parentFragment as? HomeFragment)?.afegirTasca(novaTasca)
+
         dismiss()
     }
 }

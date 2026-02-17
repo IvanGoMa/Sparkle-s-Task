@@ -42,6 +42,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.fragment.ktx)
     implementation(libs.okhttp3.okhttp)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)

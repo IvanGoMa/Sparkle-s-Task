@@ -4,68 +4,101 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CalendarView
-import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import cat.ivha.sparklestask.databinding.HomeRvBinding
+import kotlin.getValue
 
-class HomeFragment : Fragment(R.layout.home_rv) {
+class HomeFragment : Fragment() {
 
-    lateinit var ivHelp : ImageView
-    lateinit var cvCalendari: CalendarView
-    lateinit var btnAfegir: Button
-    lateinit var recyclerView: RecyclerView
-    lateinit var adapter: TasksAdapter
+    // --- VIEW BINDING ---
+    private var _binding: HomeRvBinding? = null
+    private val binding get() = _binding!!
 
-    val items = TasksList.items
+    // --- VIEWMODEL ---
+    private val viewModel: HomeViewModel by viewModels()
 
+    // --- ADAPTER ---
+    private lateinit var adapter: TasksAdapter
+
+
+    // --- CICLE DE VIDA ---
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.home_rv,container,false)
+    ): View {
+        _binding = HomeRvBinding.inflate(inflater, container, false)
+        return binding.root
     }
-    override fun onViewCreated(view: View, savedInstanceState:Bundle?){
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView = view.findViewById(R.id.rvTasques)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        setupRecyclerView()
+        setupCalendar()
+        setupListeners()
+        observeViewModel()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
+    // --- CONFIGURACIÓ ---
+
+    private fun setupRecyclerView() {
         adapter = TasksAdapter(
-            itemsComplets = items,
-            onItemClick = { item ->
-            ActualitzaTasca(item).show(parentFragmentManager,"Modificar Tasca")
+            itemsComplets = emptyList(),
+            onItemClick = { task ->
+                ActualitzaTasca.newInstance(task).show(childFragmentManager, "Modificar Tasca")
             }
-
         )
-        recyclerView.adapter=adapter
-        initComponents(view)
-        initListeners()
+        binding.rvTasques.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvTasques.adapter = adapter
     }
 
-    private fun initListeners() {
-        btnAfegir.setOnClickListener {
-            CreateTask().show(parentFragmentManager,"Crear Tasca")
+    private fun setupCalendar() {
+        binding.cvCalendari.minDate = System.currentTimeMillis()
+
+        binding.cvCalendari.maxDate = System.currentTimeMillis() + 120L * 24 * 60 * 60 * 1000
+    }
+
+    fun afegirTasca(novaTasca: Task) {
+        viewModel.afegirTaska(novaTasca)
+        Toast.makeText(context, "Tasca creada", Toast.LENGTH_SHORT).show()
+    }
+
+    fun actualizarTarea(updatedTask: Task) {
+        viewModel.updateTask(updatedTask)
+        Toast.makeText(context, "Tasca actualitzada", Toast.LENGTH_SHORT).show()
+    }
+
+    fun eliminarTarea(taskId: Long) {
+        viewModel.deleteTaska(taskId)
+        Toast.makeText(context, "Tasca eliminada", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setupListeners() {
+        binding.btnAfegir.setOnClickListener {
+            CreateTask().show(parentFragmentManager, "Crear Taska")
         }
-        cvCalendari.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            val selectedDate = dateOf(year, month + 1, dayOfMonth)
-            adapter.filtra(selectedDate)
+
+        binding.cvCalendari.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            val dataSeleccionada = dateOf(year, month + 1, dayOfMonth)
+
+            viewModel.filtraTaskaPerData(dataSeleccionada)
         }
-
-
     }
 
-
-    private fun initComponents(view: View) {
-        cvCalendari = view.findViewById(R.id.cvCalendari)
-        cvCalendari.minDate = System.currentTimeMillis()
-        cvCalendari.maxDate = System.currentTimeMillis() + 14*24*60*60*1000
-        btnAfegir = view.findViewById(R.id.btnAfegir)
-        ivHelp = view.findViewById(R.id.ivHelp)
-
+    private fun observeViewModel() {
+        viewModel.filteredTasks.observe(viewLifecycleOwner) { tasks ->
+            adapter.updateTasks(tasks)
+        }
     }
-
-
 }
