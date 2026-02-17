@@ -61,7 +61,7 @@ class RegisterViewModel: ViewModel() {
 
     fun onDateChanged(date:String){
         _date.value = date
-        if (!checkDate()) _dateError.value = "Has de ser major d'edat"
+        if (!checkDate()) _dateError.value = "Introdueix una data de naixement correcta"
         else _dateError.value = null
     }
 
@@ -117,7 +117,12 @@ class RegisterViewModel: ViewModel() {
         val toDate = Calendar.getInstance()
         val birthDate = Calendar.getInstance()
         val df = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        birthDate.time = df.parse(date.value.toString())!!
+        try{
+            birthDate.time = df.parse(date.value.toString())!!
+        } catch (e: Exception){
+            return false
+        }
+
 
         if (toDate.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR) > 18) {
             return true
