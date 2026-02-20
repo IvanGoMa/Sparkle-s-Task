@@ -8,7 +8,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 
-interface ItemService {
+interface TaskService {
 
     @GET("task")
     suspend fun llistaTasks(): Response<List<Task>>

@@ -17,10 +17,10 @@ class TasksViewHolder (
     private val tvData: TextView = itemView.findViewById(R.id.tvData)
 
     fun bind (task: Task){
-        val df = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        tvNom.text = task.title
+
+        tvNom.text = task.nomTasca
         tvSparks.text = task.sparks.toString()
-        tvData.text = df.format(task.data)
+        tvData.text = task.dataLimit.toString()
 
         itemView.setOnClickListener {
             onItemClick(task)
