@@ -8,13 +8,13 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.getValue
 
-/**
- * DialogFragment per actualitzar o eliminar una tasca
- */
 class ActualitzaTasca() : DialogFragment() {
 
     // Vistes
@@ -24,6 +24,7 @@ class ActualitzaTasca() : DialogFragment() {
     private lateinit var etNom: EditText
     private lateinit var etSparks: EditText
     private lateinit var etData: EditText
+    private val viewModel: HomeViewModel by activityViewModels()
 
     private val df = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
@@ -43,9 +44,9 @@ class ActualitzaTasca() : DialogFragment() {
             return ActualitzaTasca().apply {
                 arguments = Bundle().apply {
                     putLong(ARG_TASK_ID, task.id)
-                    putString(ARG_TASK_TITLE, task.title)
-                    putInt(ARG_TASK_SPARKS, task.sparks)
-                    putLong(ARG_TASK_DATE, task.data.time)
+                    putString(ARG_TASK_TITLE, task.nomTasca)
+                    putLong(ARG_TASK_SPARKS, task.sparks)
+                    putLong(ARG_TASK_DATE, task.dataLimit.time)
                 }
             }
         }
@@ -123,7 +124,7 @@ class ActualitzaTasca() : DialogFragment() {
             return
         }
 
-        val nousSparks = nousSparksText.toIntOrNull()
+        val nousSparks = nousSparksText.toLongOrNull()
         if (nousSparks == null) {
             Toast.makeText(context, "Els sparks han de ser un número", Toast.LENGTH_SHORT).show()
             return
@@ -138,8 +139,8 @@ class ActualitzaTasca() : DialogFragment() {
 
         // Crear tasca actualitzada
         val tascaActualitzada = Task(
-            data = novaData,
-            title = nouNom,
+            dataLimit = novaData,
+            nomTasca = nouNom,
             sparks = nousSparks,
             id = taskId
         )

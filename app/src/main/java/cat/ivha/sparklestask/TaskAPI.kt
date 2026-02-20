@@ -9,25 +9,25 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
-class ItemAPI {
+class TaskAPI {
     companion object {
-        private var mItemAPI: ItemService? = null
+        private var mTaskAPI: TaskService? = null
 
         @Synchronized
-        fun API(): ItemService {
-            if (mItemAPI == null) {
+        fun API(): TaskService {
+            if (mTaskAPI == null) {
 
                 val gsondateformat = GsonBuilder()
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                     .create()
 
-                mItemAPI = Retrofit.Builder()
+                mTaskAPI = Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create(gsondateformat))
                     .baseUrl("http://129.159.110.118:8082/api/")
                     .build()
-                    .create(ItemService::class.java)
+                    .create(TaskService::class.java)
             }
-            return mItemAPI!!
+            return mTaskAPI!!
         }
 
         private fun getUnsafeOkHttpClient(): OkHttpClient {

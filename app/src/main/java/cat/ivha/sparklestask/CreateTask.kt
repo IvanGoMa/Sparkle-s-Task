@@ -6,15 +6,20 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import cat.ivha.sparklestask.databinding.ActivityAfegirTascaBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.getValue
 
 class CreateTask : DialogFragment() {
 
     private var _binding: ActivityAfegirTascaBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: HomeViewModel by activityViewModels()
+
 
     private val df = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
@@ -71,7 +76,7 @@ class CreateTask : DialogFragment() {
             return
         }
 
-        val sparks = sparksText.toIntOrNull()
+        val sparks = sparksText.toLongOrNull()
         if (sparks == null) {
             Toast.makeText(context, "Els sparks han de ser un número", Toast.LENGTH_SHORT).show()
             return
@@ -94,13 +99,13 @@ class CreateTask : DialogFragment() {
         }
 
 
-        val novaTasca = Task(
-            data = data,
-            title = nom,
+        val novaTasca = TaskRequest(
+            dataLimit = data,
+            nomTasca = nom,
             sparks = sparks
         )
 
-        (parentFragment as? HomeFragment)?.afegirTasca(novaTasca)
+        viewModel.afegirTasca(novaTasca)
 
         dismiss()
     }

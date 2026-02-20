@@ -1,13 +1,18 @@
 package cat.ivha.sparklestask
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import okhttp3.logging.HttpLoggingInterceptor
 import java.util.Calendar
 import java.util.Date
 
 class HomeViewModel : ViewModel() {
 
-    private val _allTasks = MutableLiveData<List<Task>>()
+    private var _allTasks = MutableLiveData<List<Task>>()
 
     private val _filteredTasks = MutableLiveData<List<Task>>()
 
@@ -21,9 +26,19 @@ class HomeViewModel : ViewModel() {
     }
 
     fun carregarTasques() {
-        val tasks = TasksList.items
-        _allTasks.value = tasks
-        _filteredTasks.value = tasks
+        viewModelScope.launch{
+            try{
+                val response = TaskAPI.API().llistaTasks()
+                if (response.isSuccessful) {
+                    _allTasks.value = response.body() ?: emptyList()
+                    _filteredTasks.value = response.body() ?: emptyList()
+                } else {
+                    Log.e("API", "Error HTTP: ${response.code()}")
+                }
+            } catch (e: Exception){
+                Log.e("API", "Error de connexió: " + e.message)
+            }
+        }
     }
 
     fun normalitzaData(data: Date): Date {
@@ -42,7 +57,7 @@ class HomeViewModel : ViewModel() {
         val allTasks = _allTasks.value ?: emptyList()
 
         val filtered = allTasks.filter { task ->
-            normalitzaData(task.data) == normalitzaData(data)
+            normalitzaData(task.dataLimit) == normalitzaData(data)
         }
         _filteredTasks.value = filtered
     }
@@ -52,9 +67,21 @@ class HomeViewModel : ViewModel() {
         _filteredTasks.value = _allTasks.value
     }
 
-    fun afegirTaska(task: Task) {
-        val tasquesActuals = _allTasks.value?.toMutableList() ?: mutableListOf()
-        tasquesActuals.add(task)
+    fun afegirTasca(task: TaskRequest) {
+        viewModelScope.launch {
+            try{
+                val response = TaskAPI.API().createTask(task)
+                if (response.isSuccessful) {
+                   carregarTasques()
+                } else {
+                    Log.e("API", "Error HTTP: ${response.code()}")
+                }
+            } catch (e: Exception){
+                Log.e("API", "Error de connexió: " + e.message)
+            }
+        }
+
+        /*
         _allTasks.value = tasquesActuals
 
         TasksList.items.add(task)
@@ -65,9 +92,12 @@ class HomeViewModel : ViewModel() {
         } else {
             _filteredTasks.value = tasquesActuals
         }
+        */
+
     }
 
     fun updateTask(updatedTask: Task) {
+        /*
         val tasquesActuals = _allTasks.value?.toMutableList() ?: return
         val index = tasquesActuals.indexOfFirst { it.id == updatedTask.id }
 
@@ -86,7 +116,7 @@ class HomeViewModel : ViewModel() {
             } else {
                 _filteredTasks.value = tasquesActuals
             }
-        }
+        }*/
     }
 
     fun deleteTaska(taskId: Long) {

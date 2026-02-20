@@ -3,9 +3,9 @@ package cat.ivha.sparklestask
 import java.util.Date
 
 data class Task(
-    var data: Date,
-    var title: String,
-    var sparks: Int,
+    var dataLimit: Date,
+    var nomTasca: String,
+    var sparks: Long,
     var id: Long = nextId()
 ){
     companion object{
@@ -19,3 +19,9 @@ data class Task(
 
     }
 }
+
+data class TaskRequest(
+    var dataLimit: Date,
+    var nomTasca: String,
+    var sparks: Long,
+)
