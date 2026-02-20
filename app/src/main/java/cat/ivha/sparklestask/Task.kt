@@ -19,3 +19,9 @@ data class Task(
 
     }
 }
+
+data class TaskRequest(
+    var data: Date,
+    var title: String,
+    var sparks: Int,
+)

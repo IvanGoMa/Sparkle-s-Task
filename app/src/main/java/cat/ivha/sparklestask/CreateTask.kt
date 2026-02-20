@@ -94,7 +94,7 @@ class CreateTask : DialogFragment() {
         }
 
 
-        val novaTasca = Task(
+        val novaTasca = TaskRequest(
             data = data,
             title = nom,
             sparks = sparks

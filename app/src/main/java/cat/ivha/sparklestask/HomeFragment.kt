@@ -69,7 +69,7 @@ class HomeFragment : Fragment() {
         binding.cvCalendari.maxDate = System.currentTimeMillis() + 120L * 24 * 60 * 60 * 1000
     }
 
-    fun afegirTasca(novaTasca: Task) {
+    fun afegirTasca(novaTasca: TaskRequest) {
         viewModel.afegirTaska(novaTasca)
         Toast.makeText(context, "Tasca creada", Toast.LENGTH_SHORT).show()
     }
