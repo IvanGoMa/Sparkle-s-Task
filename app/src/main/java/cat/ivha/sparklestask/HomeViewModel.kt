@@ -81,42 +81,21 @@ class HomeViewModel : ViewModel() {
             }
         }
 
-        /*
-        _allTasks.value = tasquesActuals
-
-        TasksList.items.add(task)
-
-        val dataActual = _selectedData.value
-        if (dataActual != null) {
-            filtraTaskaPerData(dataActual)
-        } else {
-            _filteredTasks.value = tasquesActuals
-        }
-        */
-
     }
 
-    fun updateTask(updatedTask: Task) {
-        /*
-        val tasquesActuals = _allTasks.value?.toMutableList() ?: return
-        val index = tasquesActuals.indexOfFirst { it.id == updatedTask.id }
-
-        if (index != -1) {
-            tasquesActuals[index] = updatedTask
-            _allTasks.value = tasquesActuals
-
-            val taskListIndex = TasksList.items.indexOfFirst { it.id == updatedTask.id }
-            if (taskListIndex != -1) {
-                TasksList.items[taskListIndex] = updatedTask
+    fun updateTask(id: Long, updatedTask: TaskRequest) {
+        viewModelScope.launch {
+            try{
+                val response = TaskAPI.API().updateTask(id,updatedTask)
+                if (response.isSuccessful) {
+                    carregarTasques()
+                } else {
+                    Log.e("API", "Error HTTP: ${response.code()}")
+                }
+            } catch (e: Exception){
+                Log.e("API", "Error de connexió: " + e.message)
             }
-
-            val dataActual = _selectedData.value
-            if (dataActual != null) {
-                filtraTaskaPerData(dataActual)
-            } else {
-                _filteredTasks.value = tasquesActuals
-            }
-        }*/
+        }
     }
 
     fun deleteTaska(taskId: Long) {

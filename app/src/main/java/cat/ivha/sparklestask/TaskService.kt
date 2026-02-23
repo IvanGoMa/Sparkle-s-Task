@@ -20,7 +20,7 @@ interface TaskService {
     suspend fun createTask(@Body task: TaskRequest):Response<Void>
 
     @PUT("task/{id}")
-    suspend fun updateTask(@Path("id") id: Long, @Body task: Task):Response<Void>
+    suspend fun updateTask(@Path("id") id: Long, @Body task: TaskRequest):Response<Void>
 
     @DELETE("task/delete/id")
     suspend fun deleteTask(@Path("id") id: Long): Response<Void>

@@ -70,11 +70,6 @@ class HomeFragment : Fragment() {
         binding.cvCalendari.maxDate = System.currentTimeMillis() + 120L * 24 * 60 * 60 * 1000
     }
 
-    fun actualizarTarea(updatedTask: Task) {
-        viewModel.updateTask(updatedTask)
-        Toast.makeText(context, "Tasca actualitzada", Toast.LENGTH_SHORT).show()
-    }
-
     fun eliminarTarea(taskId: Long) {
         viewModel.deleteTaska(taskId)
         Toast.makeText(context, "Tasca eliminada", Toast.LENGTH_SHORT).show()
