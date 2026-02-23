@@ -16,4 +16,7 @@
     <string name="descMoneda">Imatge de la moneda</string>
     <string name="imatgeUsuari">Aqui hi anira l imatge escollida per l usuari</string>
     <string name="descItem">Imatge de l item disponible per l usuari</string>
+    <string name="todas">Totes</string>
+    <string name="selecciona_fecha">Selecciona la data</string>
+    <string name="aceptar">Acceptar</string>
 </resources>

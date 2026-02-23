@@ -92,9 +92,7 @@ class HomeViewModel : ViewModel() {
         } else {
             _filteredTasks.value = tasquesActuals
         }
-        */
-
-    }
+        *
 
     fun updateTask(updatedTask: Task) {
         /*
