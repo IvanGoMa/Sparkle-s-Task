@@ -1,31 +1,30 @@
 package cat.ivha.sparklestask
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CalendarView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import cat.ivha.sparklestask.databinding.HomeRvBinding
-import kotlin.getValue
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HomeFragment : Fragment() {
 
-    // --- VIEW BINDING ---
     private var _binding: HomeRvBinding? = null
     private val binding get() = _binding!!
 
-    // --- VIEWMODEL ---
     private val viewModel: HomeViewModel by activityViewModels()
 
-    // --- ADAPTER ---
     private lateinit var adapter: TasksAdapter
 
-
-    // --- CICLE DE VIDA ---
+    private val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +39,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-        setupCalendar()
         setupListeners()
         observeViewModel()
     }
@@ -50,8 +48,6 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-
-    // --- CONFIGURACIÓ ---
 
     private fun setupRecyclerView() {
         adapter = TasksAdapter(
@@ -64,10 +60,9 @@ class HomeFragment : Fragment() {
         binding.rvTasques.adapter = adapter
     }
 
-    private fun setupCalendar() {
-        binding.cvCalendari.minDate = System.currentTimeMillis()
-
-        binding.cvCalendari.maxDate = System.currentTimeMillis() + 120L * 24 * 60 * 60 * 1000
+    fun actualizarTarea(updatedTask: Task) {
+        viewModel.updateTask(updatedTask)
+        Toast.makeText(context, "Tasca actualitzada", Toast.LENGTH_SHORT).show()
     }
 
     fun eliminarTarea(taskId: Long) {
@@ -80,16 +75,83 @@ class HomeFragment : Fragment() {
             CreateTask().show(parentFragmentManager, "Crear Taska")
         }
 
-        binding.cvCalendari.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            val dataSeleccionada = dateOf(year, month + 1, dayOfMonth)
-
-            viewModel.filtraTaskaPerData(dataSeleccionada)
+        binding.btnMostrarTodas.setOnClickListener {
+            quitarFiltro()
         }
+
+        binding.btnAbrirCalendario.setOnClickListener {
+            mostrarDialogCalendario()
+        }
+    }
+
+    private fun mostrarDialogCalendario() {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.dialog_calendari)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        val calendarView = dialog.findViewById<CalendarView>(R.id.cvCalendariDialog)
+        val btnAceptar = dialog.findViewById<Button>(R.id.btnAceptar)
+        val btnCancelar = dialog.findViewById<Button>(R.id.btnCancelar)
+
+        calendarView.minDate = System.currentTimeMillis()
+        calendarView.maxDate = System.currentTimeMillis() + 120L * 24 * 60 * 60 * 1000
+
+        viewModel.selectedData.value?.let { fechaActual ->
+            calendarView.date = fechaActual.time
+        }
+
+        var fechaSeleccionadaTemp: Date = viewModel.selectedData.value ?: Date(System.currentTimeMillis())
+
+        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            fechaSeleccionadaTemp = dateOf(year, month + 1, dayOfMonth)
+        }
+
+        btnAceptar.setOnClickListener {
+            aplicarFiltroFecha(fechaSeleccionadaTemp)
+            dialog.dismiss()
+        }
+
+        btnCancelar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun aplicarFiltroFecha(fecha: Date) {
+        viewModel.filtraTaskaPerData(fecha)
+
+        binding.tvFechaSeleccionada.visibility = View.VISIBLE
+        binding.tvFechaSeleccionada.text = "Filtrado por: ${dateFormat.format(fecha)}"
+
+        Toast.makeText(context, "Mostrant tasques del ${dateFormat.format(fecha)}", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun quitarFiltro() {
+        viewModel.mostraTasques()
+
+        binding.tvFechaSeleccionada.visibility = View.GONE
+
+        Toast.makeText(context, "Mostrant totes les tasques", Toast.LENGTH_SHORT).show()
     }
 
     private fun observeViewModel() {
         viewModel.filteredTasks.observe(viewLifecycleOwner) { tasks ->
             adapter.updateTasks(tasks)
+        }
+
+        viewModel.selectedData.observe(viewLifecycleOwner) { fecha ->
+            if (fecha != null) {
+                binding.tvFechaSeleccionada.visibility = View.VISIBLE
+                binding.tvFechaSeleccionada.text = "Filtrado por: ${dateFormat.format(fecha)}"
+            } else {
+                binding.tvFechaSeleccionada.visibility = View.GONE
+            }
         }
     }
 }

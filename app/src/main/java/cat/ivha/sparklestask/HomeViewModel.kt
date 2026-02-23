@@ -81,7 +81,18 @@ class HomeViewModel : ViewModel() {
             }
         }
 
-    }
+        /*
+        _allTasks.value = tasquesActuals
+
+        TasksList.items.add(task)
+
+        val dataActual = _selectedData.value
+        if (dataActual != null) {
+            filtraTaskaPerData(dataActual)
+        } else {
+            _filteredTasks.value = tasquesActuals
+        }
+        *
 
     fun updateTask(id: Long, updatedTask: TaskRequest) {
         viewModelScope.launch {
