@@ -2,6 +2,7 @@ package cat.ivha.sparklestask
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.google.gson.GsonBuilder
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -31,7 +33,7 @@ class ActualitzaTasca() : DialogFragment() {
     // Dades de la tasca
     private var taskId: Long = -1
     private var taskTitle: String = ""
-    private var taskSparks: Int = 0
+    private var taskSparks: Long = 0L
     private var taskDate: Long = 0L
 
     companion object {
@@ -94,7 +96,7 @@ class ActualitzaTasca() : DialogFragment() {
         arguments?.let { args ->
             taskId = args.getLong(ARG_TASK_ID, -1)
             taskTitle = args.getString(ARG_TASK_TITLE, "")
-            taskSparks = args.getInt(ARG_TASK_SPARKS, 0)
+            taskSparks = args.getLong(ARG_TASK_SPARKS, 0)
             taskDate = args.getLong(ARG_TASK_DATE, System.currentTimeMillis())
         }
     }
@@ -144,6 +146,8 @@ class ActualitzaTasca() : DialogFragment() {
             nomTasca = nouNom,
             sparks = nousSparks
         )
+        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
+        Log.d("DEBUG_JSON", gson.toJson(tascaActualitzada))
         viewModel.updateTask(taskId, tascaActualitzada)
 
         dismiss()

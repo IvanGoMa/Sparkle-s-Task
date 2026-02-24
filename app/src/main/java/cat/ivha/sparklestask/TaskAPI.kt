@@ -27,6 +27,7 @@ class TaskAPI {
                     .build()
                     .create(TaskService::class.java)
             }
+
             return mTaskAPI!!
         }
 
