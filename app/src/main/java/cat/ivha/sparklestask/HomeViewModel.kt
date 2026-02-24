@@ -69,14 +69,14 @@ class HomeViewModel : ViewModel() {
 
     fun afegirTasca(task: TaskRequest) {
         viewModelScope.launch {
-            try{
+            try {
                 val response = TaskAPI.API().createTask(task)
                 if (response.isSuccessful) {
-                   carregarTasques()
+                    carregarTasques()
                 } else {
                     Log.e("API", "Error HTTP: ${response.code()}")
                 }
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e("API", "Error de connexió: " + e.message)
             }
         }
@@ -92,7 +92,8 @@ class HomeViewModel : ViewModel() {
         } else {
             _filteredTasks.value = tasquesActuals
         }
-        *
+        */
+    }
 
     fun updateTask(id: Long, updatedTask: TaskRequest) {
         viewModelScope.launch {
