@@ -131,6 +131,11 @@ class HomeFragment : Fragment() {
         Toast.makeText(context, "Mostrant totes les tasques", Toast.LENGTH_SHORT).show()
     }
 
+    fun eliminarTarea(taskId: Long) {
+        viewModel.deleteTaska(taskId)
+        Toast.makeText(context, "Tasca eliminada", Toast.LENGTH_SHORT).show()
+    }
+
     private fun observeViewModel() {
         viewModel.filteredTasks.observe(viewLifecycleOwner) { tasks ->
             adapter.updateTasks(tasks)

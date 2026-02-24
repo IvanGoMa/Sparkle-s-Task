@@ -132,7 +132,6 @@ class ActualitzaTasca() : DialogFragment() {
             return
         }
 
-        // TODO: Formato de fecha incorrecto
         val novaData = try {
             df.parse(novaDataText) ?: Date(taskDate)
         } catch (e: Exception) {
@@ -158,7 +157,8 @@ class ActualitzaTasca() : DialogFragment() {
             .setTitle("Eliminar tasca")
             .setMessage("Estàs segur que vols eliminar aquesta tasca?")
             .setPositiveButton("Eliminar") { _, _ ->
-                (parentFragment as? HomeFragment)?.eliminarTarea(taskId)
+                viewModel.deleteTaska(taskId)
+                Toast.makeText(context, "Tasca eliminada", Toast.LENGTH_SHORT).show()
                 dismiss()
             }
             .setNegativeButton("Cancel·lar", null)

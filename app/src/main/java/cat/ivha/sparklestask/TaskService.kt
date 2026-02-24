@@ -22,10 +22,10 @@ interface TaskService {
     @PUT("task/update/{id}")
     suspend fun updateTask(@Path("id") id: Long, @Body task: TaskRequest):Response<Void>
 
-    @DELETE("task/delete/id")
+    @DELETE("task/delete/{id}")
     suspend fun deleteTask(@Path("id") id: Long): Response<Void>
 
-    @DELETE("task/complete/id")
+    @DELETE("task/complete/{id}")
     suspend fun completeTask(@Path("id") id: Long): Response<Void>
 
     @GET("user/Hanna/sparks")
