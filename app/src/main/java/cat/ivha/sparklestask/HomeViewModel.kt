@@ -111,17 +111,17 @@ class HomeViewModel : ViewModel() {
     }
 
     fun deleteTaska(taskId: Long) {
-        val tasquesActuals = _allTasks.value?.toMutableList() ?: return
-        tasquesActuals.removeAll { it.id == taskId }
-        _allTasks.value = tasquesActuals
-
-        TasksList.items.removeAll { it.id == taskId }
-
-        val dataActual = _selectedData.value
-        if (dataActual != null) {
-            filtraTaskaPerData(dataActual)
-        } else {
-            _filteredTasks.value = tasquesActuals
+        viewModelScope.launch{
+            try{
+                val response = TaskAPI.API().deleteTask(taskId)
+                if (response.isSuccessful) {
+                    carregarTasques()
+                } else {
+                    Log.e("API", "Error HTTP: ${response.code()}")
+                }
+            } catch (e: Exception){
+                Log.e("API", "Error de connexió: " + e.message)
+            }
         }
     }
 }
