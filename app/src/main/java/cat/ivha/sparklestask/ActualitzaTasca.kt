@@ -130,6 +130,7 @@ class ActualitzaTasca() : DialogFragment() {
             return
         }
 
+        // TODO: Formato de fecha incorrecto
         val novaData = try {
             df.parse(novaDataText) ?: Date(taskDate)
         } catch (e: Exception) {
@@ -138,14 +139,12 @@ class ActualitzaTasca() : DialogFragment() {
         }
 
         // Crear tasca actualitzada
-        val tascaActualitzada = Task(
+        val tascaActualitzada = TaskRequest(
             dataLimit = novaData,
             nomTasca = nouNom,
-            sparks = nousSparks,
-            id = taskId
+            sparks = nousSparks
         )
-
-        (parentFragment as? HomeFragment)?.actualizarTarea(tascaActualitzada)
+        viewModel.updateTask(taskId, tascaActualitzada)
 
         dismiss()
     }
