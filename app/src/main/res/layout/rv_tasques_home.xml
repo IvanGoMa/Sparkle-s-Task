@@ -56,6 +56,18 @@
                 android:maxLines="1"
                 android:gravity="center"/>
 
+            <ImageButton
+                android:id="@+id/btnDelete"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/bin"
+                android:src="@drawable/bin"
+                android:layout_weight="0.5"
+                android:backgroundTint="@color/transparent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
