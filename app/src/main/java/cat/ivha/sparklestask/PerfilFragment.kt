@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cat.ivha.sparklestask.databinding.PerfilRvBinding
 
 
 class PerfilFragment : Fragment(R.layout.perfil_rv) {
@@ -18,9 +19,9 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
     lateinit var ivHelp : ImageView
     private lateinit var adapter: MyAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var btnCollars: Button
-    private lateinit var btnGorros: Button
-    private lateinit var btnUlleres: Button
+
+    private var _binding: PerfilRvBinding? = null
+    private val binding get() = _binding!!
     private var ultimClicat: String? = null
     private val collars: String = "Collars"
     private val ulleres: String = "Ulleres"
@@ -30,16 +31,17 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ) : View? {
-        return inflater.inflate(R.layout.perfil_rv, container, false)
+        _binding = PerfilRvBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ivHelp = view.findViewById(R.id.ivHelp)
         recyclerView = view.findViewById(R.id.rvItems)
-        btnCollars = view.findViewById(R.id.btnCollars)
-        btnUlleres = view.findViewById(R.id.btnUlleres)
-        btnGorros = view.findViewById(R.id.btnGorros)
+        val btnCollars = binding.btnCollars
+        val btnUlleres = binding.btnUlleres
+        val btnGorros = binding.btnGorros
 
 
         val items = DataSource.items
@@ -70,6 +72,7 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
             adapter.filtra(if (ultimClicat == collars) null
                     else Categoria.COLLARS)
             ultimClicat = if (ultimClicat == collars) null else collars
+            btnCollars.setBackgroundResource(R.drawable.round_pink_sec)
         }
 
         btnUlleres.setOnClickListener {
@@ -77,12 +80,19 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
                 if (ultimClicat == ulleres) null
                 else Categoria.ULLERES)
             ultimClicat = if (ultimClicat == ulleres) null else ulleres
+            btnUlleres.setBackgroundResource(R.drawable.round_pink_sec)
         }
 
         btnGorros.setOnClickListener {
             adapter.filtra(if (ultimClicat == gorros) null
             else Categoria.GORROS)
             ultimClicat = if (ultimClicat == gorros) null else gorros
+            btnGorros.setBackgroundResource(R.drawable.round_pink_sec)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
