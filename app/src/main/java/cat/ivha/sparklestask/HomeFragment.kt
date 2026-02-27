@@ -54,6 +54,9 @@ class HomeFragment : Fragment() {
             itemsComplets = emptyList(),
             onItemClick = { task ->
                 ActualitzaTasca.newInstance(task).show(childFragmentManager, "Modificar Tasca")
+            },
+            onBinClick = { id ->
+                viewModel.deleteTaska(id)
             }
         )
         binding.rvTasques.layoutManager = LinearLayoutManager(requireContext())

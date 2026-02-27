@@ -68,23 +68,23 @@ class Register : AppCompatActivity() {
 
     private fun observeViewmodel(){
         viewmodel.usernameError.observe(this){
-            error -> binding.etUser.error = error
+            error -> binding.etUserBox.error = error
         }
 
         viewmodel.passwordError.observe(this){
-                error -> binding.etPssw.error = error
+                error -> binding.etPsswBox.error = error
         }
 
         viewmodel.passwordValidationError.observe(this){
-                error -> binding.etPsswX.error = error
+                error -> binding.etPsswXBox.error = error
         }
 
         viewmodel.emailError.observe(this){
-                error -> binding.etEmail.error = error
+                error -> binding.etEmailBox.error = error
         }
 
         viewmodel.dateError.observe(this){
-                error -> binding.etHB.error = error
+                error -> binding.etHBBox.error = error
         }
 
         viewmodel.registerSucces.observe(this){ success ->
