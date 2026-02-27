@@ -37,6 +37,7 @@
     <string name="dataNaixement">Data de naixement</string>
     <string name="pwCheck">Confirma la contrasenya</string>
     <string name="crear">Crear</string>
+    <string name="bin">Eliminar</string>
 
 
 </resources>

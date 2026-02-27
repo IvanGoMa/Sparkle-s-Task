@@ -54,12 +54,19 @@ class HomeFragment : Fragment() {
             itemsComplets = emptyList(),
             onItemClick = { task ->
                 ActualitzaTasca.newInstance(task).show(childFragmentManager, "Modificar Tasca")
+            },
+            onBinClick = { id ->
+                viewModel.deleteTaska(id)
             }
         )
         binding.rvTasques.layoutManager = LinearLayoutManager(requireContext())
         binding.rvTasques.adapter = adapter
     }
 
+       fun eliminarTarea(taskId: Long) {
+        viewModel.deleteTaska(taskId)
+        Toast.makeText(context, "Tasca eliminada", Toast.LENGTH_SHORT).show()
+    }
 
     private fun setupListeners() {
         binding.btnAfegir.setOnClickListener {
