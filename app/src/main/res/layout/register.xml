@@ -111,6 +111,7 @@
             app:layout_constraintTop_toBottomOf="@id/etPsswBox"
             android:hint="@string/pwCheck"
             android:textColorHint="@color/black"
+            app:errorTextColor="@color/pinkPrimary"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -131,6 +132,7 @@
             app:layout_constraintTop_toBottomOf="@id/etPsswXBox"
             android:hint="@string/email"
             android:textColorHint="@color/black"
+            app:errorTextColor="@color/pinkPrimary"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
@@ -149,7 +151,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etEmailBox"
             android:hint="@string/dataNaixement"
-            android:textColorHint="@color/black">
+            android:textColorHint="@color/black"
+            app:errorTextColor="@color/pinkPrimary">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -160,28 +163,32 @@
                 android:textSize="20sp"
                 android:textColor="@color/black"/>
         </com.google.android.material.textfield.TextInputLayout>
-        <ImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="45dp"
-            android:background="@drawable/round_pink"
-            android:contentDescription="@string/exit"
-            android:src="@drawable/back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etHBBox" />
 
-        <Button
-            android:id="@+id/btnInici"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_marginTop="40dp"
-            android:backgroundTint="@color/pinkSecondary"
-            android:text="@string/registra"
-            android:textSize="22sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etHBBox" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/round_pink"
+        android:contentDescription="@string/exit"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/btnInici"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/pinkSecondary"
+        android:text="@string/registra"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

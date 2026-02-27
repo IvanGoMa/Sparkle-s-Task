@@ -27,11 +27,8 @@
             android:exported="false" />
 
         <activity
-            android:name=".ActualitzaTasca"
-            android:exported="false" />
-        <activity
             android:name=".Register"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".Inici"
             android:exported="true"
