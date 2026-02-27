@@ -3,22 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="20dp"
-    android:background="@drawable/round_pink">
+    android:padding="20dp">
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="@string/selecciona_fecha"
         android:textSize="20sp"
         android:textColor="@color/pinkOnPrimary"
         android:layout_gravity="center"
+        android:background="@drawable/round_pink_sec"
         android:layout_marginBottom="15dp" />
 
     <CalendarView
         android:id="@+id/cvCalendariDialog"
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/round_pink"
         android:dateTextAppearance="@style/CalendarTextWhite"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
-            android:backgroundTint="@android:color/transparent"
+            android:background="@drawable/round_pink"
             android:textColor="@color/pinkOnPrimary"
             style="?android:attr/borderlessButtonStyle" />
 
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/aceptar"
-            android:backgroundTint="@color/pinkSecondary"
+            android:background="@drawable/round_pink_sec"
             android:textColor="@color/white"
             android:layout_marginStart="10dp" />
     </LinearLayout>

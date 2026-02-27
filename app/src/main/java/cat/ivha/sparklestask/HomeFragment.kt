@@ -66,10 +66,6 @@ class HomeFragment : Fragment() {
         binding.rvTasques.adapter = adapter
     }
 
-       fun eliminarTarea(taskId: Long) {
-        viewModel.deleteTaska(taskId)
-        Toast.makeText(context, "Tasca eliminada", Toast.LENGTH_SHORT).show()
-    }
 
     private fun setupListeners() {
         binding.btnAfegir.setOnClickListener {
@@ -139,6 +135,11 @@ class HomeFragment : Fragment() {
         binding.tvFechaSeleccionada.visibility = View.GONE
 
         Toast.makeText(context, "Mostrant totes les tasques", Toast.LENGTH_SHORT).show()
+    }
+
+    fun eliminarTarea(taskId: Long) {
+        viewModel.deleteTaska(taskId)
+        Toast.makeText(context, "Tasca eliminada", Toast.LENGTH_SHORT).show()
     }
 
     private fun observeViewModel() {
