@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class TasksViewHolder (
@@ -15,12 +16,14 @@ class TasksViewHolder (
     private val tvNom: TextView = itemView.findViewById(R.id.tvNom)
     private val tvSparks: TextView = itemView.findViewById(R.id.tvSparks)
     private val tvData: TextView = itemView.findViewById(R.id.tvData)
+    private val df = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+
 
     fun bind (task: Task){
 
         tvNom.text = task.nomTasca
         tvSparks.text = task.sparks.toString()
-        tvData.text = task.dataLimit.toString()
+        tvData.text = df.format(task.dataLimit)
 
         itemView.setOnClickListener {
             onItemClick(task)
