@@ -139,7 +139,7 @@ class ActualitzaTasca() : DialogFragment() {
             return
         }
 
-        // Crear tasca actualitzada
+
         val tascaActualitzada = TaskRequest(
             dataLimit = novaData,
             nomTasca = nouNom,
@@ -153,15 +153,32 @@ class ActualitzaTasca() : DialogFragment() {
     }
 
     private fun confirmarEliminacio() {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Eliminar tasca")
-            .setMessage("Estàs segur que vols eliminar aquesta tasca?")
-            .setPositiveButton("Eliminar") { _, _ ->
-                viewModel.deleteTaska(taskId)
-                Toast.makeText(context, "Tasca eliminada", Toast.LENGTH_SHORT).show()
-                dismiss()
-            }
-            .setNegativeButton("Cancel·lar", null)
-            .show()
+        val context = requireContext()
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.dialog_conf_del)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        val btnCancelar = dialog.findViewById<Button>(R.id.btnCancelar)
+        val btnAceptar = dialog.findViewById<Button>(R.id.btnEliminar)
+
+        btnCancelar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnAceptar.setOnClickListener {
+            (parentFragment as? HomeFragment)?.eliminarTarea(taskId)
+
+            dialog.dismiss()
+            dismiss()
+
+        }
+
+        dialog.show()
+
     }
 }
