@@ -3,10 +3,10 @@ package cat.ivha.sparklestask
 import java.util.Date
 
 data class Task(
-    var dataLimit: Date,
-    var nomTasca: String,
-    var sparks: Long,
-    var id: Long = nextId()
+    val dataLimit: Date,
+    val nomTasca: String,
+    val sparks: Long,
+    val id: Long = nextId()
 ){
     companion object{
         private var currentId = 0L
@@ -21,7 +21,7 @@ data class Task(
 }
 
 data class TaskRequest(
-    var dataLimit: Date,
-    var nomTasca: String,
-    var sparks: Long,
+    val dataLimit: Date,
+    val nomTasca: String,
+    val sparks: Long,
 )
