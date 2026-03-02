@@ -1,33 +1,52 @@
 package cat.ivha.sparklestask
 
 import android.util.Log
-import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import okhttp3.logging.HttpLoggingInterceptor
 import java.util.Calendar
 import java.util.Date
 
 class HomeViewModel : ViewModel() {
 
     private var _allTasks = MutableLiveData<List<Task>>()
-
     private val _filteredTasks = MutableLiveData<List<Task>>()
-
     private val _selectedData = MutableLiveData<Date?>()
+
+    private val _totalSparks = MutableLiveData<Long>(0L)
+    val totalSparks: LiveData<Long> = _totalSparks
 
     val selectedData = _selectedData
     val filteredTasks = _filteredTasks
 
     init {
         carregarTasques()
+        carregarSparks()
+    }
+
+    fun carregarSparks() {
+        viewModelScope.launch {
+            try {
+                val response = TaskAPI.API().getSparks("Hanna")
+                if (response.isSuccessful) {
+                    // La API devuelve un String, convertir a Long
+                    val sparks = response.body()?.toLongOrNull() ?: 0L
+                    _totalSparks.value = sparks
+                    Log.d("API", "Sparks cargados: $sparks")
+                } else {
+                    Log.e("API", "Error HTTP al cargar sparks: ${response.code()}")
+                }
+            } catch (e: Exception) {
+                Log.e("API", "Error al cargar sparks: ${e.message}")
+            }
+        }
     }
 
     fun carregarTasques() {
-        viewModelScope.launch{
-            try{
+        viewModelScope.launch {
+            try {
                 val response = TaskAPI.API().llistaTasks()
                 if (response.isSuccessful) {
                     _allTasks.value = response.body() ?: emptyList()
@@ -35,7 +54,7 @@ class HomeViewModel : ViewModel() {
                 } else {
                     Log.e("API", "Error HTTP: ${response.code()}")
                 }
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e("API", "Error de connexió: " + e.message)
             }
         }
@@ -80,52 +99,56 @@ class HomeViewModel : ViewModel() {
                 Log.e("API", "Error de connexió: " + e.message)
             }
         }
-
-        /*
-        _allTasks.value = tasquesActuals
-
-        TasksList.items.add(task)
-
-        val dataActual = _selectedData.value
-        if (dataActual != null) {
-            filtraTaskaPerData(dataActual)
-        } else {
-            _filteredTasks.value = tasquesActuals
-        }
-        */
     }
 
     fun updateTask(id: Long, updatedTask: TaskRequest) {
         viewModelScope.launch {
-            try{
-                val response = TaskAPI.API().updateTask(id,updatedTask)
+            try {
+                val response = TaskAPI.API().updateTask(id, updatedTask)
                 if (response.isSuccessful) {
                     carregarTasques()
                 } else {
                     Log.e("API", "Error HTTP: ${response.code()}")
                 }
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e("API", "Error de connexió: " + e.message)
             }
         }
     }
 
     fun deleteTaska(taskId: Long) {
-        viewModelScope.launch{
-            try{
+        viewModelScope.launch {
+            try {
                 val response = TaskAPI.API().deleteTask(taskId)
                 if (response.isSuccessful) {
                     carregarTasques()
                 } else {
                     Log.e("API", "Error HTTP: ${response.code()}")
                 }
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e("API", "Error de connexió: " + e.message)
             }
         }
     }
 
-    fun completeTask(taskId:Long) {
+    fun completeTask(taskId: Long) {
+        viewModelScope.launch {
+            try {
+                val response = TaskAPI.API().completeTask(taskId)
+                if (response.isSuccessful) {
+                    Log.d("API", "Tarea completada exitosamente")
 
+                    // Recargar las tareas (la completada ya no aparecerá)
+                    carregarTasques()
+
+                    // Recargar los sparks actualizados desde el servidor
+                    carregarSparks()
+                } else {
+                    Log.e("API", "Error HTTP al completar tarea: ${response.code()}")
+                }
+            } catch (e: Exception) {
+                Log.e("API", "Error al completar tarea: ${e.message}")
+            }
+        }
     }
 }

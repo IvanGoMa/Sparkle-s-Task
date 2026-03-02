@@ -30,8 +30,15 @@ class TasksViewHolder (
         tvNom.text = task.nomTasca
         tvSparks.text = task.sparks.toString()
         tvData.text = df.format(task.dataLimit)
-        btnDelete.setOnClickListener { onBinClick(task.id) }
-        checkbox.setOnClickListener { onCheckboxClick(task.id) }
+
+        btnDelete.setOnClickListener{onBinClick(task.id)}
+        checkbox.setOnClickListener(null)
+        checkbox.isChecked=false
+        checkbox.setOnClickListener {
+            checkbox.isChecked = true
+            onCheckboxClick(task.id)
+
+        }
 
         itemView.setOnClickListener {
             onItemClick(task)

@@ -48,7 +48,6 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-
     private fun setupRecyclerView() {
         adapter = TasksAdapter(
             itemsComplets = emptyList(),
@@ -56,7 +55,7 @@ class HomeFragment : Fragment() {
                 ActualitzaTasca.newInstance(task).show(childFragmentManager, "Modificar Tasca")
             },
             onBinClick = { id ->
-                viewModel.deleteTaska(id)
+                mostrarDialogConfirmacionEliminacion(id)
             },
             onCheckboxClick = { id ->
                 viewModel.completeTask(id)
@@ -65,7 +64,6 @@ class HomeFragment : Fragment() {
         binding.rvTasques.layoutManager = LinearLayoutManager(requireContext())
         binding.rvTasques.adapter = adapter
     }
-
 
     private fun setupListeners() {
         binding.btnAfegir.setOnClickListener {
@@ -120,6 +118,35 @@ class HomeFragment : Fragment() {
         dialog.show()
     }
 
+    private fun mostrarDialogConfirmacionEliminacion(taskId: Long) {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.dialog_conf_del)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        val btnCancelar = dialog.findViewById<Button>(R.id.btnCancelar)
+        val btnEliminar = dialog.findViewById<Button>(R.id.btnEliminar)
+
+        btnCancelar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnEliminar.setOnClickListener {
+            viewModel.deleteTaska(taskId)
+            Toast.makeText(context, "Tasca eliminada", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    fun eliminarTarea(taskId: Long) {
+        viewModel.deleteTaska(taskId)
+        Toast.makeText(context, "Tasca eliminada", Toast.LENGTH_SHORT).show()
+    }
     private fun aplicarFiltroFecha(fecha: Date) {
         viewModel.filtraTaskaPerData(fecha)
 
@@ -137,11 +164,6 @@ class HomeFragment : Fragment() {
         Toast.makeText(context, "Mostrant totes les tasques", Toast.LENGTH_SHORT).show()
     }
 
-    fun eliminarTarea(taskId: Long) {
-        viewModel.deleteTaska(taskId)
-        Toast.makeText(context, "Tasca eliminada", Toast.LENGTH_SHORT).show()
-    }
-
     private fun observeViewModel() {
         viewModel.filteredTasks.observe(viewLifecycleOwner) { tasks ->
             adapter.updateTasks(tasks)
@@ -154,6 +176,11 @@ class HomeFragment : Fragment() {
             } else {
                 binding.tvFechaSeleccionada.visibility = View.GONE
             }
+        }
+
+        viewModel.totalSparks.observe(viewLifecycleOwner) { sparks ->
+            val tvSparksTotal = binding.tvSparksTotal
+            tvSparksTotal.text = sparks.toString()
         }
     }
 }
