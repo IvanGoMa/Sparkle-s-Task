@@ -2,12 +2,15 @@ package cat.ivha.sparklestask
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.ImageView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +45,9 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
         val btnCollars = binding.btnCollars
         val btnUlleres = binding.btnUlleres
         val btnGorros = binding.btnGorros
+        val cerca = binding.etSearch
+        val handler = Handler(Looper.getMainLooper())
+        var runnable: Runnable? = null
 
 
         val items = DataSource.items
@@ -110,6 +116,25 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
                 ultimClicat = gorros
             }
         }
+
+
+        cerca.doAfterTextChanged { text ->
+
+            runnable?.let { handler.removeCallbacks(it) }
+
+            runnable = Runnable {
+                val query = text.toString()
+
+                if (query.isEmpty()) {
+                    adapter.filtra(null)
+                } else {
+                    adapter.busca(query)
+                }
+            }
+
+            handler.postDelayed(runnable!!, 500)
+        }
+
     }
 
     override fun onDestroyView() {

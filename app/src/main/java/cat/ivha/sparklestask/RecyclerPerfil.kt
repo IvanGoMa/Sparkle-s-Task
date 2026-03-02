@@ -43,6 +43,12 @@ class MyAdapter(
         notifyDataSetChanged() // Actualizar la vista
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun busca(text: String){
+        itemsFiltrados = itemsComplets.filter { it.nom.contains(text,true) }
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int = itemsFiltrados.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
