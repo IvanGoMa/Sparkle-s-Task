@@ -2,15 +2,19 @@ package cat.ivha.sparklestask
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.ImageView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cat.ivha.sparklestask.databinding.PerfilRvBinding
 
 
 class PerfilFragment : Fragment(R.layout.perfil_rv) {
@@ -18,9 +22,9 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
     lateinit var ivHelp : ImageView
     private lateinit var adapter: MyAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var btnCollars: Button
-    private lateinit var btnGorros: Button
-    private lateinit var btnUlleres: Button
+
+    private var _binding: PerfilRvBinding? = null
+    private val binding get() = _binding!!
     private var ultimClicat: String? = null
     private val collars: String = "Collars"
     private val ulleres: String = "Ulleres"
@@ -30,16 +34,20 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ) : View? {
-        return inflater.inflate(R.layout.perfil_rv, container, false)
+        _binding = PerfilRvBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ivHelp = view.findViewById(R.id.ivHelp)
         recyclerView = view.findViewById(R.id.rvItems)
-        btnCollars = view.findViewById(R.id.btnCollars)
-        btnUlleres = view.findViewById(R.id.btnUlleres)
-        btnGorros = view.findViewById(R.id.btnGorros)
+        val btnCollars = binding.btnCollars
+        val btnUlleres = binding.btnUlleres
+        val btnGorros = binding.btnGorros
+        val cerca = binding.etSearch
+        val handler = Handler(Looper.getMainLooper())
+        var runnable: Runnable? = null
 
 
         val items = DataSource.items
@@ -67,22 +75,70 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
         }
 
         btnCollars.setOnClickListener {
-            adapter.filtra(if (ultimClicat == collars) null
-                    else Categoria.COLLARS)
-            ultimClicat = if (ultimClicat == collars) null else collars
+            if (ultimClicat == collars){
+                adapter.filtra(null)
+                btnCollars.setBackgroundResource(R.drawable.round_pink)
+                ultimClicat = null
+            } else {
+                adapter.filtra(Categoria.COLLARS)
+                btnCollars.setBackgroundResource(R.drawable.round_pink_sec)
+                btnUlleres.setBackgroundResource(R.drawable.round_pink)
+                btnGorros.setBackgroundResource(R.drawable.round_pink)
+                ultimClicat = collars
+            }
         }
 
         btnUlleres.setOnClickListener {
-            adapter.filtra(
-                if (ultimClicat == ulleres) null
-                else Categoria.ULLERES)
-            ultimClicat = if (ultimClicat == ulleres) null else ulleres
+
+            if (ultimClicat == ulleres){
+                adapter.filtra(null)
+                btnUlleres.setBackgroundResource(R.drawable.round_pink)
+                ultimClicat = null
+            } else {
+                adapter.filtra(Categoria.ULLERES)
+                btnUlleres.setBackgroundResource(R.drawable.round_pink_sec)
+                btnCollars.setBackgroundResource(R.drawable.round_pink)
+                btnGorros.setBackgroundResource(R.drawable.round_pink)
+                ultimClicat = ulleres
+            }
         }
 
         btnGorros.setOnClickListener {
-            adapter.filtra(if (ultimClicat == gorros) null
-            else Categoria.GORROS)
-            ultimClicat = if (ultimClicat == gorros) null else gorros
+            if (ultimClicat == gorros){
+                adapter.filtra(null)
+                btnGorros.setBackgroundResource(R.drawable.round_pink)
+                ultimClicat = null
+            } else {
+                adapter.filtra(Categoria.GORROS)
+                btnGorros.setBackgroundResource(R.drawable.round_pink_sec)
+                btnCollars.setBackgroundResource(R.drawable.round_pink)
+                btnUlleres.setBackgroundResource(R.drawable.round_pink)
+                ultimClicat = gorros
+            }
         }
+
+
+        cerca.doAfterTextChanged { text ->
+
+            runnable?.let { handler.removeCallbacks(it) }
+
+            runnable = Runnable {
+                val query = text.toString()
+
+                if (query.isEmpty()) {
+                    adapter.filtra(null)
+                } else {
+                    adapter.busca(query)
+                }
+            }
+
+            handler.postDelayed(runnable!!, 500)
+        }
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
