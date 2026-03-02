@@ -56,14 +56,14 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
-            android:id="@+id/btnSave"
+            android:id="@+id/btnCancelar"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:background="@drawable/circle_pink"
             android:backgroundTint="@color/pinkSecondary"
-            android:text="@string/creaTasca"
+            android:text="@string/cancel"
             android:textColor="@color/pinkOnSecondary"
             android:textSize="20sp"/>
 

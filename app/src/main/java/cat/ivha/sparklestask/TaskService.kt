@@ -28,7 +28,7 @@ interface TaskService {
     @DELETE("task/complete/{id}")
     suspend fun completeTask(@Path("id") id: Long): Response<Void>
 
-    @GET("user/Hanna/sparks")
+    @GET("user/{username}/sparks")
     suspend fun getSparks(@Path("username") username: String): Response<String>
 
 
