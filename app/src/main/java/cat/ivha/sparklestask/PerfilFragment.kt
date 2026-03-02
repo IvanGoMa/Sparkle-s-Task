@@ -69,25 +69,46 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
         }
 
         btnCollars.setOnClickListener {
-            adapter.filtra(if (ultimClicat == collars) null
-                    else Categoria.COLLARS)
-            ultimClicat = if (ultimClicat == collars) null else collars
-            btnCollars.setBackgroundResource(R.drawable.round_pink_sec)
+            if (ultimClicat == collars){
+                adapter.filtra(null)
+                btnCollars.setBackgroundResource(R.drawable.round_pink)
+                ultimClicat = null
+            } else {
+                adapter.filtra(Categoria.COLLARS)
+                btnCollars.setBackgroundResource(R.drawable.round_pink_sec)
+                btnUlleres.setBackgroundResource(R.drawable.round_pink)
+                btnGorros.setBackgroundResource(R.drawable.round_pink)
+                ultimClicat = collars
+            }
         }
 
         btnUlleres.setOnClickListener {
-            adapter.filtra(
-                if (ultimClicat == ulleres) null
-                else Categoria.ULLERES)
-            ultimClicat = if (ultimClicat == ulleres) null else ulleres
-            btnUlleres.setBackgroundResource(R.drawable.round_pink_sec)
+
+            if (ultimClicat == ulleres){
+                adapter.filtra(null)
+                btnUlleres.setBackgroundResource(R.drawable.round_pink)
+                ultimClicat = null
+            } else {
+                adapter.filtra(Categoria.ULLERES)
+                btnUlleres.setBackgroundResource(R.drawable.round_pink_sec)
+                btnCollars.setBackgroundResource(R.drawable.round_pink)
+                btnGorros.setBackgroundResource(R.drawable.round_pink)
+                ultimClicat = ulleres
+            }
         }
 
         btnGorros.setOnClickListener {
-            adapter.filtra(if (ultimClicat == gorros) null
-            else Categoria.GORROS)
-            ultimClicat = if (ultimClicat == gorros) null else gorros
-            btnGorros.setBackgroundResource(R.drawable.round_pink_sec)
+            if (ultimClicat == gorros){
+                adapter.filtra(null)
+                btnGorros.setBackgroundResource(R.drawable.round_pink)
+                ultimClicat = null
+            } else {
+                adapter.filtra(Categoria.GORROS)
+                btnGorros.setBackgroundResource(R.drawable.round_pink_sec)
+                btnCollars.setBackgroundResource(R.drawable.round_pink)
+                btnUlleres.setBackgroundResource(R.drawable.round_pink)
+                ultimClicat = gorros
+            }
         }
     }
 
