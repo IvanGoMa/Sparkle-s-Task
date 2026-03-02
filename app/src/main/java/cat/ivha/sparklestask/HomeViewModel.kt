@@ -124,4 +124,8 @@ class HomeViewModel : ViewModel() {
             }
         }
     }
+
+    fun completeTask(taskId:Long) {
+
+    }
 }

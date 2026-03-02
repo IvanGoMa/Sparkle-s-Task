@@ -57,6 +57,9 @@ class HomeFragment : Fragment() {
             },
             onBinClick = { id ->
                 viewModel.deleteTaska(id)
+            },
+            onCheckboxClick = { id ->
+                viewModel.completeTask(id)
             }
         )
         binding.rvTasques.layoutManager = LinearLayoutManager(requireContext())
