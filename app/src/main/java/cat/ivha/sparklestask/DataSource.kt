@@ -15,7 +15,7 @@ object DataSource {
         Item("Gorra Negra", "Un accesori per l'avatar",R.drawable.gorranegra, Categoria.GORROS ),
         Item("Gorra de Paja", "Un accesori per l'avatar", R.drawable.gorramarron, Categoria.GORROS),
         Item("Gorra Azul", "Un accesori per l'avatar", R.drawable.gorraazul, Categoria.GORROS),
-        Item("Collar con diamante Rojp", "Un accesori per l'avatar", R.drawable.diamanterojo,
+        Item("Collar con diamante Rojo", "Un accesori per l'avatar", R.drawable.diamanterojo,
             Categoria.COLLARS),
         Item("Collar de corazon", "Un accesori per l'avatar", R.drawable.corazon, Categoria.COLLARS)
     )
