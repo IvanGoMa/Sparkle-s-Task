@@ -21,6 +21,7 @@ class HomeViewModel : ViewModel() {
     val selectedData = _selectedData
     val filteredTasks = _filteredTasks
 
+
     init {
         carregarTasques()
         carregarSparks()

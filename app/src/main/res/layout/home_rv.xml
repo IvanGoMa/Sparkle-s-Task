@@ -135,15 +135,15 @@
 
         <ImageButton
             android:id="@+id/btnAfegir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/round_pink_sec"
             android:text="@string/addTask"
             android:textColor="@color/white"
             android:src="@drawable/add"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="25dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

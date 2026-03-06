@@ -8,12 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import cat.ivha.sparklestask.databinding.HomeRvBinding
+import cat.ivha.sparklestask.databinding.PerfilRvBinding
+import cat.ivha.sparklestask.databinding.SettingsBinding
 
 
 class SettingsFragment : Fragment() {
 
-    lateinit var btnGuarda : Button
-    lateinit var btnSortir : Button
+    private var _binding: SettingsBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: HomeViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -21,32 +26,36 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.settings, container, false)
+        _binding = SettingsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        initComponents(view)
+        observeViewModel()
         initListeners()
     }
 
-    private fun initComponents(view: View) {
-        btnGuarda = view.findViewById(R.id.btnGuarda)
-        btnSortir = view.findViewById(R.id.btnSortir)
-    }
-
     fun initListeners(){
-        btnSortir.setOnClickListener {
+        binding.btnSortir.setOnClickListener {
             val intent = Intent(requireContext(), Inici::class.java)
             startActivity(intent)
         }
-        btnGuarda.setOnClickListener{
+        binding.btnGuarda.setOnClickListener{
             Toast.makeText(
                 requireContext(),
                 "Preferencies guardades",
                 Toast.LENGTH_SHORT
             ).show()
+        }
+    }
+
+    private fun observeViewModel() {
+
+        viewModel.totalSparks.observe(viewLifecycleOwner) { sparks ->
+            val tvSparksTotal = binding.tvSparksTotal
+            tvSparksTotal.text = sparks.toString()
         }
     }
 

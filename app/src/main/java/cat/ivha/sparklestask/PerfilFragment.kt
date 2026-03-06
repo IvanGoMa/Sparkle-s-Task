@@ -12,9 +12,11 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cat.ivha.sparklestask.databinding.PerfilRvBinding
+import kotlin.getValue
 
 
 class PerfilFragment : Fragment(R.layout.perfil_rv) {
@@ -30,6 +32,8 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
     private val ulleres: String = "Ulleres"
     private val gorros: String = "Gorros"
 
+    private val viewModel: HomeViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +44,7 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeViewModel()
         ivHelp = view.findViewById(R.id.ivHelp)
         recyclerView = view.findViewById(R.id.rvItems)
         val btnCollars = binding.btnCollars
@@ -140,5 +145,13 @@ class PerfilFragment : Fragment(R.layout.perfil_rv) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun observeViewModel() {
+
+        viewModel.totalSparks.observe(viewLifecycleOwner) { sparks ->
+            val tvSparksTotal = binding.tvSparksTotal
+            tvSparksTotal.text = sparks.toString()
+        }
     }
 }
