@@ -239,10 +239,38 @@ Aquest sistema reactiu fa que la interfície respongui automàticament a qualsev
 
 ---
 
+## [Retrofit](./Retrofit.md): Comunicació amb l'API
+
+Retrofit és una llibreria que simplifica enormement la comunicació amb servidors web mitjançant peticions HTTP. A Sparkle's Task l'utilitzem per connectar-nos amb la nostra API REST i gestionar totes les operacions relacionades amb les tasques i els Sparks de l'usuari.
+
+### Com funciona
+
+El funcionament de Retrofit es basa en tres components principals. Primer tenim la interfície TaskService que defineix tots els endpoints de l'API amb anotacions com @GET, @POST, @PUT i @DELETE. Després tenim la classe TaskAPI que configura Retrofit especificant la URL base del servidor i el conversor Gson per transformar les dades JSON. Finalment, des del ViewModel utilitzem les funcions definides a la interfície dins de coroutines per fer les crides de manera asíncrona sense bloquejar la interfície.
+
+Les operacions principals que fem amb Retrofit són carregar la llista de tasques des del servidor, crear noves tasques enviant les dades al backend, actualitzar tasques existents, eliminar tasques que ja no necessitem, marcar tasques com a completades per guanyar Sparks, i consultar els Sparks acumulats de l'usuari. Totes aquestes operacions es fan de manera asíncrona, això significa que l'aplicació segueix funcionant amb fluïdesa mentre espera la resposta del servidor.
+
+```kotlin
+// Exemple de crida a l'API des del ViewModel
+fun carregarTasques() {
+    viewModelScope.launch {
+        try {
+            val response = TaskAPI.API().llistaTasks()
+            if (response.isSuccessful) {
+                _allTasks.value = response.body() ?: emptyList()
+            }
+        } catch (e: Exception) {
+            Log.e("API", "Error de connexió: " + e.message)
+        }
+    }
+}
+```
+
 ## Resum de l'arquitectura
 
 L'aplicació Sparkle's Task està construïda seguint les millors pràctiques i patrons de desenvolupament d'Android. Utilitza RecyclerView amb el patró Adapter i ViewHolder per mostrar llistes eficients amb funcionalitat de filtres. Implementa una Splash Screen professional que ofereix una bona primera impressió. El sistema de navegació amb Bottom Navigation i Fragments proporciona una experiència d'usuari fluida i eficient.
 
 Per a la interacció amb l'usuari utilitzem DialogFragments que ofereixen finestres modals segures i ben integrades amb el cicle de vida. View Binding elimina codi repetitiu i proporciona accés segur a les vistes. Finalment, el patró ViewModel amb LiveData gestiona l'estat de manera reactiva seguint l'arquitectura MVVM.
+
+Les dades ara es guarden a una base de dades i son accesibles graciès al Retrofit. 
 
 Aquesta combinació de tecnologies i patrons crea una base sòlida, escalable i mantenible per a l'aplicació, facilitant futures ampliacions i millores.
