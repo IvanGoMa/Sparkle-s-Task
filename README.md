@@ -239,7 +239,7 @@ Aquest sistema reactiu fa que la interfície respongui automàticament a qualsev
 
 ---
 
-## Retrofit: Comunicació amb l'API
+## [Retrofit](./Retrofit.md): Comunicació amb l'API
 
 Retrofit és una llibreria que simplifica enormement la comunicació amb servidors web mitjançant peticions HTTP. A Sparkle's Task l'utilitzem per connectar-nos amb la nostra API REST i gestionar totes les operacions relacionades amb les tasques i els Sparks de l'usuari.
 
