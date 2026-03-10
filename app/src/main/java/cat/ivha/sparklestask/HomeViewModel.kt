@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Date
@@ -16,6 +18,7 @@ class HomeViewModel : ViewModel() {
     private val _selectedData = MutableLiveData<Date?>()
 
     private val _totalSparks = MutableLiveData<Long>(0L)
+    private val db = Firebase.firestore
     val totalSparks: LiveData<Long> = _totalSparks
 
     val selectedData = _selectedData
@@ -27,6 +30,7 @@ class HomeViewModel : ViewModel() {
         carregarSparks()
     }
 
+    // ------ CRUD -------
     fun carregarSparks() {
         viewModelScope.launch {
             try {
@@ -151,5 +155,42 @@ class HomeViewModel : ViewModel() {
                 Log.e("API", "Error al completar tarea: ${e.message}")
             }
         }
+    }
+
+    // ------ Firestore -------
+
+    fun guardarTasca(nom: String, descripcio: String, categoria: String) {
+        // Creem una referència a un nou document (genera l'ID automàticament)
+        val nouDocument = db.collection("items").document()
+
+        val tasca = Task(
+            id = 0, // Guardem l'ID generat dins de l'objecte
+            nomTasca = "nom",
+            sparks = 20,
+            dataLimit =
+        )
+
+        nouDocument.set(tasca)
+            .addOnSuccessListener {
+                // Èxit en la pujada
+            }
+            .addOnFailureListener { e ->
+                // Error en la pujada
+            }
+    }
+
+    fun obtenirItems() {
+        db.collection("items")
+            .get()
+            .addOnSuccessListener { result ->
+                // Convertim tots els documents a una llista d'objectes Item
+                val llistaItems = result.toObjects(Item::class.java)
+
+                // Aquí pots carregar la llista al teu RecyclerView Adapter
+                actualitzarUI(llistaItems)
+            }
+            .addOnFailureListener { exception ->
+                // Gestionar l'error
+            }
     }
 }
