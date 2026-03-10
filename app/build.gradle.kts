@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.gms.google-services")  // Firebase plugin
 }
 
 android {
@@ -42,6 +43,11 @@ android {
 }
 
 dependencies {
+    // Firebase BoM (gestiona les versions automàticament)
+    //noinspection GradleDependency
+    implementation(platform(libs.firebase.bom))
+    // Firestore
+    implementation(libs.firebase.firestore)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.okhttp3.okhttp)
     implementation(libs.retrofit)
